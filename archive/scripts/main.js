@@ -1,1 +1,0 @@
-"use strict";$("div a").click(function(t){$("#myModal img").attr("src",$(this).attr("data-img-url"))});
