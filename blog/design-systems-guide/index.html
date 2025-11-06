@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.16.19"><!-- Primary Meta Tags --><title>Building Design Systems That Actually Get Used</title><meta name="title" content="Building Design Systems That Actually Get Used"><meta name="description" content="Lessons learned from creating and maintaining design systems that teams actually adopt and use consistently."><meta name="author" content="Savelle McThias"><meta name="keywords" content="UX Designer, UI Designer, User Experience, Digital Design, Product Design, UX/UI, Scottsdale Arizona, Enterprise SaaS, E-commerce Design, AI-Powered Design"><link rel="canonical" href="https://savellem.com/blog/design-systems-guide/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://savellem.com/blog/design-systems-guide/"><meta property="og:title" content="Building Design Systems That Actually Get Used"><meta property="og:description" content="Lessons learned from creating and maintaining design systems that teams actually adopt and use consistently."><meta property="og:image" content="https://savellem.com/og-image.jpg"><meta property="og:site_name" content="Savelle McThias | UX/UI Designer"><meta property="og:locale" content="en_US"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://savellem.com/blog/design-systems-guide/"><meta name="twitter:title" content="Building Design Systems That Actually Get Used"><meta name="twitter:description" content="Lessons learned from creating and maintaining design systems that teams actually adopt and use consistently."><meta name="twitter:image" content="https://savellem.com/og-image.jpg"><meta name="twitter:creator" content="@savellem"><meta name="twitter:site" content="@savellem"><!-- Additional SEO --><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><meta name="theme-color" content="#09090b"><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"><!-- MailerLite Universal --><script>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '1901778');
+    </script><!-- End MailerLite Universal --><link rel="stylesheet" href="/_astro/about.BqHA5BBm.css"><script type="module" src="/_astro/hoisted.Cck56vUj.js"></script></head> <body> <!-- Skip Links for Accessibility --> <a href="#main-content" class="skip-link">
+Skip to main content
+</a> <header class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-800"> <nav class="container-custom py-6"> <div class="flex items-center justify-between"> <a href="/" class="text-xl font-semibold text-gray-100 tracking-tight">
+Savelle McThias
+</a> <ul class="hidden md:flex items-center space-x-10"> <li> <a href="/" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Home </a> </li><li> <a href="/about" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> About </a> </li><li> <a href="/work" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Work </a> </li><li> <a href="/blog" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Blog </a> </li> <li> <a href="/contact" class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-zinc-950 text-sm font-medium rounded-full hover:bg-white transition-colors">
+Start a project
+</a> </li> </ul> <!-- Mobile menu button --> <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400 hover:text-gray-100" aria-label="Toggle menu"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> <!-- Mobile menu --> <div id="mobile-menu" class="hidden md:hidden mt-6 space-y-4"> <a href="/" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Home </a><a href="/about" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> About </a><a href="/work" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Work </a><a href="/blog" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Blog </a> <a href="/contact" class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-zinc-950 text-sm font-medium rounded-full hover:bg-white transition-colors">
+Start a project
+</a> </div> </nav> </header>  <main id="main-content" class="pt-20" tabindex="-1">   <section class="container-custom py-12"> <a href="/blog" class="inline-flex items-center text-gray-100 hover:text-gray-300 mb-8 transition-colors"> <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>
+Back to Blog
+</a> <div class="max-w-4xl"> <div class="flex flex-wrap gap-2 mb-6"> <span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> Design Systems </span><span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> Team Collaboration </span><span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> Design Process </span> </div> <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-100 mb-6"> Building Design Systems That Actually Get Used </h1> <div class="flex items-center space-x-4 text-gray-400"> <time>January 27, 2024</time> <span>•</span> <span>Savelle McThias</span> </div> </div> </section>  <section class="container-custom mb-16"> <div class="rounded-2xl overflow-hidden shadow-xl max-w-4xl"> <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop" alt="Building Design Systems That Actually Get Used" class="w-full aspect-video object-cover"> </div> </section>  <article class="container-custom mb-16"> <div class="max-w-3xl"> <div class="prose-custom"> <p>I’ve built three design systems in my career. The first one failed completely—nobody used it. The second one saw moderate adoption. The third one was actually successful and is still being used today.</p>
+<p>Here’s what I learned about creating design systems that teams actually want to use.</p>
+<h2 id="why-design-systems-fail">Why Design Systems Fail</h2>
+<p>Before talking about success, let’s acknowledge why design systems often fail:</p>
+<h3 id="1-built-in-isolation">1. Built in Isolation</h3>
+<p>The most common mistake is creating a design system in a vacuum, without input from the people who will actually use it. You end up with components that look great in Figma but don’t solve real problems.</p>
+<h3 id="2-too-rigid">2. Too Rigid</h3>
+<p>Some design systems are so strict they feel like prisons rather than tools. When the system doesn’t accommodate real needs, teams work around it rather than with it.</p>
+<h3 id="3-poorly-documented">3. Poorly Documented</h3>
+<p>A component library without documentation is just a collection of files. If people don’t know how to use your system, they won’t.</p>
+<h3 id="4-lack-of-maintenance">4. Lack of Maintenance</h3>
+<p>A design system isn’t a one-time project—it’s a product that needs ongoing maintenance. When it falls behind product needs, teams stop using it.</p>
+<h2 id="principles-for-success">Principles for Success</h2>
+<p>Here’s what actually works:</p>
+<h3 id="start-small">Start Small</h3>
+<p>Don’t try to build everything at once. Start with:</p>
+<ul>
+<li>Color palette</li>
+<li>Typography system</li>
+<li>Most common components (buttons, inputs, cards)</li>
+<li>Basic layouts</li>
+</ul>
+<p>You can expand later based on actual needs, not assumptions.</p>
+<h3 id="involve-the-team-early">Involve the Team Early</h3>
+<p>From day one, include:</p>
+<ul>
+<li><strong>Designers</strong>: What do they actually need?</li>
+<li><strong>Developers</strong>: What’s feasible and maintainable?</li>
+<li><strong>Product managers</strong>: What business problems need solving?</li>
+</ul>
+<p>Make it collaborative, not dictatorial.</p>
+<h3 id="document-everything">Document Everything</h3>
+<p>Every component needs:</p>
+<ul>
+<li><strong>What it is</strong>: Clear description of purpose</li>
+<li><strong>When to use it</strong>: Specific use cases</li>
+<li><strong>When not to use it</strong>: Common misuses</li>
+<li><strong>Code examples</strong>: Copy-paste ready implementations</li>
+<li><strong>Do’s and don’ts</strong>: Visual examples of correct and incorrect usage</li>
+</ul>
+<h3 id="make-it-easy-to-use">Make It Easy to Use</h3>
+<p>Reduce friction at every step:</p>
+<ul>
+<li>Clear naming conventions</li>
+<li>Easy access (Figma libraries, npm packages, etc.)</li>
+<li>Copy-paste code snippets</li>
+<li>Clear contribution process</li>
+</ul>
+<p>The easier it is to use the system correctly than to create something custom, the more adoption you’ll get.</p>
+<h2 id="building-blocks-of-a-good-system">Building Blocks of a Good System</h2>
+<h3 id="foundation-layer">Foundation Layer</h3>
+<p>Start with the fundamentals:</p>
+<p><strong>Colors</strong></p>
+<ul>
+<li>Primary, secondary, accent colors</li>
+<li>Semantic colors (success, error, warning, info)</li>
+<li>Neutral grays</li>
+<li>Consider accessibility from the start</li>
+</ul>
+<p><strong>Typography</strong></p>
+<ul>
+<li>Font families</li>
+<li>Size scale</li>
+<li>Weight scale</li>
+<li>Line height guidelines</li>
+</ul>
+<p><strong>Spacing</strong></p>
+<ul>
+<li>Consistent spacing scale (4px, 8px, 16px, 24px, etc.)</li>
+<li>Margin and padding guidelines</li>
+<li>Layout grid system</li>
+</ul>
+<p><strong>Elevation</strong></p>
+<ul>
+<li>Shadow system</li>
+<li>Z-index scale</li>
+</ul>
+<h3 id="component-layer">Component Layer</h3>
+<p>Build commonly used components:</p>
+<p><strong>Form Elements</strong></p>
+<ul>
+<li>Inputs (text, number, email, etc.)</li>
+<li>Checkboxes and radio buttons</li>
+<li>Select dropdowns</li>
+<li>Textareas</li>
+<li>Form validation states</li>
+</ul>
+<p><strong>Buttons</strong></p>
+<ul>
+<li>Primary, secondary, tertiary variants</li>
+<li>Different sizes</li>
+<li>Loading and disabled states</li>
+<li>Icon buttons</li>
+</ul>
+<p><strong>Feedback</strong></p>
+<ul>
+<li>Alerts and notifications</li>
+<li>Loading states</li>
+<li>Empty states</li>
+<li>Error states</li>
+</ul>
+<p><strong>Navigation</strong></p>
+<ul>
+<li>Headers</li>
+<li>Sidebars</li>
+<li>Tabs</li>
+<li>Breadcrumbs</li>
+</ul>
+<h3 id="pattern-layer">Pattern Layer</h3>
+<p>Document common patterns:</p>
+<ul>
+<li>Form layouts</li>
+<li>Dashboard layouts</li>
+<li>List and table patterns</li>
+<li>Modal and dialog patterns</li>
+<li>Empty state patterns</li>
+</ul>
+<h2 id="governance-and-maintenance">Governance and Maintenance</h2>
+<h3 id="clear-ownership">Clear Ownership</h3>
+<p>Someone needs to own the design system. This could be:</p>
+<ul>
+<li>A dedicated team (for large organizations)</li>
+<li>Rotating ownership (for smaller teams)</li>
+<li>Part-time ownership (minimum viable approach)</li>
+</ul>
+<p>Without clear ownership, the system will decay.</p>
+<h3 id="contribution-process">Contribution Process</h3>
+<p>Make it easy for others to contribute:</p>
+<ol>
+<li>Clear guidelines for proposing new components</li>
+<li>Review process for contributions</li>
+<li>Documentation requirements</li>
+<li>Testing requirements</li>
+</ol>
+<h3 id="versioning-strategy">Versioning Strategy</h3>
+<p>Use semantic versioning and clear release notes:</p>
+<ul>
+<li>Major versions: Breaking changes</li>
+<li>Minor versions: New features</li>
+<li>Patch versions: Bug fixes</li>
+</ul>
+<h3 id="regular-review">Regular Review</h3>
+<p>Schedule quarterly reviews to:</p>
+<ul>
+<li>Identify components that need updates</li>
+<li>Remove unused components</li>
+<li>Add frequently requested components</li>
+<li>Update documentation</li>
+</ul>
+<h2 id="measuring-success">Measuring Success</h2>
+<p>Track adoption and usage:</p>
+<ul>
+<li><strong>Component usage</strong>: Which components are used most/least?</li>
+<li><strong>Design consistency</strong>: Are teams following the system?</li>
+<li><strong>Development speed</strong>: Are teams shipping faster?</li>
+<li><strong>Designer/developer satisfaction</strong>: Survey your users regularly</li>
+</ul>
+<h2 id="common-challenges">Common Challenges</h2>
+<h3 id="our-project-is-special">”Our project is special”</h3>
+<p>Every project feels special, but most use cases are common. Push back on custom components unless there’s a genuine need.</p>
+<h3 id="balancing-flexibility-and-consistency">Balancing flexibility and consistency</h3>
+<p>Allow customization where it makes sense (colors, spacing) but be strict about structure and behavior.</p>
+<h3 id="technical-debt">Technical debt</h3>
+<p>It’s okay to iterate. Version 1 doesn’t need to be perfect. Ship something useful, then improve it.</p>
+<h3 id="getting-buy-in">Getting buy-in</h3>
+<p>Start small, show value, then expand. A successful small system beats a failed comprehensive one.</p>
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p>A design system is a product, and your team is your user. Apply the same user-centered thinking you’d apply to any product:</p>
+<ul>
+<li>Understand their needs</li>
+<li>Solve real problems</li>
+<li>Make it easy to use</li>
+<li>Iterate based on feedback</li>
+<li>Maintain it over time</li>
+</ul>
+<p>When you do this right, you don’t need to convince people to use your design system. They’ll want to use it because it makes their work easier, faster, and better.</p>
+<p>That’s when you know you’ve built something truly valuable.</p> </div> </div> </article>  <section class="container-custom mb-16"> <div class="max-w-3xl border-t border-b border-zinc-800 py-8"> <div class="flex items-center justify-between"> <span class="text-gray-100 font-medium">Share this article</span> <div class="flex space-x-4"> <a href="https://twitter.com/intent/tweet?text=Building%20Design%20Systems%20That%20Actually%20Get%20Used&url=https%3A%2F%2Fsavellem.com%2Fblog%2Fdesign-systems-guide%2F" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-100 transition-colors" aria-label="Share on Twitter"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path> </svg> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsavellem.com%2Fblog%2Fdesign-systems-guide%2F" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-100 transition-colors" aria-label="Share on LinkedIn"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path> </svg> </a> <button onclick="navigator.clipboard.writeText(window.location.href)" class="text-gray-400 hover:text-gray-100 transition-colors" aria-label="Copy link"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path> </svg> </button> </div> </div> </div> </section>  <section class="container-custom pb-20"> <div class="max-w-6xl"> <h2 class="text-3xl font-display font-bold text-gray-100 mb-8">Related Articles</h2> <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <article class="group"> <a href="/blog/direct-sales-vs-ecommerce" class="block"> <div class="aspect-video overflow-hidden rounded-lg bg-zinc-900 mb-4"> <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop" alt="Direct Sales vs. Traditional E-Commerce: What Designers Need to Know" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"> </div> <time class="text-sm text-gray-400 block mb-2">January 19, 2025</time> <h3 class="text-xl font-display font-bold text-gray-100 group-hover:text-gray-300 transition-colors mb-2"> Direct Sales vs. Traditional E-Commerce: What Designers Need to Know </h3> <p class="text-gray-400 line-clamp-2">Understanding the critical differences between designing for direct sales platforms and traditional e-commerce, drawn from years of experience with both PetSmart.com and three complete redesigns of PlexusWorldwide.com.</p> </a> </article><article class="group"> <a href="/blog/designing-accessible-interfaces" class="block"> <div class="aspect-video overflow-hidden rounded-lg bg-zinc-900 mb-4"> <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=600&fit=crop" alt="Designing for Accessibility: Beyond Compliance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"> </div> <time class="text-sm text-gray-400 block mb-2">February 29, 2024</time> <h3 class="text-xl font-display font-bold text-gray-100 group-hover:text-gray-300 transition-colors mb-2"> Designing for Accessibility: Beyond Compliance </h3> <p class="text-gray-400 line-clamp-2">Why accessibility should be a core design principle, not a checkbox exercise, and practical tips for creating inclusive experiences.</p> </a> </article><article class="group"> <a href="/blog/mobile-first-design-approach" class="block"> <div class="aspect-video overflow-hidden rounded-lg bg-zinc-900 mb-4"> <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop" alt="Mobile-First Design: Why It's Still Critical in 2024" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"> </div> <time class="text-sm text-gray-400 block mb-2">February 19, 2024</time> <h3 class="text-xl font-display font-bold text-gray-100 group-hover:text-gray-300 transition-colors mb-2"> Mobile-First Design: Why It&#39;s Still Critical in 2024 </h3> <p class="text-gray-400 line-clamp-2">Understanding why mobile-first design remains essential and how to implement it effectively in modern web projects.</p> </a> </article> </div> </div> </section> <section class="container-custom pb-20"> <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-12 text-center max-w-4xl"> <h2 class="text-3xl font-display font-bold text-gray-100 mb-4">
+Want to discuss your project?
+</h2> <p class="text-lg text-gray-300 mb-8">
+I'm always open to new opportunities and collaborations.
+</p> <a href="/contact" class="btn-primary">
+Get in Touch
+</a> </div> </section>  </main> <footer class="border-t border-zinc-800 mt-32"> <div class="container-custom py-16"> <!-- 3 Column Layout --> <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16"> <!-- Column 1: Name and Description --> <div> <a href="/" class="text-xl font-semibold text-gray-100 tracking-tight">
+Savelle McThias
+</a> <p class="text-sm text-gray-400 mt-3 leading-relaxed">
+Digital Experience Leader | UX/UI Designer with 18+ years of experience crafting exceptional user experiences.
+</p> </div> <!-- Column 2: Navigation --> <div> <h4 class="text-xs font-semibold text-gray-100 uppercase tracking-wider mb-4">Navigation</h4> <ul class="space-y-3"> <li><a href="/" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Home</a></li> <li><a href="/about" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">About</a></li> <li><a href="/work" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Work</a></li> <li><a href="/blog" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Blog</a></li> <li><a href="/contact" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Contact</a></li> </ul> </div> <!-- Column 3: Newsletter --> <div> <h4 class="text-xs font-semibold text-gray-100 uppercase tracking-wider mb-4">Stay Updated</h4> <p class="text-sm text-gray-400 mb-4">
+Subscribe to get the latest insights on UX design and industry trends.
+</p> <!-- MailerLite Form --> <div class="ml-embedded" data-form="iqJhJu"></div> </div> </div> <div class="mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4"> <p class="text-xs text-gray-600">
+&copy; 2025 Savelle McThias. All rights reserved.
+</p> <a href="https://www.linkedin.com/in/savelle" target="_blank" rel="noopener" class="flex items-center gap-2 text-xs text-gray-400 hover:text-gray-100 transition-colors" aria-label="LinkedIn"> <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path> </svg> <span>Connect on LinkedIn</span> </a> </div> </div> </footer> <!-- Back to Top Button --> <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path> </svg> </button>  </body> </html>
