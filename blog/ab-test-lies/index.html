@@ -1,0 +1,656 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.15.9"><!-- Primary Meta Tags --><title>Your A/B Test Isn&#39;t Telling You What You Think It Is | Savelle McThias</title><meta name="title" content="Your A/B Test Isn't Telling You What You Think It Is | Savelle McThias"><meta name="description" content="Most teams run A/B tests wrong: improper sample sizes, premature endings, and surface-level analysis that misses the real story. Here's how to actually extract meaningful insights from your tests."><meta name="author" content="Savelle McThias"><meta name="keywords" content="UX Designer, UI Designer, User Experience, Digital Design, Product Design, UX/UI, Scottsdale Arizona, Enterprise SaaS, E-commerce Design, AI-Powered Design"><link rel="canonical" href="https://savellem.com/blog/ab-test-lies/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://savellem.com/blog/ab-test-lies/"><meta property="og:title" content="Your A/B Test Isn't Telling You What You Think It Is | Savelle McThias"><meta property="og:description" content="Most teams run A/B tests wrong: improper sample sizes, premature endings, and surface-level analysis that misses the real story. Here's how to actually extract meaningful insights from your tests."><meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&#38;h=600&#38;fit=crop"><meta property="og:site_name" content="Savelle McThias | UX/UI Designer"><meta property="og:locale" content="en_US"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://savellem.com/blog/ab-test-lies/"><meta name="twitter:title" content="Your A/B Test Isn't Telling You What You Think It Is | Savelle McThias"><meta name="twitter:description" content="Most teams run A/B tests wrong: improper sample sizes, premature endings, and surface-level analysis that misses the real story. Here's how to actually extract meaningful insights from your tests."><meta name="twitter:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&#38;h=600&#38;fit=crop"><meta name="twitter:creator" content="@savellem"><meta name="twitter:site" content="@savellem"><!-- Additional SEO --><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><meta name="theme-color" content="#09090b"><!-- Structured Data (JSON-LD) --><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Savelle McThias Design","alternateName":"Savelle LLC","url":"https://savellem.com/","logo":"https://savellem.com/favicon.svg","description":"Expert UX/UI design services specializing in enterprise SaaS, e-commerce, and digital transformation with 18+ years of experience","founder":{"@type":"Person","name":"Savelle McThias","jobTitle":"UX/UI Designer & Digital Experience Leader","description":"Digital Experience Leader with 18+ years creating exceptional UX/UI designs","url":"https://savellem.com/","image":"https://savellem.com/favicon.svg","sameAs":["https://www.linkedin.com/in/savelle","https://twitter.com/savellem"],"knowsAbout":["UX Design","UI Design","User Experience","Digital Design","Product Design","Design Systems","Enterprise SaaS","E-commerce Design","AI-Powered Design"],"alumniOf":{"@type":"CollegeOrUniversity","name":"Collins College"}},"address":{"@type":"PostalAddress","addressLocality":"Scottsdale","addressRegion":"AZ","addressCountry":"US"},"areaServed":"Worldwide","serviceType":["UX Design","UI Design","Design Systems","E-commerce Optimization","Enterprise SaaS Design","Digital Transformation"],"priceRange":"$$"}</script><!-- Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-Q08TQD2DG9"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Q08TQD2DG9');
+    </script><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"><!-- MailerLite Universal --><script>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '1901778');
+    </script><!-- End MailerLite Universal --><!-- Additional Head Content --> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Your A/B Test Isn't Telling You What You Think It Is","description":"Most teams run A/B tests wrong: improper sample sizes, premature endings, and surface-level analysis that misses the real story. Here's how to actually extract meaningful insights from your tests.","image":"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop","datePublished":"2025-10-15T00:00:00.000Z","dateModified":"2025-10-15T00:00:00.000Z","author":{"@type":"Person","name":"Savelle McThias","url":"https://savellem.com/"},"publisher":{"@type":"Person","name":"Savelle McThias","url":"https://savellem.com/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://savellem.com/blog/ab-test-lies/"},"keywords":"A/B Testing, Conversion Optimization, Analytics, UX Best Practices"}</script> <link rel="stylesheet" href="/_astro/about.D6YgzE1u.css"></head> <body> <!-- Skip Links for Accessibility --> <a href="#main-content" class="skip-link">
+Skip to main content
+</a> <header class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-800"> <nav class="container-custom py-6"> <div class="flex items-center justify-between"> <a href="/" class="text-xl font-semibold text-gray-100 tracking-tight">
+Savelle McThias
+</a> <ul class="hidden md:flex items-center space-x-10"> <li> <a href="/" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Home </a> </li><li> <a href="/about" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> About </a> </li><li> <a href="/work" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Work </a> </li><li> <a href="/services" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Services </a> </li><li> <a href="/blog" class="text-sm font-medium transition-colors tracking-wide text-gray-400 hover:text-gray-100"> Blog </a> </li> <li> <a href="/contact" class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-zinc-950 text-sm font-medium rounded-full hover:bg-white transition-colors">
+Start a project
+</a> </li> </ul> <!-- Mobile menu button --> <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400 hover:text-gray-100" aria-label="Toggle menu"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> <!-- Mobile menu --> <div id="mobile-menu" class="hidden md:hidden mt-6 space-y-4"> <a href="/" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Home </a><a href="/about" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> About </a><a href="/work" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Work </a><a href="/services" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Services </a><a href="/blog" class="block text-sm font-medium transition-colors text-gray-400 hover:text-gray-100"> Blog </a> <a href="/contact" class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-zinc-950 text-sm font-medium rounded-full hover:bg-white transition-colors">
+Start a project
+</a> </div> </nav> </header> <script type="module">const e=document.getElementById("mobile-menu-button"),t=document.getElementById("mobile-menu");e?.addEventListener("click",()=>{t?.classList.toggle("hidden")});</script> <main id="main-content" class="pt-20" tabindex="-1">    <section class="container-custom py-12"> <a href="/blog" class="inline-flex items-center text-gray-100 hover:text-gray-300 mb-8 transition-colors"> <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>
+Back to Blog
+</a> <div class="max-w-4xl"> <div class="flex flex-wrap gap-2 mb-6"> <span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> A/B Testing </span><span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> Conversion Optimization </span><span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> Analytics </span><span class="px-3 py-1 bg-zinc-900 text-gray-300 rounded-full text-sm font-medium"> UX Best Practices </span> </div> <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-100 mb-6"> Your A/B Test Isn&#39;t Telling You What You Think It Is </h1> <div class="flex items-center space-x-4 text-gray-400"> <time>October 14, 2025</time> <span>•</span> <span>Savelle McThias</span> </div> </div> </section>  <section class="container-custom mb-16"> <div class="rounded-2xl overflow-hidden shadow-xl max-w-4xl"> <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Your A/B Test Isn't Telling You What You Think It Is" class="w-full aspect-video object-cover"> </div> </section>  <article class="container-custom mb-16"> <div class="max-w-3xl"> <div class="prose-custom"> <p>“We ran an A/B test. B won. Ship it.”</p>
+<p>I’ve heard this exact conversation at least 50 times in my 18 years of UX work. And almost every time, the team is about to make a mistake.</p>
+<p>Not because A/B testing doesn’t work—it does. But because <strong>most teams fundamentally misunderstand what their A/B tests are actually telling them.</strong></p>
+<p>They think A/B testing is simple:</p>
+<ol>
+<li>Create two versions</li>
+<li>Split traffic 50/50</li>
+<li>Wait for a winner</li>
+<li>Implement the winner everywhere</li>
+</ol>
+<p>This approach is so common that entire platforms are built around it. And it’s leading to terrible decisions backed by “data.”</p>
+<h2 id="the-five-ways-teams-screw-up-ab-tests">The Five Ways Teams Screw Up A/B Tests</h2>
+<p>Let me walk you through the most common mistakes I see—and how they lead to wrong conclusions.</p>
+<h3 id="mistake-1-using-inadequate-sample-sizes">Mistake #1: Using Inadequate Sample Sizes</h3>
+<p><strong>What teams do:</strong>
+Run a test with 500 visitors to each variant, see that variant B converted 2% better than variant A, and call it a win.</p>
+<p><strong>Why this is wrong:</strong>
+With small sample sizes, random variation can easily produce a 2% difference even if there’s no real effect.</p>
+<p><strong>Real example from a client:</strong></p>
+<p><strong>Their test:</strong></p>
+<ul>
+<li>Variant A: 247 visitors, 12 conversions (4.9%)</li>
+<li>Variant B: 251 visitors, 17 conversions (6.8%)</li>
+<li>Conclusion: “B wins by 39%! Ship it!”</li>
+</ul>
+<p><strong>The problem:</strong>
+Sample size was nowhere near large enough for statistical significance. I ran the numbers:</p>
+<ul>
+<li>Statistical significance: p = 0.34</li>
+<li>Confidence level: 66%</li>
+<li><strong>Translation: 34% chance this “win” is just random noise</strong></li>
+</ul>
+<p><strong>What happened:</strong>
+They implemented B. Conversion rate stayed exactly the same over the next month. They’d wasted two weeks of testing and engineering time on a false positive.</p>
+<p><strong>What they should have done:</strong>
+Calculate required sample size BEFORE running the test.</p>
+<p>For their baseline conversion rate (5%) and desired lift (39%), they needed:</p>
+<ul>
+<li><strong>Minimum 1,200 visitors per variant</strong> for 95% confidence</li>
+<li><strong>Test duration: 3-4 weeks</strong> at their traffic levels</li>
+</ul>
+<h3 id="how-to-calculate-proper-sample-size">How to Calculate Proper Sample Size</h3>
+<p>Don’t guess. Use this formula (or an online calculator):</p>
+<p><strong>Required sample size depends on:</strong></p>
+<ul>
+<li><strong>Baseline conversion rate:</strong> Your current performance</li>
+<li><strong>Minimum detectable effect (MDE):</strong> Smallest improvement worth detecting</li>
+<li><strong>Statistical power:</strong> Usually 80% (probability of detecting a real effect)</li>
+<li><strong>Significance level:</strong> Usually 95% (p &lt; 0.05)</li>
+</ul>
+<p><strong>Example:</strong></p>
+<ul>
+<li>Baseline conversion: 3%</li>
+<li>Want to detect: 20% relative improvement (3% → 3.6%)</li>
+<li>Power: 80%</li>
+<li>Significance: 95%</li>
+<li><strong>Required sample: ~7,800 visitors per variant</strong></li>
+</ul>
+<p>If you only get 1,000 visitors per day, that’s an 8-day test minimum.</p>
+<p><strong>The rule:</strong> If you can’t reach adequate sample size in a reasonable timeframe, don’t run the test. You’ll just waste time.</p>
+<h3 id="mistake-2-ending-tests-too-early">Mistake #2: Ending Tests Too Early</h3>
+<p><strong>What teams do:</strong>
+Check results daily, see B ahead by 15% on day 3, and declare victory.</p>
+<p><strong>Why this is wrong:</strong>
+Early in a test, random variance creates big swings. What looks like a massive win on day 3 often regresses to zero by day 14.</p>
+<p><strong>This is called “peeking” and it’s dangerous.</strong></p>
+<p><strong>Real example:</strong></p>
+<p>I consulted with an e-commerce company that was “data-driven.” They ran A/B tests constantly. And they were making worse decisions because of it.</p>
+<p><strong>Their process:</strong></p>
+<ol>
+<li>Launch test Monday morning</li>
+<li>Check results Wednesday afternoon</li>
+<li>If B is winning, end test and implement</li>
+<li>Move to next test</li>
+</ol>
+<p><strong>Their reasoning:</strong> “We don’t want to waste time. If we see a winner, we implement it fast.”</p>
+<p><strong>The problem:</strong></p>
+<p>I audited their last 15 tests. Here’s what actually happened:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Test</th><th>Day 3 Winner</th><th>Final Winner (Day 14)</th><th>Did They Ship?</th><th>Actual Result</th></tr></thead><tbody><tr><td>1</td><td>B (+22%)</td><td>A (-3%)</td><td>Shipped B</td><td>Conversion dropped 4%</td></tr><tr><td>2</td><td>B (+18%)</td><td>B (+4%, p=0.09)</td><td>Shipped B</td><td>No significant change</td></tr><tr><td>3</td><td>A (+31%)</td><td>B (+7%, p=0.03)</td><td>Kept A</td><td>Missed 7% lift opportunity</td></tr><tr><td>4</td><td>B (+15%)</td><td>No difference</td><td>Shipped B</td><td>No change</td></tr><tr><td>5</td><td>B (+26%)</td><td>A (-8%)</td><td>Shipped B</td><td>Conversion dropped 9%</td></tr></tbody></table>
+<p><strong>Out of 15 tests, they made the wrong call 11 times</strong> because they peeked and ended early.</p>
+<p><strong>Why this happens:</strong></p>
+<p>Early in a test, you have small sample sizes, which means high variance. A few random conversions can swing the numbers dramatically.</p>
+<p><strong>Imagine:</strong></p>
+<ul>
+<li>Day 1: 50 visitors to A, 50 to B</li>
+<li>Variant A: 1 conversion (2%)</li>
+<li>Variant B: 4 conversions (8%)</li>
+<li>“B is winning by 300%!”</li>
+</ul>
+<p>But this means nothing. With such small samples, one or two conversions change everything.</p>
+<p>By day 14, with proper sample sizes, the difference usually disappears.</p>
+<p><strong>The solution:</strong></p>
+<p><strong>1. Decide your test duration BEFORE launching</strong></p>
+<p>Based on:</p>
+<ul>
+<li>Required sample size</li>
+<li>Your traffic levels</li>
+<li>Seasonality (include different days of week)</li>
+</ul>
+<p><strong>2. Don’t peek at results</strong></p>
+<p>Or if you must peek, use sequential testing methods that account for multiple looks (Bayesian approaches or adjusted significance thresholds).</p>
+<p><strong>3. Commit to running the full duration</strong></p>
+<p>Even if it looks like you have a winner early. Discipline beats impatience.</p>
+<h3 id="mistake-3-using-the-wrong-baseline-metrics">Mistake #3: Using the Wrong Baseline Metrics</h3>
+<p><strong>What teams do:</strong>
+Test a new checkout flow and only measure final conversion rate.</p>
+<p><strong>Why this is wrong:</strong>
+Final conversion rate doesn’t tell you <em>where</em> and <em>why</em> behavior changed.</p>
+<p><strong>Real example:</strong></p>
+<p><strong>Client:</strong> SaaS company with complex 5-step signup flow</p>
+<p><strong>Their test:</strong></p>
+<ul>
+<li>Variant A (control): 5-step signup</li>
+<li>Variant B: Simplified 3-step signup</li>
+<li>Metric: Signup completion rate</li>
+</ul>
+<p><strong>Their result:</strong></p>
+<ul>
+<li>Variant B: +12% signup completion</li>
+<li>“Ship it immediately!”</li>
+</ul>
+<p><strong>What they didn’t measure:</strong></p>
+<p>I ran a funnel analysis on both variants:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Step</th><th>Variant A</th><th>Variant B</th><th>Change</th></tr></thead><tbody><tr><td>Start signup</td><td>100%</td><td>100%</td><td>-</td></tr><tr><td>Enter email</td><td>78%</td><td>89%</td><td>+14%</td></tr><tr><td>Choose plan</td><td>62%</td><td>71%</td><td>+15%</td></tr><tr><td>Enter payment</td><td>51%</td><td>58%</td><td>+14%</td></tr><tr><td>Complete signup</td><td>43%</td><td>48%</td><td>+12%</td></tr><tr><td><strong>Activate (7 days)</strong></td><td><strong>35%</strong></td><td><strong>21%</strong></td><td><strong>-40%</strong></td></tr><tr><td><strong>Paying (30 days)</strong></td><td><strong>29%</strong></td><td><strong>15%</strong></td><td><strong>-48%</strong></td></tr></tbody></table>
+<p><strong>What actually happened:</strong></p>
+<p>Variant B made signup easier—too easy. It removed friction that helped qualify serious users.</p>
+<p>Result:</p>
+<ul>
+<li>More signups (+12%)</li>
+<li>But worse quality leads</li>
+<li>Lower activation (-40%)</li>
+<li>Lower conversion to paying customers (-48%)</li>
+</ul>
+<p><strong>Net business impact: -36% revenue</strong></p>
+<p>If they’d measured only signup rate, they’d have shipped a variant that destroyed their business.</p>
+<p><strong>The lesson:</strong></p>
+<p>Measure your <strong>actual business goal</strong>, not just the proximate metric.</p>
+<ul>
+<li>Selling products? Measure revenue, not just checkout completion</li>
+<li>SaaS signup? Measure activation and retention, not just registration</li>
+<li>Content site? Measure engagement and return visits, not just clicks</li>
+</ul>
+<h3 id="mistake-4-ignoring-segment-performance">Mistake #4: Ignoring Segment Performance</h3>
+<p>This is the most common and most damaging mistake.</p>
+<p><strong>What teams do:</strong>
+Look at overall results: “B won by 10%, ship it!”</p>
+<p><strong>Why this is wrong:</strong>
+<strong>Variant B might work great for some users and terribly for others.</strong> Overall performance hides this.</p>
+<p><strong>Real example (this happens constantly):</strong></p>
+<p><strong>Client:</strong> E-commerce site testing new product page design</p>
+<p><strong>Their result:</strong></p>
+<ul>
+<li>Overall conversion: Variant B +8.2% (p = 0.03)</li>
+<li>“Winner! Implement B everywhere!”</li>
+</ul>
+<p><strong>What I found when I segmented the data:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Segment</th><th>Variant A</th><th>Variant B</th><th>Change</th></tr></thead><tbody><tr><td><strong>Mobile</strong></td><td>2.1%</td><td>3.2%</td><td><strong>+52%</strong> ✓</td></tr><tr><td><strong>Desktop</strong></td><td>4.8%</td><td>4.1%</td><td><strong>-15%</strong> ✗</td></tr><tr><td><strong>New users</strong></td><td>2.7%</td><td>3.4%</td><td><strong>+26%</strong> ✓</td></tr><tr><td><strong>Returning users</strong></td><td>5.1%</td><td>4.6%</td><td><strong>-10%</strong> ✗</td></tr><tr><td><strong>Organic traffic</strong></td><td>3.9%</td><td>4.2%</td><td><strong>+8%</strong> ✓</td></tr><tr><td><strong>Paid traffic</strong></td><td>2.2%</td><td>3.1%</td><td><strong>+41%</strong> ✓</td></tr></tbody></table>
+<p><strong>Translation:</strong></p>
+<p>Variant B is:</p>
+<ul>
+<li><strong>Excellent for mobile users</strong> (+52%)</li>
+<li><strong>Terrible for desktop users</strong> (-15%)</li>
+<li><strong>Great for new users</strong> (+26%)</li>
+<li><strong>Worse for returning customers</strong> (-10%)</li>
+</ul>
+<p><strong>What they should have done:</strong></p>
+<ol>
+<li><strong>Implement variant B for mobile only</strong> → Capture the +52% lift</li>
+<li><strong>Keep variant A for desktop</strong> → Avoid the -15% drop</li>
+<li><strong>Test a new variant C for desktop</strong> → Try to find what works for that segment</li>
+</ol>
+<p><strong>Net impact of smart segmentation vs. blanket implementation:</strong></p>
+<p><strong>If they implemented B everywhere:</strong></p>
+<ul>
+<li>Mobile gains: +52% on 40% of traffic = +20.8%</li>
+<li>Desktop losses: -15% on 60% of traffic = -9.0%</li>
+<li>Net effect: +11.8%</li>
+</ul>
+<p><strong>If they segmented properly:</strong></p>
+<ul>
+<li>Mobile gains: +52% on 40% of traffic = +20.8%</li>
+<li>Desktop stays same: 0% on 60% of traffic = 0%</li>
+<li>Then test variant C for desktop</li>
+<li>Net effect: +20.8% immediate, with upside potential from variant C</li>
+</ul>
+<p><strong>By not segmenting, they left +9% lift on the table.</strong></p>
+<h3 id="the-segments-you-must-analyze">The Segments You Must Analyze</h3>
+<p>Don’t just look at overall numbers. Segment by:</p>
+<p><strong>1. Device type</strong></p>
+<ul>
+<li>Mobile vs. tablet vs. desktop</li>
+<li>iOS vs. Android</li>
+<li>Different screen sizes</li>
+</ul>
+<p><strong>2. User type</strong></p>
+<ul>
+<li>New vs. returning visitors</li>
+<li>Logged in vs. anonymous</li>
+<li>Customer vs. prospect</li>
+</ul>
+<p><strong>3. Traffic source</strong></p>
+<ul>
+<li>Organic search</li>
+<li>Paid search</li>
+<li>Social media</li>
+<li>Email</li>
+<li>Direct</li>
+</ul>
+<p><strong>4. Demographics (if available)</strong></p>
+<ul>
+<li>Geographic location</li>
+<li>Time of day / day of week</li>
+<li>Language preference</li>
+</ul>
+<p><strong>5. Behavior patterns</strong></p>
+<ul>
+<li>High intent (viewed pricing, added to cart)</li>
+<li>Low intent (browsing)</li>
+<li>Cart value (high vs. low AOV)</li>
+</ul>
+<p><strong>One variant rarely wins for everyone.</strong> Segment analysis reveals the nuance.</p>
+<h3 id="mistake-5-misinterpreting-statistical-significance">Mistake #5: Misinterpreting Statistical Significance</h3>
+<p><strong>What teams think:</strong> “95% confidence means we’re 95% sure B is better than A.”</p>
+<p><strong>What it actually means:</strong> “If there’s truly no difference between A and B, there’s only a 5% chance we’d see a result this extreme due to random chance.”</p>
+<p><strong>These are not the same thing.</strong></p>
+<p><strong>Real example:</strong></p>
+<p><strong>Client test result:</strong></p>
+<ul>
+<li>Variant B: +15% conversion</li>
+<li>p-value: 0.04</li>
+<li>Confidence: 96%</li>
+</ul>
+<p><strong>Client interpretation:</strong> “We’re 96% sure variant B is better!”</p>
+<p><strong>Actual meaning:</strong> “If A and B were truly the same, we’d see a result this extreme only 4% of the time.”</p>
+<p><strong>Why this matters:</strong></p>
+<p>A statistically significant result doesn’t tell you:</p>
+<ul>
+<li><strong>How big the real effect is</strong> (could be smaller than measured)</li>
+<li><strong>Whether the effect will persist</strong> (could be temporary)</li>
+<li><strong>Whether it’s worth the implementation cost</strong> (significant ≠ meaningful)</li>
+</ul>
+<p><strong>What you should actually look at:</strong></p>
+<ol>
+<li>
+<p><strong>Confidence interval</strong>, not just p-value</p>
+<ul>
+<li>“B improves conversion by 8-22% (95% CI)”</li>
+<li>This tells you the range of plausible effect sizes</li>
+<li>If the lower bound is still worth implementing, proceed</li>
+</ul>
+</li>
+<li>
+<p><strong>Practical significance</strong>, not just statistical significance</p>
+<ul>
+<li>A +2% lift might be statistically significant but not worth engineering effort</li>
+<li>A +15% lift might not reach significance but worth further testing</li>
+</ul>
+</li>
+<li>
+<p><strong>Consistency across segments</strong></p>
+<ul>
+<li>Does the effect hold across different user types?</li>
+<li>Or is it driven entirely by one small segment?</li>
+</ul>
+</li>
+</ol>
+<h2 id="how-to-actually-run-meaningful-ab-tests">How to Actually Run Meaningful A/B Tests</h2>
+<p>Here’s my process after 18 years of running (and fixing) A/B tests:</p>
+<h3 id="before-launch-test-design">Before Launch: Test Design</h3>
+<p><strong>1. Define your primary metric</strong></p>
+<ul>
+<li>What business outcome are you trying to improve?</li>
+<li>Not a proxy metric—the actual goal</li>
+</ul>
+<p><strong>2. Define secondary and guardrail metrics</strong></p>
+<ul>
+<li>Secondary: Additional positive indicators</li>
+<li>Guardrail: Metrics that shouldn’t get worse (bounce rate, page load time, etc.)</li>
+</ul>
+<p><strong>3. Calculate required sample size</strong></p>
+<ul>
+<li>Based on baseline conversion, minimum detectable effect, and power</li>
+<li>Use a calculator: <a href="https://www.evanmiller.org/ab-testing/sample-size.html">https://www.evanmiller.org/ab-testing/sample-size.html</a></li>
+</ul>
+<p><strong>4. Determine test duration</strong></p>
+<ul>
+<li>Based on traffic and required sample size</li>
+<li>Include full weeks to account for day-of-week variance</li>
+<li>Account for seasonality</li>
+</ul>
+<p><strong>5. Decide on segment analysis plan</strong></p>
+<ul>
+<li>Which segments will you analyze?</li>
+<li>Pre-register your analysis plan to avoid data dredging</li>
+</ul>
+<h3 id="during-the-test-discipline">During the Test: Discipline</h3>
+<p><strong>1. Don’t peek</strong> (or use proper sequential testing methods)
+<strong>2. Don’t stop early</strong> unless there’s a technical problem
+<strong>3. Don’t change the test mid-flight</strong>
+<strong>4. Monitor for technical issues</strong> (tracking errors, load time problems)</p>
+<h3 id="after-the-test-deep-analysis">After the Test: Deep Analysis</h3>
+<p><strong>1. Check for statistical significance</strong></p>
+<ul>
+<li>Is p &lt; 0.05?</li>
+<li>What’s the confidence interval?</li>
+</ul>
+<p><strong>2. Analyze segment performance</strong></p>
+<ul>
+<li>Does the effect hold across all major segments?</li>
+<li>Are there segments where B performs significantly worse?</li>
+</ul>
+<p><strong>3. Review secondary and guardrail metrics</strong></p>
+<ul>
+<li>Did we accidentally break something?</li>
+<li>Are there unexpected negative effects?</li>
+</ul>
+<p><strong>4. Make segmented decisions</strong></p>
+<ul>
+<li>Implement winning variant for segments where it won</li>
+<li>Keep control for segments where it lost</li>
+<li>Test new variants for losing segments</li>
+</ul>
+<p><strong>5. Monitor post-implementation</strong></p>
+<ul>
+<li>Does the lift persist after full rollout?</li>
+<li>Or was the test result a fluke?</li>
+</ul>
+<h2 id="real-world-case-study-doing-it-right">Real-World Case Study: Doing It Right</h2>
+<p><strong>Client:</strong> Mid-size e-commerce company, $12M annual revenue</p>
+<p><strong>Goal:</strong> Improve product page conversion rate</p>
+<p><strong>Current performance:</strong> 3.2% add-to-cart rate</p>
+<p><strong>Test hypothesis:</strong> Adding trust badges and reviews above the fold will increase conversions</p>
+<p><strong>Proper test design:</strong></p>
+<p><strong>Metrics:</strong></p>
+<ul>
+<li>Primary: Add-to-cart rate</li>
+<li>Secondary: Revenue per visitor</li>
+<li>Guardrail: Bounce rate, time on page</li>
+</ul>
+<p><strong>Sample size calculation:</strong></p>
+<ul>
+<li>Baseline: 3.2%</li>
+<li>Minimum detectable effect: 15% relative improvement (3.2% → 3.7%)</li>
+<li>Power: 80%</li>
+<li>Significance: 95%</li>
+<li><strong>Required: 8,400 visitors per variant</strong></li>
+</ul>
+<p><strong>Test duration:</strong></p>
+<ul>
+<li>Traffic: 2,000 visitors/day to product pages</li>
+<li>Required: 16,800 total visitors</li>
+<li>Duration: <strong>9 days minimum</strong> (rounded up to 14 days to include 2 full weeks)</li>
+</ul>
+<p><strong>Results after 14 days:</strong></p>
+<p><strong>Overall:</strong></p>
+<ul>
+<li>Variant A (control): 3.18% (534 conversions, 16,792 visitors)</li>
+<li>Variant B (trust badges): 3.64% (614 conversions, 16,871 visitors)</li>
+<li>Lift: +14.5% (p = 0.021, 95% CI: 2.3% to 28.1%)</li>
+</ul>
+<p><strong>Segment analysis:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Segment</th><th>Variant A</th><th>Variant B</th><th>Lift</th><th>p-value</th></tr></thead><tbody><tr><td><strong>Mobile</strong></td><td>2.1%</td><td>2.9%</td><td>+38%</td><td>0.008 ✓</td></tr><tr><td><strong>Desktop</strong></td><td>4.7%</td><td>4.9%</td><td>+4%</td><td>0.54 ✗</td></tr><tr><td><strong>New visitors</strong></td><td>2.4%</td><td>3.1%</td><td>+29%</td><td>0.015 ✓</td></tr><tr><td><strong>Returning</strong></td><td>5.2%</td><td>5.3%</td><td>+2%</td><td>0.78 ✗</td></tr><tr><td><strong>Products &lt;$50</strong></td><td>4.1%</td><td>5.2%</td><td>+27%</td><td>0.019 ✓</td></tr><tr><td><strong>Products &gt;$50</strong></td><td>2.2%</td><td>2.1%</td><td>-5%</td><td>0.71 ✗</td></tr></tbody></table>
+<p><strong>Interpretation:</strong></p>
+<p>Variant B works significantly better for:</p>
+<ul>
+<li>Mobile users</li>
+<li>New visitors</li>
+<li>Lower-priced products</li>
+</ul>
+<p>Variant B shows no significant effect for:</p>
+<ul>
+<li>Desktop users</li>
+<li>Returning visitors</li>
+<li>Higher-priced products</li>
+</ul>
+<p><strong>Decision:</strong></p>
+<p><strong>Phase 1: Implement for winning segments</strong></p>
+<ul>
+<li>Show trust badges to mobile users → +38% lift on 45% of traffic</li>
+<li>Show trust badges to new visitors → +29% lift on 60% of traffic</li>
+<li>Show trust badges on products under $50 → +27% lift on 70% of traffic</li>
+</ul>
+<p><strong>Phase 2: Test new variant for losing segments</strong></p>
+<ul>
+<li>Hypothesis: Desktop users and returning visitors don’t need trust badges (they’re already familiar/trusting)</li>
+<li>Hypothesis: High-value products need different trust signals (warranties, detailed specs, expert reviews)</li>
+<li>Test variant C: Social proof and detailed specifications for high-value products</li>
+</ul>
+<p><strong>Projected impact:</strong></p>
+<p><strong>Naive implementation (B for everyone):</strong> +14.5% overall</p>
+<p><strong>Segmented implementation:</strong></p>
+<ul>
+<li>Mobile lift: +38% × 45% = +17.1%</li>
+<li>New visitor lift: +29% × 60% = +17.4%</li>
+<li>Low-price lift: +27% × 70% = +18.9%</li>
+<li>(Overlapping segments, actual combined lift: ~22%)</li>
+</ul>
+<p><strong>By segmenting properly, they extracted 50% more value from the same test.</strong></p>
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p>Your A/B test isn’t telling you “B is better than A.”</p>
+<p>It’s telling you:</p>
+<ul>
+<li><strong>For which users</strong> B performs better</li>
+<li><strong>Under what conditions</strong> the improvement holds</li>
+<li><strong>How confident you can be</strong> in the measured effect size</li>
+<li><strong>What trade-offs</strong> you’re making (are any metrics getting worse?)</li>
+</ul>
+<p>Most teams see “B wins” and stop thinking.</p>
+<p>The best teams see “B wins overall” and start asking:</p>
+<ul>
+<li>For whom?</li>
+<li>Why?</li>
+<li>Where does it lose?</li>
+<li>How can we capture the gains and eliminate the losses?</li>
+</ul>
+<p><strong>A/B testing isn’t about finding winners. It’s about understanding your users deeply enough to serve different segments optimally.</strong></p>
+<p>The data is there. You just have to look past the surface-level number.</p>
+<p>After 18 years of running tests, here’s what I know: <strong>The teams that win aren’t the ones running the most tests. They’re the ones extracting the most insight from each test.</strong></p>
+<p>Run fewer tests. Analyze them properly. Make segmented decisions.</p>
+<p>Your conversion rate will thank you.</p> </div> </div> </article>  <section class="container-custom mb-16"> <div class="max-w-3xl border-t border-b border-zinc-800 py-8"> <div class="flex items-center justify-between"> <span class="text-gray-100 font-medium">Share this article</span> <div class="flex space-x-4"> <a href="https://twitter.com/intent/tweet?text=Your%20A%2FB%20Test%20Isn't%20Telling%20You%20What%20You%20Think%20It%20Is&url=https%3A%2F%2Fsavellem.com%2Fblog%2Fab-test-lies%2F" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-100 transition-colors" aria-label="Share on Twitter"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path> </svg> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsavellem.com%2Fblog%2Fab-test-lies%2F" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-100 transition-colors" aria-label="Share on LinkedIn"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path> </svg> </a> <button onclick="navigator.clipboard.writeText(window.location.href)" class="text-gray-400 hover:text-gray-100 transition-colors" aria-label="Copy link"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path> </svg> </button> </div> </div> </div> </section>  <section class="container-custom pb-20"> <div class="max-w-6xl"> <h2 class="text-3xl font-display font-bold text-gray-100 mb-8">Related Articles</h2> <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <article class="group"> <a href="/blog/conversion-copy-problem-ai-solution" class="block"> <div class="aspect-video overflow-hidden rounded-lg bg-zinc-900 mb-4"> <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop" alt="The Conversion Copy Problem Most E-commerce Sites Have (And How I Fix It in Hours, Not Days)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"> </div> <time class="text-sm text-gray-400 block mb-2">November 15, 2025</time> <h3 class="text-xl font-display font-bold text-gray-100 group-hover:text-gray-300 transition-colors mb-2"> The Conversion Copy Problem Most E-commerce Sites Have (And How I Fix It in Hours, Not Days) </h3> <p class="text-gray-400 line-clamp-2">How I partner with AI to write and audit conversion copy faster—while maintaining the strategic thinking and brand voice that actually converts.</p> </a> </article><article class="group"> <a href="/blog/direct-sales-vs-ecommerce" class="block"> <div class="aspect-video overflow-hidden rounded-lg bg-zinc-900 mb-4"> <img src="/images/articles/LinkedIn-ECommercevsDirectSales.png" alt="Direct Sales vs. Traditional E-Commerce: What Designers Need to Know" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"> </div> <time class="text-sm text-gray-400 block mb-2">November 14, 2025</time> <h3 class="text-xl font-display font-bold text-gray-100 group-hover:text-gray-300 transition-colors mb-2"> Direct Sales vs. Traditional E-Commerce: What Designers Need to Know </h3> <p class="text-gray-400 line-clamp-2">Understanding the critical differences between designing for direct sales platforms and traditional e-commerce, drawn from years of experience with both PetSmart.com and three complete redesigns of PlexusWorldwide.com.</p> </a> </article><article class="group"> <a href="/blog/ai-helps-deliver-faster" class="block"> <div class="aspect-video overflow-hidden rounded-lg bg-zinc-900 mb-4"> <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop" alt="How AI Helps Me Deliver Faster Without Cutting Corners" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"> </div> <time class="text-sm text-gray-400 block mb-2">November 9, 2025</time> <h3 class="text-xl font-display font-bold text-gray-100 group-hover:text-gray-300 transition-colors mb-2"> How AI Helps Me Deliver Faster Without Cutting Corners </h3> <p class="text-gray-400 line-clamp-2">AI has cut my design process time by 40% while improving quality. Here&#39;s how I use it for brainstorming, reviews, and catching errors—without losing the human judgment that makes design work.</p> </a> </article> </div> </div> </section> <section class="container-custom pb-20"> <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-12 text-center max-w-4xl"> <h2 class="text-3xl font-display font-bold text-gray-100 mb-4">
+Want to discuss your project?
+</h2> <p class="text-lg text-gray-300 mb-8">
+I'm always open to new opportunities and collaborations.
+</p> <a href="/contact" class="btn-primary">
+Get in Touch
+</a> </div> </section>  </main> <footer class="border-t border-zinc-800 mt-32"> <div class="container-custom py-16"> <!-- 3 Column Layout --> <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16"> <!-- Column 1: Name and Description --> <div> <a href="/" class="text-xl font-semibold text-gray-100 tracking-tight">
+Savelle McThias
+</a> <p class="text-sm text-gray-400 mt-3 leading-relaxed">
+Digital Experience Leader | UX/UI Designer with 18+ years of experience crafting exceptional user experiences.
+</p> </div> <!-- Column 2: Navigation --> <div> <h4 class="text-xs font-semibold text-gray-100 uppercase tracking-wider mb-4">Navigation</h4> <ul class="space-y-3"> <li><a href="/" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Home</a></li> <li><a href="/about" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">About</a></li> <li><a href="/work" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Work</a></li> <li><a href="/services" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Services</a></li> <li><a href="/blog" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Blog</a></li> <li><a href="/contact" class="text-sm text-gray-400 hover:text-gray-100 transition-colors">Contact</a></li> </ul> </div> <!-- Column 3: Newsletter --> <div> <h4 class="text-xs font-semibold text-gray-100 uppercase tracking-wider mb-4">Stay Updated</h4> <p class="text-sm text-gray-400 mb-4">
+Subscribe to get the latest insights on UX design and industry trends.
+</p> <!-- MailerLite Form --> <div class="ml-embedded" data-form="iqJhJu"></div> </div> </div> <div class="mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4"> <p class="text-xs text-gray-600">
+&copy; 2025 Savelle McThias. All rights reserved.
+</p> <a href="https://www.linkedin.com/in/savelle" target="_blank" rel="noopener" class="flex items-center gap-2 text-xs text-gray-400 hover:text-gray-100 transition-colors" aria-label="LinkedIn"> <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"> <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path> </svg> <span>Connect on LinkedIn</span> </a> </div> </div> </footer> <!-- Back to Top Button --> <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path> </svg> </button> <script type="module">const o=document.getElementById("back-to-top");window.addEventListener("scroll",()=>{window.scrollY>300?o?.classList.add("visible"):o?.classList.remove("visible")});o?.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})});</script> </body> </html>
