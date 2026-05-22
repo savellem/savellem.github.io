@@ -1,1 +1,0 @@
-import"./hoisted.Cck56vUj.js";document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",o=>{const t=e.getAttribute("href"),r=t?document.querySelector(t):null;r&&(o.preventDefault(),r.scrollIntoView({behavior:"smooth"}))})});
