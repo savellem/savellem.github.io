@@ -1,6 +1,7 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://savellem.com/sitemap.xml
+# AI assistant guide
+# See /llms.txt
+
+Sitemap: https://savellem.com/sitemap-index.xml
