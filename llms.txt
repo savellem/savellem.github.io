@@ -16,6 +16,7 @@
 - [Case Studies](https://savellem.com/work): Selected UX/UI projects with objectives, role, scope, and outcomes.
 - [Green Compass — Digital Experience Leadership](https://savellem.com/case-studies/green-compass-digital-experience): Full-funnel digital experience leadership in the regulated CBD wellness industry.
 - [About](https://savellem.com/about): Background, professional experience, and the brands worked with (PetSmart, Plexus Worldwide, Green Compass, and others).
+- [Insights](https://savellem.com/insights): Articles on UX clarity, conversion, onboarding, mobile UX, accessibility, and design systems — why products lose customers to confusion and how to fix it.
 
 ## Contact
 
