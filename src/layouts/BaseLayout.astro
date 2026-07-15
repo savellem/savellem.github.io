@@ -1,0 +1,172 @@
+---
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { personSchema, websiteSchema } from '@/lib/schema';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  /** Page-specific JSON-LD graph(s); Person + WebSite are always included. */
+  schema?: object | object[];
+}
+
+const {
+  title,
+  description = 'Savelle McThias is a product designer and creative director based in Scottsdale, AZ. Web design, branding, and development for Phoenix area businesses. Senior product design and design engineering for remote teams.',
+  image = '/og-image.jpg',
+  schema,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteTitle = 'Savelle McThias';
+
+const pageSchema = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const jsonLdGraphs = [personSchema, websiteSchema, ...pageSchema];
+
+// GA4 measurement ID is env-configurable (override per environment via
+// PUBLIC_GA_MEASUREMENT_ID) with a fallback to the production property. The ID
+// is public — it ships in the page HTML — so a committed fallback is safe.
+// Only inject analytics in production builds so local dev and previews don't
+// pollute the property.
+const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-Q08TQD2DG9';
+const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Savelle McThias" />
+    <meta name="keywords" content="product designer, creative director, design engineer, web designer, web developer, Scottsdale, Phoenix, Arizona, remote product design, UX design, UI design, branding, Webflow, WordPress, React, Next.js, front-end development, logo design, ad creative, landing page design, design systems, senior product designer" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:creator" content="@savellem" />
+    <meta name="twitter:site" content="@savellem" />
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#09090b" />
+
+    <!-- Structured Data (JSON-LD) -->
+    {jsonLdGraphs.map((graph) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />
+    ))}
+
+    <!-- Google Analytics (production only, ID from PUBLIC_GA_MEASUREMENT_ID) -->
+    {enableAnalytics && (
+      <Fragment>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script is:inline define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA_ID);
+        </script>
+      </Fragment>
+    )}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  </head>
+  <body>
+    <!-- Skip Links for Accessibility -->
+    <a href="#main-content" class="skip-link">
+      Skip to main content
+    </a>
+
+    <Header />
+    <main id="main-content" class="pt-20" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+    <script>
+      // Back to top functionality
+      const backToTop = document.getElementById('back-to-top');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop?.classList.add('visible');
+        } else {
+          backToTop?.classList.remove('visible');
+        }
+      });
+
+      backToTop?.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    </script>
+
+    <script>
+      // Conversion tracking — fires GA4 events on key CTA clicks, detected by
+      // destination so no per-button markup is needed.
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const link = target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+        const gtag = (window as any).gtag;
+        if (typeof gtag !== 'function') return;
+
+        if (href.includes('buy.stripe.com')) {
+          gtag('event', 'begin_checkout', {
+            currency: 'USD',
+            value: 997,
+            items: [{ item_name: '48-Hour UX Audit' }],
+          });
+        } else if (href === '/contact' || href.startsWith('/contact')) {
+          // Soft intent — the real generate_lead fires on actual form submission.
+          gtag('event', 'contact_intent', { method: 'contact_cta' });
+        } else if (href.startsWith('mailto:')) {
+          gtag('event', 'contact', { method: 'email' });
+        } else if (href.startsWith('tel:')) {
+          gtag('event', 'contact', { method: 'phone' });
+        }
+      });
+    </script>
+  </body>
+</html>

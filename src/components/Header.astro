@@ -1,0 +1,87 @@
+---
+const currentPath = Astro.url.pathname;
+
+function isActive(path: string) {
+  return currentPath === path;
+}
+
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Work', path: '/work' },
+  { name: 'About', path: '/about' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-800">
+  <nav class="container-custom py-6">
+    <div class="flex items-center justify-between md:grid md:grid-cols-3">
+      <a href="/" class="text-xl font-semibold text-gray-100 tracking-tight">
+        Savelle McThias
+      </a>
+
+      <ul class="hidden md:flex items-center justify-center space-x-8">
+        {navItems.filter((item) => item.path !== '/').map((item) => (
+          <li>
+            <a
+              href={item.path}
+              class={`text-sm font-medium transition-colors tracking-wide hover:text-gray-100 ${
+                isActive(item.path) ? 'text-gray-100' : 'text-gray-400'
+              }`}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="hidden md:flex items-center justify-end">
+        <a
+          href="/contact"
+          class="inline-flex items-center px-5 py-2.5 border-2 border-zinc-700 text-gray-100 text-sm font-medium rounded-full hover:bg-zinc-900 transition-colors"
+        >
+          Contact
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 text-gray-400 hover:text-gray-100"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-6 space-y-4">
+      {navItems.map((item) => (
+        <a
+          href={item.path}
+          class={`block text-sm font-medium transition-colors hover:text-gray-100 ${
+            isActive(item.path) ? 'text-gray-100' : 'text-gray-400'
+          }`}
+        >
+          {item.name}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="inline-flex items-center px-5 py-2.5 border-2 border-zinc-700 text-gray-100 text-sm font-medium rounded-full hover:bg-zinc-900 transition-colors"
+      >
+        Contact
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const button = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  button?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

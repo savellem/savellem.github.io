@@ -1,0 +1,109 @@
+---
+interface MediaLink {
+  label: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  client: string;
+  year: number;
+  yearEnd?: number;
+  description: string;
+  role?: string;
+  scope?: string;
+  media?: MediaLink[];
+  thumbnail: string;
+  slug: string;
+}
+
+const {
+  title,
+  client,
+  year,
+  yearEnd,
+  description,
+  role,
+  scope,
+  media,
+  thumbnail,
+  slug,
+} = Astro.props;
+
+const yearDisplay = yearEnd ? `${year}–${yearEnd}` : `${year}`;
+const href = `/case-studies/${slug}`;
+---
+
+<article class="border-t border-zinc-800 py-16 lg:py-20">
+  <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+    <!-- Left: text (1/4) -->
+    <div class="lg:w-1/4 shrink-0 flex flex-col">
+      <p class="font-bold text-gray-100 uppercase tracking-widest mb-5">{client}</p>
+      <p class="text-gray-400 leading-relaxed mb-8">{description}</p>
+
+      <!-- Metadata rows -->
+      <div>
+        <div class="divide-y divide-zinc-800 border-t border-zinc-800">
+          <div class="flex items-start justify-between py-3">
+            <span class=" text-gray-500 shrink-0 mr-4">Years</span>
+            <span class=" text-gray-300 text-right">{yearDisplay}</span>
+          </div>
+
+          {role && (
+            <div class="flex items-start justify-between py-3">
+              <span class=" text-gray-500 shrink-0 mr-4">Role</span>
+              <span class=" text-gray-300 text-right">{role}</span>
+            </div>
+          )}
+
+          {scope && (
+            <div class="flex items-start justify-between py-3">
+              <span class=" text-gray-500 shrink-0 mr-4">Scope</span>
+              <span class=" text-gray-300 text-right">{scope}</span>
+            </div>
+          )}
+
+          {media && media.length > 0 && (
+            <div class="flex items-start justify-between py-3">
+              <span class=" text-gray-500 shrink-0 mr-4">Media</span>
+              <div class="flex flex-wrap gap-x-3 gap-y-1 justify-end">
+                {media.map((item) => (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xs text-gray-300 hover:text-gray-100 transition-colors inline-flex items-center gap-0.5"
+                  >
+                    {item.label}
+                    <svg class="w-2.5 h-2.5 ml-0.5" viewBox="0 0 12 12" fill="none">
+                      <path d="M3.5 8.5L8.5 3.5M8.5 3.5H5M8.5 3.5V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <a
+          href={href}
+          class="mt-6 inline-flex items-center font-medium text-gray-100 hover:text-gray-300 transition-colors group"
+        >
+          View case study
+          <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: image (3/4) -->
+    <a href={href} class="lg:w-3/4 shrink-0 block group overflow-hidden rounded-2xl">
+      <img
+        src={thumbnail}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+      />
+    </a>
+  </div>
+</article>

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import FeaturedCaseStudy from '@components/FeaturedCaseStudy.astro';
+import { getCollection } from 'astro:content';
+
+const EXCLUDED_SLUGS = new Set([
+  'direct-sales-enrollment-template',
+  'dsyfer-cybersecurity-platform',
+  'lifewave-global-platform',
+  'gmc-silverado-configurator',
+  'yoli-omegas-dashboard',
+  'lamesa-rv-vanup-platform',
+  'ifoodds-agriculture-platform',
+  'plexus-worldwide-digital-transformation',
+  'petsmart-ecommerce-redesign',
+]);
+
+const caseStudies = (await getCollection('case-studies'))
+  .filter((s) => !EXCLUDED_SLUGS.has(s.id))
+  .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99));
+---
+
+<BaseLayout
+  title="Portfolio & Case Studies — Savelle McThias"
+  description="Case studies and portfolio work spanning product design, e-commerce, enterprise SaaS, branding, and front-end development. Two decades of real results for real businesses."
+>
+  <!-- Hero Section -->
+  <section class="container-custom py-20">
+    <div class="max-w-3xl">
+      <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-100 mb-6">
+        My Work
+      </h1>
+      <p class="text-xl text-gray-400 leading-relaxed">
+        A collection of case studies showcasing my approach to solving complex design
+        challenges. Each project represents a unique opportunity to create meaningful
+        user experiences.
+      </p>
+    </div>
+  </section>
+
+  <!-- Case Studies List -->
+  <section class="container-custom pb-20">
+    {caseStudies.length > 0 ? (
+      <div>
+        {caseStudies.map((study) => (
+          <FeaturedCaseStudy
+            title={study.data.title}
+            client={study.data.client}
+            year={study.data.year}
+            yearEnd={study.data.yearEnd}
+            description={study.data.description}
+            role={study.data.role}
+            scope={study.data.scope}
+            media={study.data.media}
+            thumbnail={study.data.thumbnail}
+            slug={study.id}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-20">
+        <p class="text-xl text-gray-400">No case studies available yet. Check back soon!</p>
+      </div>
+    )}
+  </section>
+</BaseLayout>
