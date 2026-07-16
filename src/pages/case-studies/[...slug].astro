@@ -50,24 +50,24 @@ const pageSchema = [
     <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 mb-10">
       <!-- Left: client + title -->
       <div class="lg:w-1/2">
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-100 leading-tight">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-900 leading-tight">
           {study.data.client}
         </h1>
       </div>
 
       <!-- Right: description -->
       <div class="lg:w-1/2 flex items-end">
-        <p class="text-lg text-gray-300 leading-relaxed">
+        <p class="text-lg text-gray-700 leading-relaxed">
           {study.data.description}
         </p>
       </div>
     </div>
 
     <!-- Metadata row -->
-    <div class="border-t border-zinc-800 divide-y divide-zinc-800 lg:divide-y-0 lg:flex lg:divide-x lg:divide-zinc-800">
+    <div class="border-t border-gray-200 divide-y divide-gray-200 lg:divide-y-0 lg:flex lg:divide-x lg:divide-gray-200">
       <div class="py-4 lg:pr-10">
         <p class="text-sm text-gray-500 mb-1">Years</p>
-        <p class="text-gray-100">
+        <p class="text-gray-900">
           {study.data.yearEnd ? `${study.data.year}–${study.data.yearEnd}` : study.data.year}
         </p>
       </div>
@@ -75,21 +75,21 @@ const pageSchema = [
       {study.data.role && (
         <div class="py-4 lg:px-10">
           <p class="text-sm text-gray-500 mb-1">Role</p>
-          <p class="text-gray-100">{study.data.role}</p>
+          <p class="text-gray-900">{study.data.role}</p>
         </div>
       )}
 
       {study.data.scope && (
         <div class="py-4 lg:px-10">
           <p class="text-sm text-gray-500 mb-1">Scope</p>
-          <p class="text-gray-100">{study.data.scope}</p>
+          <p class="text-gray-900">{study.data.scope}</p>
         </div>
       )}
 
       {study.data.tags.length > 0 && !study.data.scope && (
         <div class="py-4 lg:px-10">
           <p class="text-sm text-gray-500 mb-1">Scope</p>
-          <p class="text-gray-100">{study.data.tags.join(', ')}</p>
+          <p class="text-gray-900">{study.data.tags.join(', ')}</p>
         </div>
       )}
 
@@ -102,7 +102,7 @@ const pageSchema = [
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-100 hover:text-gray-300 transition-colors inline-flex items-center gap-0.5"
+                class="text-gray-900 hover:text-gray-700 transition-colors inline-flex items-center gap-0.5"
               >
                 {item.label}
                 <svg class="w-3 h-3 ml-0.5" viewBox="0 0 12 12" fill="none">
@@ -137,15 +137,15 @@ const pageSchema = [
   <!-- Outcomes -->
   {study.data.outcomes && study.data.outcomes.length > 0 && (
     <section class="container-custom mb-16">
-      <div class="border-t border-zinc-800 pt-10 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-8 lg:gap-16">
+      <div class="border-t border-gray-200 pt-10 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-8 lg:gap-16">
         <div>
           <p class="text-xs font-medium text-gray-500 uppercase tracking-widest pt-1">Outcomes</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
           {study.data.outcomes.map((outcome) => (
             <div>
-              <p class="text-4xl lg:text-5xl font-display font-bold text-gray-100 leading-none mb-3">{outcome.stat}</p>
-              <p class="text-sm text-gray-400 leading-snug">{outcome.label}</p>
+              <p class="text-4xl lg:text-5xl font-display font-bold text-gray-900 leading-none mb-3">{outcome.stat}</p>
+              <p class="text-sm text-gray-600 leading-snug">{outcome.label}</p>
             </div>
           ))}
         </div>
@@ -155,10 +155,10 @@ const pageSchema = [
 
   <!-- Navigation -->
   <section class="container-custom py-16">
-    <div class="flex items-center justify-between border-t border-zinc-800 pt-8">
+    <div class="flex items-center justify-between border-t border-gray-200 pt-8">
       <a
         href="/work"
-        class="inline-flex items-center text-gray-400 hover:text-gray-100 transition-colors"
+        class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
       >
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />

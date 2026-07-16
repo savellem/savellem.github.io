@@ -48,23 +48,23 @@
   }
 
   body {
-    @apply bg-zinc-950 text-gray-100 antialiased;
+    @apply bg-white text-gray-900 antialiased;
   }
 
   /* Improved focus states for accessibility */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-gray-100 rounded;
+    @apply outline-2 outline-offset-2 outline-gray-900 rounded;
   }
 
   /* Skip link for keyboard navigation */
   .skip-link {
-    @apply absolute -top-full left-0 bg-gray-100 text-zinc-950 px-4 py-2 z-50 focus:top-0;
+    @apply absolute -top-full left-0 bg-gray-900 text-white px-4 py-2 z-50 focus:top-0;
     transition: top 0.3s;
   }
 
   /* Back to top button */
   .back-to-top {
-    @apply fixed bottom-6 right-6 w-12 h-12 bg-gray-100 text-zinc-950 rounded-full shadow-lg flex items-center justify-center opacity-0 transition-all duration-300 hover:bg-gray-200 z-40;
+    @apply fixed bottom-6 right-6 w-12 h-12 bg-gray-900 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 transition-all duration-300 hover:bg-gray-800 z-40;
     visibility: hidden;
   }
 
@@ -80,22 +80,22 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-zinc-950 bg-gray-100 hover:bg-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-100;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-700 text-base font-medium rounded-md text-gray-100 bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300;
   }
 
   .prose-custom {
-    @apply max-w-none text-gray-300 leading-relaxed text-lg;
+    @apply max-w-none text-gray-700 leading-relaxed text-lg;
   }
 
   .prose-custom h1,
   .prose-custom h2,
   .prose-custom h3,
   .prose-custom h4 {
-    @apply font-display font-bold text-gray-100 mt-8 mb-4;
+    @apply font-display font-bold text-gray-900 mt-8 mb-4;
   }
 
   .prose-custom h1 {
@@ -127,18 +127,18 @@
   }
 
   .prose-custom a {
-    @apply text-gray-100 no-underline hover:underline;
+    @apply text-gray-900 no-underline hover:underline;
   }
 
   .prose-custom strong {
-    @apply font-semibold text-gray-100;
+    @apply font-semibold text-gray-900;
   }
 
   .prose-custom code {
-    @apply bg-zinc-900 px-2 py-1 rounded text-sm;
+    @apply bg-gray-100 px-2 py-1 rounded text-sm;
   }
 
   .prose-custom blockquote {
-    @apply border-l-4 border-gray-100 pl-4 italic text-gray-400 my-4;
+    @apply border-l-4 border-gray-900 pl-4 italic text-gray-600 my-4;
   }
 }

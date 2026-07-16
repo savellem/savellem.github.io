@@ -12,17 +12,17 @@ const testimonial = realTestimonials[0];
   <!-- Hero -->
   <section class="container-custom pt-32 pb-20">
     <div class="max-w-2xl mx-auto text-center">
-      <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-100 mb-6 tracking-tight leading-[1.05]">
+      <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-6 tracking-tight leading-[1.05]">
         Let&apos;s talk.
       </h1>
-      <p class="text-xl text-gray-300 leading-relaxed mb-12">
+      <p class="text-xl text-gray-700 leading-relaxed mb-12">
         If you&apos;re hiring for a senior or lead product design role, or want to talk about enrollment and conversion work, I&apos;d love to hear from you.
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4">
         <a
           href="mailto:savellem@gmail.com"
-          class="inline-flex items-center px-8 py-4 bg-gray-100 text-zinc-950 text-lg font-medium rounded-full hover:bg-white transition-colors"
+          class="inline-flex items-center px-8 py-4 bg-gray-900 text-white text-lg font-medium rounded-full hover:bg-gray-800 transition-colors"
         >
           savellem@gmail.com
         </a>
@@ -30,7 +30,7 @@ const testimonial = realTestimonials[0];
           href="https://www.linkedin.com/in/savelle"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center px-8 py-4 border-2 border-zinc-700 text-gray-100 text-lg font-medium rounded-full hover:bg-zinc-900 transition-colors"
+          class="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-900 text-lg font-medium rounded-full hover:bg-gray-50 transition-colors"
         >
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -44,13 +44,13 @@ const testimonial = realTestimonials[0];
   <!-- Testimonial -->
   {testimonial && (
     <section class="container-custom pb-32">
-      <figure class="max-w-2xl mx-auto text-center border-t border-zinc-800 pt-16">
-        <blockquote class="text-2xl text-gray-200 leading-relaxed mb-6">
+      <figure class="max-w-2xl mx-auto text-center border-t border-gray-200 pt-16">
+        <blockquote class="text-2xl text-gray-800 leading-relaxed mb-6">
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
         <figcaption class="text-sm">
-          <span class="text-gray-100 font-semibold">{testimonial.name}</span>
-          <span class="text-gray-400"> · {testimonial.title}, {testimonial.company}</span>
+          <span class="text-gray-900 font-semibold">{testimonial.name}</span>
+          <span class="text-gray-600"> · {testimonial.title}, {testimonial.company}</span>
         </figcaption>
       </figure>
     </section>

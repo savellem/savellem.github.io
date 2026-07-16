@@ -35,11 +35,11 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
       aria-hidden="true"
     >
       <!-- Mountains -->
-      <polyline points="0,600 180,280 320,420 500,180 680,380 820,240 1000,400 1150,200 1320,360 1400,300 1400,600" stroke="rgba(255,255,255,0.055)" stroke-width="1.5" stroke-linejoin="round" />
-      <polyline points="0,600 140,340 280,460 460,230 640,420 780,290 960,440 1100,250 1270,390 1400,340 1400,600" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-linejoin="round" />
+      <polyline points="0,600 180,280 320,420 500,180 680,380 820,240 1000,400 1150,200 1320,360 1400,300 1400,600" stroke="rgba(0,0,0,0.055)" stroke-width="1.5" stroke-linejoin="round" />
+      <polyline points="0,600 140,340 280,460 460,230 640,420 780,290 960,440 1100,250 1270,390 1400,340 1400,600" stroke="rgba(0,0,0,0.03)" stroke-width="1" stroke-linejoin="round" />
 
       <!-- Saguaro cactus left -->
-      <g stroke="rgba(255,255,255,0.07)" stroke-width="1.5" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.07)" stroke-width="1.5" stroke-linecap="round">
         <!-- trunk -->
         <line x1="1100" y1="600" x2="1100" y2="380" />
         <!-- left arm -->
@@ -49,20 +49,20 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
       </g>
 
       <!-- Saguaro cactus right -->
-      <g stroke="rgba(255,255,255,0.055)" stroke-width="1.5" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.055)" stroke-width="1.5" stroke-linecap="round">
         <line x1="1220" y1="600" x2="1220" y2="420" />
         <polyline points="1220,490 1196,490 1196,450" />
         <polyline points="1220,465 1244,465 1244,430" />
       </g>
 
       <!-- Tall saguaro far right -->
-      <g stroke="rgba(255,255,255,0.04)" stroke-width="1.2" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.04)" stroke-width="1.2" stroke-linecap="round">
         <line x1="1340" y1="600" x2="1340" y2="390" />
         <polyline points="1340,470 1318,470 1318,435" />
       </g>
 
       <!-- Agave bottom left -->
-      <g stroke="rgba(255,255,255,0.06)" stroke-width="1.2" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.06)" stroke-width="1.2" stroke-linecap="round">
         <line x1="80" y1="600" x2="60" y2="545" />
         <line x1="80" y1="600" x2="50" y2="560" />
         <line x1="80" y1="600" x2="40" y2="580" />
@@ -73,7 +73,7 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
       </g>
 
       <!-- Agave mid right -->
-      <g stroke="rgba(255,255,255,0.05)" stroke-width="1.2" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.05)" stroke-width="1.2" stroke-linecap="round">
         <line x1="960" y1="600" x2="938" y2="548" />
         <line x1="960" y1="600" x2="928" y2="563" />
         <line x1="960" y1="600" x2="930" y2="582" />
@@ -84,16 +84,16 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
       </g>
 
       <!-- Ground line -->
-      <line x1="0" y1="598" x2="1400" y2="598" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+      <line x1="0" y1="598" x2="1400" y2="598" stroke="rgba(0,0,0,0.04)" stroke-width="1" />
     </svg>
 
     <div class="relative">
-      <h1 class="text-5xl md:text-6xl font-bold text-gray-100 mb-8 tracking-tight leading-tight">
+      <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-8 tracking-tight leading-tight">
         Designer. Builder. Desert dweller.
       </h1>
     </div>
     <div class="max-w-4xl relative">
-      <div class="prose prose-lg max-w-none text-gray-400 space-y-6">
+      <div class="prose prose-lg max-w-none text-gray-600 space-y-6">
         <p class="text-xl leading-relaxed">
           My superpower is a mix of intuition and ideas that seem obvious to me but apparently aren't obvious to everyone else. I've been taking things apart and putting them back together differently since I was a kid. Remote controlled cars, mostly. In high school I taught myself HTML and CSS in the school library and helped redesign sections of the school website. Nobody asked me to. I just wanted to see if I could.
         </p>
@@ -108,7 +108,7 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
   </section>
 
   <!-- Logo Bar -->
-  <section class="py-10 border-t border-zinc-800/60">
+  <section class="py-10 border-t border-gray-200/60">
     <p class="text-center text-xs font-medium text-gray-500 uppercase tracking-widest mb-8">
       Brands I've Worked With
     </p>
@@ -137,7 +137,7 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
           <img
             src={src}
             alt={alt}
-            class={`${h} w-auto object-contain brightness-0 invert opacity-40 shrink-0`}
+            class={`${h} w-auto object-contain brightness-0 opacity-40 shrink-0`}
           />
         ))}
       </div>
@@ -145,43 +145,43 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
   </section>
 
   <!-- Experience Timeline -->
-  <section class="bg-zinc-900 py-20">
+  <section class="bg-gray-50 py-20">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
-      <h2 class="text-sm font-semibold text-gray-100 uppercase tracking-wider mb-12">
+      <h2 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-12">
         Professional Experience
       </h2>
 
       <div class="space-y-12">
         <!-- Savelle LLC -->
-        <div class="relative pl-8 border-l-2 border-gray-100">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-100"></div>
+        <div class="relative pl-8 border-l-2 border-gray-900">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-900"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">Founder & Principal Designer</h3>
-            <p class="text-gray-400 font-medium">Savelle LLC • March 2021 - Present</p>
-            <p class="text-sm text-gray-400 mt-1">Scottsdale, AZ</p>
+            <h3 class="text-2xl font-semibold text-gray-900">Founder & Principal Designer</h3>
+            <p class="text-gray-600 font-medium">Savelle LLC • March 2021 - Present</p>
+            <p class="text-sm text-gray-600 mt-1">Scottsdale, AZ</p>
           </div>
-          <p class="text-gray-300 leading-relaxed mb-3">
+          <p class="text-gray-700 leading-relaxed mb-3">
             This is my own shop. I take on client work and build my own products, and I run on an AI-augmented workflow that lets me move fast without cutting corners.
           </p>
-          <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
             <li>Designed and built Card Ritual, a tarot journaling app, solo: product design, front and back end code, and brand</li>
             <li>Use Claude and Claude Code every day, from early concepts to shipped code</li>
           </ul>
         </div>
 
         <!-- Green Compass -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">Digital Experience Director</h3>
-            <p class="text-gray-400 font-medium">Green Compass, LLC • February 2024 - November 2024</p>
-            <p class="text-sm text-gray-400 mt-1">Scottsdale, AZ</p>
+            <h3 class="text-2xl font-semibold text-gray-900">Digital Experience Director</h3>
+            <p class="text-gray-600 font-medium">Green Compass, LLC • February 2024 - November 2024</p>
+            <p class="text-sm text-gray-600 mt-1">Scottsdale, AZ</p>
           </div>
-          <p class="text-gray-300 leading-relaxed mb-3">
+          <p class="text-gray-700 leading-relaxed mb-3">
             I owned the digital side of the customer journey at this CBD wellness company: enrollment, branding, email, video, and the back office. It's a heavily regulated industry, so compliance had to be built into almost everything.
           </p>
-          <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
             <li>Redesigned the back office and self-service support tools, cutting customer service calls by 25%</li>
             <li>Simplified the enrollment flow, which dropped cart abandonment by 12% and increased enrollments by 15%</li>
             <li>Directed brand and content across email, social, web, and video, and built a design system so campaigns shipped faster</li>
@@ -189,17 +189,17 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
         </div>
 
         <!-- iFoodDS -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">UI/UX Designer</h3>
-            <p class="text-gray-400 font-medium">iFoodDS • January 2020 - March 2021</p>
-            <p class="text-sm text-gray-400 mt-1">Scottsdale, Arizona</p>
+            <h3 class="text-2xl font-semibold text-gray-900">UI/UX Designer</h3>
+            <p class="text-gray-600 font-medium">iFoodDS • January 2020 - March 2021</p>
+            <p class="text-sm text-gray-600 mt-1">Scottsdale, Arizona</p>
           </div>
-          <p class="text-gray-300 leading-relaxed mb-3">
+          <p class="text-gray-700 leading-relaxed mb-3">
             Redesigned the core product for an agriculture software company, used on phones and desktop by people in the field and in the office.
           </p>
-          <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
             <li>Reworked the main workflows so common tasks took fewer steps and generated fewer support tickets</li>
             <li>Rebuilt the interface with a modern JavaScript framework so it worked the same across devices</li>
             <li>Worked closely with the backend team to keep the front end and the API in sync</li>
@@ -207,17 +207,17 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
         </div>
 
         <!-- SyberSafe -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">Front-end UI Developer</h3>
-            <p class="text-gray-400 font-medium">SyberSafe • February 2019 - November 2019</p>
-            <p class="text-sm text-gray-400 mt-1">Chandler, Arizona</p>
+            <h3 class="text-2xl font-semibold text-gray-900">Front-end UI Developer</h3>
+            <p class="text-gray-600 font-medium">SyberSafe • February 2019 - November 2019</p>
+            <p class="text-sm text-gray-600 mt-1">Chandler, Arizona</p>
           </div>
-          <p class="text-gray-300 leading-relaxed mb-3">
+          <p class="text-gray-700 leading-relaxed mb-3">
             Built the front end for a cybersecurity compliance platform used by more than 50,000 people, working alongside the dev team.
           </p>
-          <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
             <li>Built UI components in Angular and .NET</li>
             <li>Designed the brand identity and marketing materials</li>
             <li>Built layouts for dense data and dashboards that held up across screen sizes</li>
@@ -225,17 +225,17 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
         </div>
 
         <!-- Plexus Worldwide -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">UI/UX Designer</h3>
-            <p class="text-gray-400 font-medium">Plexus Worldwide • August 2016 - February 2019</p>
-            <p class="text-sm text-gray-400 mt-1">Scottsdale, AZ</p>
+            <h3 class="text-2xl font-semibold text-gray-900">UI/UX Designer</h3>
+            <p class="text-gray-600 font-medium">Plexus Worldwide • August 2016 - February 2019</p>
+            <p class="text-sm text-gray-600 mt-1">Scottsdale, AZ</p>
           </div>
-          <p class="text-gray-300 leading-relaxed mb-3">
+          <p class="text-gray-700 leading-relaxed mb-3">
             I was the first dedicated designer on the marketing team and led three major platform redesigns over two and a half years.
           </p>
-          <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
             <li>Designed and built a custom <span class="whitespace-nowrap">e-commerce</span> platform, replicated site builder, and back-office dashboard used by thousands of ambassadors</li>
             <li>Built an atomic design system with a Sketch component library that cut design-to-development handoff time by 60%</li>
             <li>Ran ongoing A/B tests to keep improving the product based on real data</li>
@@ -243,17 +243,17 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
         </div>
 
         <!-- PetSmart -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">Senior Web Designer</h3>
-            <p class="text-gray-400 font-medium">PetSmart • September 2015 - July 2016</p>
-            <p class="text-sm text-gray-400 mt-1">Greater Phoenix Area</p>
+            <h3 class="text-2xl font-semibold text-gray-900">Senior Web Designer</h3>
+            <p class="text-gray-600 font-medium">PetSmart • September 2015 - July 2016</p>
+            <p class="text-sm text-gray-600 mt-1">Greater Phoenix Area</p>
           </div>
-          <p class="text-gray-300 leading-relaxed mb-3">
+          <p class="text-gray-700 leading-relaxed mb-3">
             Worked on the <span class="whitespace-nowrap">e-commerce</span> redesign for a site with millions of monthly visitors, where even small changes had a big ripple effect.
           </p>
-          <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
             <li>Owned the homepage experience, the highest-traffic page on the site</li>
             <li>Led design for the Universal Studios "Secret Life of Pets" brand partnership</li>
             <li>Reworked the checkout flow so more of that traffic converted</li>
@@ -261,30 +261,30 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
         </div>
 
         <!-- Earlier Experience -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-xl font-semibold text-gray-100">Earlier Roles</h3>
-            <p class="text-gray-400 text-sm">2006 - 2015</p>
+            <h3 class="text-xl font-semibold text-gray-900">Earlier Roles</h3>
+            <p class="text-gray-600 text-sm">2006 - 2015</p>
           </div>
-          <p class="text-gray-300 leading-relaxed">
+          <p class="text-gray-700 leading-relaxed">
             Before that, roles at HomeSmart, Simple Sites, Xhibit Corp, and Zion & Zion took me through real estate tools, custom client sites, interactive museum exhibits, and <span class="whitespace-nowrap">e-commerce</span> and marketing work for clients like General Motors, the Arizona Science Center, and Sotheby's.
           </p>
         </div>
 
         <!-- Education Divider -->
-        <h3 class="text-sm font-semibold text-gray-100 uppercase tracking-wider pt-8 border-t border-zinc-700">
+        <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider pt-8 border-t border-gray-300">
           Education
         </h3>
 
         <!-- Education -->
-        <div class="relative pl-8 border-l-2 border-zinc-600">
-          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-600"></div>
+        <div class="relative pl-8 border-l-2 border-gray-300">
+          <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-300"></div>
           <div class="mb-3">
-            <h3 class="text-2xl font-semibold text-gray-100">BA in Game Design</h3>
-            <p class="text-gray-400 font-medium">Collins College • 2003 - 2006</p>
+            <h3 class="text-2xl font-semibold text-gray-900">BA in Game Design</h3>
+            <p class="text-gray-600 font-medium">Collins College • 2003 - 2006</p>
           </div>
-          <p class="text-gray-300 leading-relaxed">
+          <p class="text-gray-700 leading-relaxed">
             Studied Game Design, Graphic Design, Computer Science, and Computer Arts
           </p>
         </div>
@@ -295,40 +295,40 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
 
   <!-- Skills & Expertise -->
   <section class="container-custom py-20">
-    <h2 class="text-sm font-semibold text-gray-100 uppercase tracking-wider mb-12">
+    <h2 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-12">
       Skills & Expertise
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div>
-        <h3 class="text-xl font-semibold text-gray-100 mb-6">Design</h3>
-        <ul class="space-y-3 text-gray-300">
+        <h3 class="text-xl font-semibold text-gray-900 mb-6">Design</h3>
+        <ul class="space-y-3 text-gray-700">
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             UX/UI Design
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Atomic Design Systems
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             User Research
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             A/B Testing
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             AI-Enhanced Workflows
@@ -337,34 +337,34 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
       </div>
 
       <div>
-        <h3 class="text-xl font-semibold text-gray-100 mb-6">Development</h3>
-        <ul class="space-y-3 text-gray-300">
+        <h3 class="text-xl font-semibold text-gray-900 mb-6">Development</h3>
+        <ul class="space-y-3 text-gray-700">
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             React & Angular
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Component Architecture
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Responsive Design
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Accessibility (WCAG)
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Performance Optimization
@@ -373,34 +373,34 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
       </div>
 
       <div>
-        <h3 class="text-xl font-semibold text-gray-100 mb-6">Strategy</h3>
-        <ul class="space-y-3 text-gray-300">
+        <h3 class="text-xl font-semibold text-gray-900 mb-6">Strategy</h3>
+        <ul class="space-y-3 text-gray-700">
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Digital Marketing
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             <span class="whitespace-nowrap">E-commerce</span> Optimization
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Analytics & ROI
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Team Leadership
           </li>
           <li class="flex items-start">
-            <svg class="w-5 h-5 mr-2 text-gray-100 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mr-2 text-gray-900 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             Cross-functional Collaboration
@@ -412,17 +412,17 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
 
   <!-- CTA Section -->
   <section class="container-custom py-32">
-    <div class="bg-zinc-950 rounded-3xl p-16 md:p-24 text-center border border-zinc-800">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-100 mb-6 tracking-tight">
+    <div class="bg-gray-50 rounded-3xl p-16 md:p-24 text-center border border-gray-200">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
         Let's talk about your product.
       </h2>
-      <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+      <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
         If you're hiring for a senior or lead product design role, or want to talk about enrollment and conversion work, reach out.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/contact"
-          class="inline-flex items-center px-8 py-4 border-2 border-zinc-700 text-gray-100 text-base font-medium rounded-full hover:bg-zinc-900 transition-colors"
+          class="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-900 text-base font-medium rounded-full hover:bg-gray-100 transition-colors"
         >
           Get in touch
         </a>
@@ -430,7 +430,7 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
           href="https://www.linkedin.com/in/savelle"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center px-8 py-4 border-2 border-zinc-700 text-gray-100 text-base font-medium rounded-full hover:bg-zinc-900 transition-colors"
+          class="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-900 text-base font-medium rounded-full hover:bg-gray-100 transition-colors"
         >
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />

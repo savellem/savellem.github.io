@@ -26,7 +26,7 @@ const caseStudies = (await getCollection('case-studies'))
       aria-hidden="true"
     >
       <!-- Dashboard card: window frame with header dots -->
-      <g stroke="rgba(255,255,255,0.06)" stroke-width="1.2">
+      <g stroke="rgba(0,0,0,0.06)" stroke-width="1.2">
         <rect x="1180" y="70" width="200" height="170" rx="14" />
         <line x1="1180" y1="110" x2="1380" y2="110" />
         <circle cx="1198" cy="90" r="3" />
@@ -34,12 +34,12 @@ const caseStudies = (await getCollection('case-studies'))
         <circle cx="1222" cy="90" r="3" />
       </g>
       <!-- Content rows inside the card -->
-      <g stroke="rgba(255,255,255,0.05)" stroke-width="1.2" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.05)" stroke-width="1.2" stroke-linecap="round">
         <line x1="1198" y1="135" x2="1300" y2="135" />
         <line x1="1198" y1="155" x2="1270" y2="155" />
       </g>
       <!-- Small bar chart, bottom of the card -->
-      <g stroke="rgba(255,255,255,0.06)" stroke-width="1.2" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.06)" stroke-width="1.2" stroke-linecap="round">
         <line x1="1198" y1="225" x2="1360" y2="225" />
         <line x1="1205" y1="225" x2="1205" y2="200" />
         <line x1="1228" y1="225" x2="1228" y2="210" />
@@ -50,17 +50,17 @@ const caseStudies = (await getCollection('case-studies'))
       </g>
 
       <!-- Enrollment flow: connected nodes, between the two cards -->
-      <g stroke="rgba(255,255,255,0.045)" stroke-width="1.2">
+      <g stroke="rgba(0,0,0,0.045)" stroke-width="1.2">
         <circle cx="1230" cy="268" r="6" />
         <circle cx="1330" cy="268" r="6" />
         <line x1="1240" y1="268" x2="1320" y2="268" stroke-dasharray="3 5" />
       </g>
 
       <!-- Floating stat card with sparkline -->
-      <g stroke="rgba(255,255,255,0.045)" stroke-width="1.2">
+      <g stroke="rgba(0,0,0,0.045)" stroke-width="1.2">
         <rect x="1180" y="300" width="200" height="130" rx="12" />
       </g>
-      <g stroke="rgba(255,255,255,0.05)" stroke-width="1.2" stroke-linecap="round">
+      <g stroke="rgba(0,0,0,0.05)" stroke-width="1.2" stroke-linecap="round">
         <line x1="1198" y1="326" x2="1260" y2="326" />
         <polyline points="1198,405 1223,390 1248,398 1273,375 1298,385 1323,365 1348,378" />
       </g>
@@ -68,29 +68,29 @@ const caseStudies = (await getCollection('case-studies'))
       <!-- Cursor near the sparkline -->
       <path
         d="M0,0 L0,18 L4.5,14 L7,20 L9.5,19 L7,13 L12,13 Z"
-        fill="rgba(255,255,255,0.06)"
+        fill="rgba(0,0,0,0.06)"
         transform="translate(1343,360)"
       />
 
       <!-- Toggle switch, below the stat card -->
-      <g stroke="rgba(255,255,255,0.05)" stroke-width="1.2">
+      <g stroke="rgba(0,0,0,0.05)" stroke-width="1.2">
         <rect x="1180" y="450" width="50" height="26" rx="13" />
         <circle cx="1217" cy="463" r="9" />
       </g>
 
       <!-- Primary button, below the stat card -->
-      <rect x="1245" y="446" width="100" height="34" rx="17" stroke="rgba(255,255,255,0.06)" stroke-width="1.2" />
+      <rect x="1245" y="446" width="100" height="34" rx="17" stroke="rgba(0,0,0,0.06)" stroke-width="1.2" />
     </svg>
 
-    <div class="max-w-5xl text-left relative">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-100 tracking-tight leading-[1.05] mb-4">
-        I design the moment someone becomes a customer, patient, or member. 
+    <div class="max-w-2xl mx-auto text-center relative">
+      <h1 class="text-3xl text-gray-900 font-semibold mb-7 leading-snug">
+        There's a moment right before someone becomes a customer, a patient, a member. Their thumb hovers. They're deciding whether to trust you.
       </h1>
-      <p class="text-xl md:text-2xl font-medium text-gray-300 leading-snug mb-6">
-        For health and wellness products. And I build them with code.
+      <p class="text-3xl text-gray-900 font-semibold mb-7 leading-snug">
+        I design that moment.
       </p>
-      <p class="text-lg md:text-xl text-gray-400 leading-snug max-w-3xl">
-        Enrollment flows, patient dashboards, and conversion systems. 18 years of experience, currently building with Claude and Claude Code daily.
+      <p class="text-3xl text-gray-900 font-semibold mb-7 leading-snug">
+        For health and wellness products. And I build them with code.
       </p>
     </div>
   </section>
@@ -100,16 +100,16 @@ const caseStudies = (await getCollection('case-studies'))
     <section id="featured-work" class="container-custom pt-20 pb-8">
       <div class="mb-4 flex items-end justify-between">
         <div>
-          <h2 class="text-sm font-semibold text-gray-100 uppercase tracking-wider mb-3">
+          <h2 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
             Featured Work
           </h2>
-          <p class="text-gray-400 text-lg">
+          <p class="text-gray-600 text-lg">
             Recent projects and case studies
           </p>
         </div>
         <a
           href="/work"
-          class="hidden md:inline-flex items-center text-sm font-medium text-gray-100 hover:text-gray-300 transition-colors group"
+          class="hidden md:inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors group"
         >
           View all case studies
           <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +138,7 @@ const caseStudies = (await getCollection('case-studies'))
       <div class="mt-12 text-center md:hidden">
         <a
           href="/work"
-          class="inline-flex items-center text-sm font-medium text-gray-100 hover:text-gray-300 transition-colors group"
+          class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors group"
         >
           View all case studies
           <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,16 +152,16 @@ const caseStudies = (await getCollection('case-studies'))
 
   <!-- CTA Section -->
   <section class="container-custom py-32">
-    <div class="bg-zinc-950 rounded-3xl p-16 md:p-24 text-center border border-zinc-800">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-100 mb-6 tracking-tight">
+    <div class="bg-gray-50 rounded-3xl p-16 md:p-24 text-center border border-gray-200">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
         Let's talk about your product.
       </h2>
-      <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+      <p class="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
         If you're hiring for a senior or lead product design role, or want to talk about enrollment and conversion work, reach out.
       </p>
       <a
         href="/contact"
-        class="inline-flex items-center px-8 py-4 border-2 border-zinc-700 text-gray-100 text-base font-medium rounded-full hover:bg-zinc-900 transition-colors"
+        class="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-900 text-base font-medium rounded-full hover:bg-gray-100 transition-colors"
       >
         Get in touch
       </a>

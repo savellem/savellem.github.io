@@ -12,10 +12,10 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-sm border-b border-zinc-800">
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
   <nav class="container-custom py-6">
     <div class="flex items-center justify-between md:grid md:grid-cols-3">
-      <a href="/" class="text-xl font-semibold text-gray-100 tracking-tight">
+      <a href="/" class="text-xl font-semibold text-gray-900 tracking-tight">
         Savelle McThias
       </a>
 
@@ -24,8 +24,8 @@ const navItems = [
           <li>
             <a
               href={item.path}
-              class={`text-sm font-medium transition-colors tracking-wide hover:text-gray-100 ${
-                isActive(item.path) ? 'text-gray-100' : 'text-gray-400'
+              class={`text-sm font-medium transition-colors tracking-wide hover:text-gray-900 ${
+                isActive(item.path) ? 'text-gray-900' : 'text-gray-600'
               }`}
             >
               {item.name}
@@ -37,7 +37,7 @@ const navItems = [
       <div class="hidden md:flex items-center justify-end">
         <a
           href="/contact"
-          class="inline-flex items-center px-5 py-2.5 border-2 border-zinc-700 text-gray-100 text-sm font-medium rounded-full hover:bg-zinc-900 transition-colors"
+          class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors"
         >
           Contact
         </a>
@@ -46,7 +46,7 @@ const navItems = [
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden p-2 text-gray-400 hover:text-gray-100"
+        class="md:hidden p-2 text-gray-600 hover:text-gray-900"
         aria-label="Toggle menu"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,8 +60,8 @@ const navItems = [
       {navItems.map((item) => (
         <a
           href={item.path}
-          class={`block text-sm font-medium transition-colors hover:text-gray-100 ${
-            isActive(item.path) ? 'text-gray-100' : 'text-gray-400'
+          class={`block text-sm font-medium transition-colors hover:text-gray-900 ${
+            isActive(item.path) ? 'text-gray-900' : 'text-gray-600'
           }`}
         >
           {item.name}
@@ -69,7 +69,7 @@ const navItems = [
       ))}
       <a
         href="/contact"
-        class="inline-flex items-center px-5 py-2.5 border-2 border-zinc-700 text-gray-100 text-sm font-medium rounded-full hover:bg-zinc-900 transition-colors"
+        class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors"
       >
         Contact
       </a>
