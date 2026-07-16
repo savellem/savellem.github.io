@@ -24,7 +24,7 @@ const navItems = [
           <li>
             <a
               href={item.path}
-              class={`text-sm font-medium transition-colors tracking-wide hover:text-gray-900 ${
+              class={`text-sm font-medium uppercase transition-colors tracking-wide hover:text-gray-900 ${
                 isActive(item.path) ? 'text-gray-900' : 'text-gray-600'
               }`}
             >
@@ -37,7 +37,7 @@ const navItems = [
       <div class="hidden md:flex items-center justify-end">
         <a
           href="/contact"
-          class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors"
+          class="inline-flex items-center px-5 py-2.5 border-2 border-gray-300 text-gray-900 text-sm font-medium uppercase rounded-full hover:bg-gray-50 transition-colors"
         >
           Contact
         </a>
