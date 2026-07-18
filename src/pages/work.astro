@@ -2,18 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import FeaturedCaseStudy from '@components/FeaturedCaseStudy.astro';
 import { getCollection } from 'astro:content';
-
-const EXCLUDED_SLUGS = new Set([
-  'direct-sales-enrollment-template',
-  'dsyfer-cybersecurity-platform',
-  'lifewave-global-platform',
-  'gmc-silverado-configurator',
-  'yoli-omegas-dashboard',
-  'lamesa-rv-vanup-platform',
-  'ifoodds-agriculture-platform',
-  'plexus-worldwide-digital-transformation',
-  'petsmart-ecommerce-redesign',
-]);
+import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 
 const caseStudies = (await getCollection('case-studies'))
   .filter((s) => !EXCLUDED_SLUGS.has(s.id))

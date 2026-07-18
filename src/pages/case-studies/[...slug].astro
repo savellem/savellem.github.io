@@ -4,16 +4,29 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
 import NumbersBlock from '@components/case-study/NumbersBlock.astro';
 import { creativeWorkSchema, breadcrumbListSchema, SITE_URL } from '@/lib/schema';
+import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 
 export async function getStaticPaths() {
   const caseStudies = await getCollection('case-studies');
-  return caseStudies.map((study) => ({
-    params: { slug: study.id },
-    props: { study },
-  }));
+  // Prev/Next cycles through the same visible, ordered set shown on /work,
+  // wrapping around at both ends. Legacy/excluded pages get no nav.
+  const visible = caseStudies
+    .filter((s) => !EXCLUDED_SLUGS.has(s.id))
+    .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99));
+
+  return caseStudies.map((study) => {
+    const index = visible.findIndex((s) => s.id === study.id);
+    const hasNav = index !== -1 && visible.length > 1;
+    const prevStudy = hasNav ? visible[(index - 1 + visible.length) % visible.length] : undefined;
+    const nextStudy = hasNav ? visible[(index + 1) % visible.length] : undefined;
+    return {
+      params: { slug: study.id },
+      props: { study, prevStudy, nextStudy },
+    };
+  });
 }
 
-const { study } = Astro.props;
+const { study, prevStudy, nextStudy } = Astro.props;
 const { Content } = await render(study);
 
 // Role, Team, and Timeline surface beside the headline; Model and Scope
@@ -123,24 +136,39 @@ const pageSchema = [
     </div>
   </section>
 
-  <!-- Navigation -->
-  <section class="container-custom py-16">
-    <div class="flex items-center justify-between border-t border-gray-200 pt-8">
-      <a
-        href="/work"
-        class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-      >
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        View Case Studies
-      </a>
-      <a
-        href="/contact"
-        class="btn-primary"
-      >
-        Let's Work Together
-      </a>
-    </div>
-  </section>
+  <!-- Prev / Next Navigation -->
+  {prevStudy && nextStudy && (
+    <section class="container-custom py-16">
+      <div class="grid grid-cols-2 gap-6 border-t border-gray-200 pt-8">
+        <a
+          href={`/case-studies/${prevStudy.id}`}
+          class="group"
+        >
+          <p class="inline-flex items-center text-sm text-gray-500 group-hover:text-gray-900 transition-colors mb-2">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+          </p>
+          <p class="text-lg md:text-xl font-display font-bold text-gray-900 leading-snug">
+            {prevStudy.data.client}
+          </p>
+        </a>
+        <a
+          href={`/case-studies/${nextStudy.id}`}
+          class="group text-right"
+        >
+          <p class="inline-flex items-center justify-end text-sm text-gray-500 group-hover:text-gray-900 transition-colors mb-2">
+            Next
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </p>
+          <p class="text-lg md:text-xl font-display font-bold text-gray-900 leading-snug">
+            {nextStudy.data.client}
+          </p>
+        </a>
+      </div>
+    </section>
+  )}
 </BaseLayout>
