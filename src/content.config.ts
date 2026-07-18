@@ -9,10 +9,10 @@ const caseStudies = defineCollection({
     client: z.string(),
     project: z.string(),
     year: z.number(),
-    objectives: z.string(),
+    objectives: z.string().optional(),
     description: z.string(),
-    result: z.string(),
-    thumbnail: z.string(),
+    result: z.string().optional(),
+    thumbnail: z.string().optional(),
     featured: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     publishDate: z.coerce.date(),
@@ -24,6 +24,8 @@ const caseStudies = defineCollection({
     homepageFeatured: z.boolean().default(false),
     homepageOrder: z.number().optional(),
     outcomes: z.array(z.object({ stat: z.string(), label: z.string() })).optional(),
+    /** Label/value spec-sheet block (Model, Role, Team, Scope, Timeline). */
+    details: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
   }),
 });
 

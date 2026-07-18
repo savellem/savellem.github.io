@@ -1,113 +1,81 @@
 ---
-title: "Card Ritual"
+title: "Card Ritual: Solo Full-Stack Build"
 client: "Card Ritual"
-project: "AI-Integrated Tarot Journaling Web App"
+project: "Solo Full-Stack Tarot Journaling Web App"
 year: 2026
-description: "A tarot journaling web app designed for practitioners who have outgrown every passive app they've tried. Built solo in three months — concept, design, development, and brand. No outside interpretations. No algorithms. Just you, the cards, and your own lived experience."
-objectives: "Most tarot apps treat the cards like a horoscope. They hand you a predefined meaning and call it a reading. But a real practice doesn’t work that way. Life is too personal and too unpredictable to be interpreted by someone else’s definition. After nine years of daily practice I knew what was missing — an app that trusted the user to develop their own relationship with the cards through lived experience, not handed down interpretations."
-result: "Shipped and live with real users. Trial users converting through a drip sequence. App Store rejection became a web-first pivot. Content reaching beyond followers from week one."
-thumbnail: "/images/case-studies/thumb-cardritual.png"
+description: "A solo-built tarot journaling web app, three months from concept to live product, grown from nine years of personal daily practice."
+thumbnail: "/images/case-studies/cs-cr-001.png"
 featured: true
 homepageFeatured: true
 homepageOrder: 1
-role: "Founder, Designer & Developer"
-scope: "Product Design · AI Integration · SaaS · Brand Strategy · Content"
-tags: ["Product Design", "AI Integration", "Solo Founder", "SaaS", "Web App", "Next.js"]
+role: "Founder, sole designer and engineer"
+scope: "Product Design · UX/UI · Full-Stack Development · Brand"
+tags: ["Product Design", "Full-Stack Development", "Solo Founder", "SaaS", "Web App"]
 publishDate: 2026-05-01
+details:
+  - { label: "Model", value: "B2C · Subscription SaaS" }
+  - { label: "Role", value: "Founder, sole designer and engineer" }
+  - { label: "Team", value: "Solo" }
+  - { label: "Scope", value: "0 to 1 Product Strategy · UX/UI · Full-Stack Development · Brand" }
+  - { label: "Timeline", value: "3 months, concept to live" }
 outcomes:
-  - { stat: "3 months", label: "Concept to production, built solo" }
-  - { stat: "Live", label: "Shipped and active with real users" }
-  - { stat: "Web-first", label: "Pivoted from App Store to broader reach" }
+  - { stat: "9 years", label: "of personal daily tarot practice as the research foundation" }
+  - { stat: "3 months", label: "from first brainstorm to live product" }
+  - { stat: "Live", label: "and in active use today" }
 ---
 
-import ImageSlot from '../../components/ImageSlot.astro'
+import CopySection from '../../components/case-study/CopySection.astro'
+import ReflectionSection from '../../components/case-study/ReflectionSection.astro'
+import ImagePlaceholder from '../../components/case-study/ImagePlaceholder.astro'
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12 my-12">
-  <div>
-    <p class="text-xs font-medium text-gray-500 uppercase tracking-widest mb-4">Challenge</p>
-    <p class="text-2xl leading-snug text-gray-900">Most tarot apps treat the cards like a horoscope. They hand you a predefined meaning and call it a reading. But a real practice doesn't work that way. Life is too personal and too unpredictable to be interpreted by someone else's definition. After nine years of daily practice I knew what was missing. An app that trusted the user to develop their own relationship with the cards through lived experience, not handed down interpretations.</p>
-  </div>
-  <div>
-    <p class="text-xs font-medium text-gray-500 uppercase tracking-widest mb-3">Solution</p>
-    <p>A journaling-first web app built around a single daily loop: pull a card, sit with it, live your day, then come back and write down what you actually experienced. Over time users build their own personal interpretation of every card, not from a book, not from an algorithm, but from their own life. The design keeps the experience intentional and distraction free, because the practice only works if the user does the thinking.</p>
-  </div>
-</div>
+<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-001.png" caption="App screenshot or composite showing the daily card pull screen, this should feel like the emotional entry point to the product." />
 
-<ImageSlot label="Process / early iterations" src="/images/case-studies/card-ritual-01.png" />
+<CopySection title="The Problem" center>
+<div class="max-w-2xl mx-auto">
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start my-16">
-<div class="text-xl max-w-xl">
+I've pulled one card a day for nine years, using a physical journal. That practice is genuinely valuable, but it doesn't scale the way a memory does. I couldn't easily look back and see a pattern, a shift, how a reading from three years ago connected to something happening now. Doing that meant flipping through hundreds of handwritten pages. I also just wanted the practice to go where I go, pull a card and log it from my phone, in bed, privately, without needing my physical deck or journal on hand.
 
-
-## Nine years of personal practice as the only user research that mattered.
-
-Starting from my own daily ritual meant I knew exactly where every existing tool failed. The journaling loop was designed from lived experience, not assumption. That's a different kind of product clarity than any focus group delivers.
+The tarot app market isn't small, it's a $5.6 billion space with roughly 5 million users globally. But it's saturated with apps built by people who don't actually practice. Most either lean fully into mystical, algorithm-generated interpretations, or they're generic journaling tools with a card deck bolted on. None of them were built by someone with a real, sustained daily practice, and it showed.
 
 </div>
-<ImageSlot label="Feature 01 image" src="/images/case-studies/card-ritual-02.png" aspect="square" class="my-0" />
-</div>
+</CopySection>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start my-16">
-<div class="text-xl max-w-xl">
+<CopySection title="The Build" center>
+<div class="max-w-2xl mx-auto">
 
-
-## Designed to get out of the way.
-
-The interface leads with one question: what might this card mean for your day? The traditional card interpretation exists but sits below the fold intentionally, available for those who want it, invisible for those who don't. The user decides how much outside context enters their practice.
-
-For those who want to go further, Go Deeper offers three optional reflection prompts to help unlock more clarity. And for users who want a professional perspective, Mentor Feedback lets them purchase tokens to receive optional feedback from a real tarot reader on their personal reflection.
-
-Every feature is opt-in. The core experience stays clean and uninterrupted for the user who just wants to pull a card and think.
+Month one was concept and infrastructure: brainstorming the product with Claude, designing the brand, defining the ideal customer and business model, then building the first versions, a React Native mobile app, a Next.js web app, and an Astro marketing site, all at once. Month two was testing and go-to-market groundwork, user testing with ten different types of users, early email and social strategy. Month three was the hard turn: submitted to the App Store and Google Play, got rejected, rebuilt the payment integration from RevenueCat to Stripe, and made the call to go web-only. That same month is when the smaller delight details went in, theme switching, gesture interactions, onboarding walkthroughs.
 
 </div>
-<ImageSlot label="Feature 02 image" src="/images/case-studies/card-ritual-03.png" aspect="square" class="my-0" />
-</div>
 
-<div class="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10 lg:gap-16 my-16 border-t border-zinc-800 pt-16">
-  <p class="text-xs font-medium text-gray-500 uppercase tracking-widest pt-1">Industry Challenge</p>
-  <p class="text-2xl md:text-3xl text-gray-900 leading-snug max-w-2xl">The tarot app market is saturated with passive, single-session tools. No product has successfully bridged serious spiritual practice with long-term journaling. Most apps are built by developers who don't practice, and it shows.</p>
-</div>
+<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-002.png" caption="The core daily loop, pulling a card and writing a journal entry, ideally showing the card art and the reflection prompt together." />
 
-<ImageSlot label="Competitive landscape" src="/images/case-studies/card-ritual-04.png" />
+<div class="max-w-2xl mx-auto">
 
-<div class="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10 lg:gap-16 my-16 border-t border-zinc-800 pt-16">
-  <p class="text-xs font-medium text-gray-500 uppercase tracking-widest pt-1">Opportunity</p>
-  <p class="text-2xl md:text-3xl text-gray-900 leading-snug max-w-2xl">Card Ritual targets the practitioner who has outgrown every app they've tried, but also the curious skeptic who has never tried one. Someone intellectually drawn to self-reflection but turned off by mysticism and fortune-telling. By designing around continuity and personal interpretation, returning to past entries, watching your own meaning evolve over time, the product speaks to users who want a reflection practice that feels intelligent, not superstitious. No competitor is speaking to that person at all.</p>
-</div>
+Most of the stack was new to me going in, Claude Code, Vercel, even basic SQL. I'd never submitted an app to a store before either. What made it possible was a decade of front-end experience underneath all of it, enough foundation to move fast through genuinely unfamiliar territory.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start my-16">
-<div class="text-xl max-w-xl">
-
-
-## An App Store rejection became a better product decision.
-
-Hitting Apple's wall during launch forced a web-first pivot. Faster iteration, no gatekeeping, immediate cross-device access. What looked like a setback turned out to be a cleaner path to ship, and the product is stronger for it.
+Apple rejected the app on submission, not for a bug or a policy violation, but because they were actively rejecting tarot and astrology apps outright to reduce category bloat in a saturated space. That's not a problem you fix with a better app. I changed course entirely, dropped the native app plan, and rebuilt the payment layer for a standalone web app instead. It ended up being the right call. No app store gatekeeping, no 30% cut, full control over the experience.
 
 </div>
-<ImageSlot label="Feature 03 image" src="/images/case-studies/card-ritual-05.png" aspect="square" class="my-0" />
-</div>
+</CopySection>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start my-16">
-<div class="text-xl max-w-xl">
+<CopySection title="Where It Stands" center>
+<div class="max-w-2xl mx-auto">
 
-
-## A content strategy built around a real practice and a real person.
-
-A mix of daily reflections using the app, single card pulls with a real deck, and honest takes on tarot superstitions and common misconceptions. No performance, no mysticism theater. Just someone who actually practices sharing what that looks like. Non-follower reach outperformed benchmarks from week one.
+Card Ritual is live today with a small, real user base, 9 people including me, with 3 to 4 daily journal entries happening consistently. It has paying subscribers at $5 a month. These are small numbers by design right now, the focus so far has been proving the product works end to end before pushing on growth.
 
 </div>
-<ImageSlot label="Feature 04 image" src="/images/case-studies/card-ritual-06.png" aspect="square" class="my-0" />
+
+<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-003.png" caption="The list or calendar view of past entries, showing how a user looks back on patterns over time." />
+</CopySection>
+
+<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-004.png" caption="Marketing site screenshot or app icon/branding moment, shows the product as a finished, polished whole rather than just UI screens." />
+
+<ReflectionSection title="What I'd Do Differently" center>
+<div class="max-w-2xl mx-auto">
+
+I'd have researched app store policy before committing to a native build. I lost real time building for a platform that was actively hostile to the category I was entering, time I could have spent building the web version from day one. I'd also get feedback from real users earlier, in the planning phase rather than after a working version already existed. Some of what changed in month three could have been decided in month one.
+
+What's next isn't more features. It's marketing and getting real usage data from a wider group before I add anything else. I built the thing I wanted to build. Now it's about finding out if other people who share the practice want it too.
+
 </div>
-
-<div class="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10 lg:gap-16 my-16 border-t border-zinc-800 pt-16">
-  <p class="text-xs font-medium text-gray-500 uppercase tracking-widest pt-1">Challenges & Obstacles</p>
-  <p class="text-2xl md:text-3xl text-gray-900 leading-snug max-w-2xl">Building alone is brutal honesty. App Store rejection during launch. Trial users were signing up but not coming back, which meant rebuilding the entire email sequence from scratch. No team to pressure-test decisions, just the product and whether it actually works. That accountability made every design choice sharper.</p>
-</div>
-
-<ImageSlot label="Supporting image" src="/images/case-studies/card-ritual-07.png" />
-
-<div class="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10 lg:gap-16 my-16 border-t border-zinc-800 pt-16">
-  <p class="text-xs font-medium text-gray-500 uppercase tracking-widest pt-1">Conclusion</p>
-  <p class="text-2xl md:text-3xl text-gray-900 leading-snug max-w-2xl">Card Ritual is the clearest expression of everything I believe about design. Your best work comes from a problem you actually live inside. The app is live, the content is running, and the practice that inspired it is nine years deep.</p>
-</div>
-
+</ReflectionSection>

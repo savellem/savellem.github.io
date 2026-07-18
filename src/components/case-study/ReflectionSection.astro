@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  /**
+   * Centers the heading and text as a block on the page while keeping the
+   * text itself left-aligned. Only the heading is wrapped here; paragraph
+   * blocks in the slot carry their own `max-w-2xl` (+ `mx-auto` when
+   * centered) so images placed between them aren't constrained to the
+   * text column width.
+   */
+  center?: boolean;
+}
+
+const { title, center = false } = Astro.props;
+const headingClass = center ? 'max-w-2xl mx-auto' : 'max-w-2xl';
+---
+
+<section class="mt-16 md:mt-20 rounded-2xl bg-gray-50 border border-gray-200 px-8 py-10 md:px-14 md:py-14">
+  <h2 class={`text-2xl md:text-3xl font-display font-bold text-gray-900 mb-8 ${headingClass}`}>{title}</h2>
+  <slot />
+</section>

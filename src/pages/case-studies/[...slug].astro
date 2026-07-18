@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
+import NumbersBlock from '@components/case-study/NumbersBlock.astro';
 import { creativeWorkSchema, breadcrumbListSchema, SITE_URL } from '@/lib/schema';
 
 export async function getStaticPaths() {
@@ -14,6 +15,16 @@ export async function getStaticPaths() {
 
 const { study } = Astro.props;
 const { Content } = await render(study);
+
+// Role, Team, and Timeline surface beside the headline; Model and Scope
+// break down into keyword pills under the subheadline instead.
+const HERO_DETAIL_LABELS = ['Role', 'Team', 'Timeline'];
+const allDetails = study.data.details ?? [];
+const heroDetails = allDetails.filter((d) => HERO_DETAIL_LABELS.includes(d.label));
+const pillKeywords = allDetails
+  .filter((d) => !HERO_DETAIL_LABELS.includes(d.label))
+  .flatMap((d) => d.value.split('·').map((s) => s.trim()))
+  .filter(Boolean);
 
 const caseUrl = `${SITE_URL}/case-studies/${study.id}`;
 const pageSchema = [
@@ -45,70 +56,52 @@ const pageSchema = [
     { label: study.data.client, href: `/case-studies/${study.id}` },
   ]} />
 
-  <!-- Hero Header -->
-  <section class="container-custom pt-16 pb-10">
-    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 mb-10">
-      <!-- Left: client + title -->
-      <div class="lg:w-1/2">
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-900 leading-tight">
-          {study.data.client}
-        </h1>
-      </div>
+  <!-- Header -->
+  <section class="container-custom pt-10 pb-16">
+    <a
+      href="/work"
+      class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
+    >
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Work
+    </a>
 
-      <!-- Right: description -->
-      <div class="lg:w-1/2 flex items-end">
-        <p class="text-lg text-gray-700 leading-relaxed">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight mb-10">
+      {study.data.title}
+    </h1>
+
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 mb-12">
+      <!-- Left: subheadline -->
+      <div class="lg:w-1/2">
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-6">
           {study.data.description}
         </p>
+
+        {pillKeywords.length > 0 && (
+          <div class="border-t border-gray-200 pt-4">
+            <p class="text-sm md:text-base font-semibold text-gray-900">
+              {pillKeywords.map((keyword, i) => (
+                <>
+                  {i > 0 && <span class="text-gray-400 mx-2">&bull;</span>}
+                  {keyword}
+                </>
+              ))}
+            </p>
+          </div>
+        )}
       </div>
-    </div>
 
-    <!-- Metadata row -->
-    <div class="border-t border-gray-200 divide-y divide-gray-200 lg:divide-y-0 lg:flex lg:divide-x lg:divide-gray-200">
-      <div class="py-4 lg:pr-10">
-        <p class="text-sm text-gray-500 mb-1">Years</p>
-        <p class="text-gray-900">
-          {study.data.yearEnd ? `${study.data.year}–${study.data.yearEnd}` : study.data.year}
-        </p>
-      </div>
-
-      {study.data.role && (
-        <div class="py-4 lg:px-10">
-          <p class="text-sm text-gray-500 mb-1">Role</p>
-          <p class="text-gray-900">{study.data.role}</p>
-        </div>
-      )}
-
-      {study.data.scope && (
-        <div class="py-4 lg:px-10">
-          <p class="text-sm text-gray-500 mb-1">Scope</p>
-          <p class="text-gray-900">{study.data.scope}</p>
-        </div>
-      )}
-
-      {study.data.tags.length > 0 && !study.data.scope && (
-        <div class="py-4 lg:px-10">
-          <p class="text-sm text-gray-500 mb-1">Scope</p>
-          <p class="text-gray-900">{study.data.tags.join(', ')}</p>
-        </div>
-      )}
-
-      {study.data.media && study.data.media.length > 0 && (
-        <div class="py-4 lg:px-10">
-          <p class="text-sm text-gray-500 mb-1">Media</p>
-          <div class="flex flex-wrap gap-x-3 gap-y-1">
-            {study.data.media.map((item) => (
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-900 hover:text-gray-700 transition-colors inline-flex items-center gap-0.5"
-              >
-                {item.label}
-                <svg class="w-3 h-3 ml-0.5" viewBox="0 0 12 12" fill="none">
-                  <path d="M3.5 8.5L8.5 3.5M8.5 3.5H5M8.5 3.5V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+      <!-- Right: Role / Team / Timeline -->
+      {heroDetails.length > 0 && (
+        <div class="lg:w-1/2 flex">
+          <div class="w-full divide-y divide-gray-200 border-t border-gray-200">
+            {heroDetails.map((item) => (
+              <div class="flex items-start justify-between py-3">
+                <span class="text-gray-500 shrink-0 mr-4">{item.label}</span>
+                <span class="text-gray-900 text-right">{item.value}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -116,16 +109,12 @@ const pageSchema = [
     </div>
   </section>
 
-  <!-- Hero Image -->
-  <section class="container-custom mb-16">
-    <div class="rounded-2xl overflow-hidden">
-      <img
-        src={study.data.thumbnail}
-        alt={study.data.client}
-        class="w-full object-cover"
-      />
-    </div>
-  </section>
+  <!-- Numbers -->
+  {study.data.outcomes && study.data.outcomes.length > 0 && (
+    <section class="container-custom mb-16">
+      <NumbersBlock stats={study.data.outcomes} />
+    </section>
+  )}
 
   <!-- Main Content -->
   <section class="container-custom mb-16">
@@ -133,25 +122,6 @@ const pageSchema = [
       <Content />
     </div>
   </section>
-
-  <!-- Outcomes -->
-  {study.data.outcomes && study.data.outcomes.length > 0 && (
-    <section class="container-custom mb-16">
-      <div class="border-t border-gray-200 pt-10 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-8 lg:gap-16">
-        <div>
-          <p class="text-xs font-medium text-gray-500 uppercase tracking-widest pt-1">Outcomes</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
-          {study.data.outcomes.map((outcome) => (
-            <div>
-              <p class="text-4xl lg:text-5xl font-display font-bold text-gray-900 leading-none mb-3">{outcome.stat}</p>
-              <p class="text-sm text-gray-600 leading-snug">{outcome.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- Navigation -->
   <section class="container-custom py-16">
