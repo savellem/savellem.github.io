@@ -7,24 +7,103 @@ interface Stat {
 interface Props {
   stats: Stat[];
   eyebrow?: string;
+  /** Counts each stat up from 0 when the block scrolls into view. */
+  animate?: boolean;
 }
 
-const { stats, eyebrow = 'The Numbers' } = Astro.props;
+const { stats, eyebrow = 'The Numbers', animate = true } = Astro.props;
 
 // Literal class strings (not template-interpolated) so Tailwind's scanner picks them up.
 const gridClass = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3';
+
+/**
+ * Splits a stat like "25%", "90 days", or "~30k" into a fixed prefix, an
+ * animatable integer, and a fixed suffix. Stats with no digits at all
+ * (e.g. "Live") fall back to static text.
+ */
+function parseStat(stat: string) {
+  const match = stat.match(/^(\D*)(\d+)(.*)$/);
+  if (!match) return null;
+  return { prefix: match[1], value: parseInt(match[2], 10), suffix: match[3] };
+}
 ---
 
-<div class="rounded-2xl bg-gray-50 px-8 py-10 md:px-14 md:py-14">
+<div
+  class="rounded-2xl bg-gray-50 px-8 py-10 md:px-14 md:py-14"
+  data-numbers-block={animate ? 'animate' : undefined}
+>
   <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-8">{eyebrow}</p>
   <div class={`grid grid-cols-1 ${gridClass} divide-y sm:divide-y-0 sm:divide-x divide-white`}>
-    {stats.map((item) => (
-      <div class="py-6 first:pt-0 last:pb-0 sm:py-0 sm:px-8 sm:first:pl-0">
-        <p class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-900 leading-none mb-3">
-          {item.stat}
-        </p>
-        <p class="text-sm md:text-base text-gray-600 leading-snug">{item.label}</p>
-      </div>
-    ))}
+    {stats.map((item) => {
+      const parsed = animate ? parseStat(item.stat) : null;
+      return (
+        <div class="py-6 first:pt-0 last:pb-0 sm:py-0 sm:px-8 sm:first:pl-0">
+          <p class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-900 leading-none mb-3">
+            {parsed ? (
+              <>
+                {parsed.prefix}<span class="stat-number tabular-nums" data-target={parsed.value}>0</span>{parsed.suffix}
+              </>
+            ) : (
+              item.stat
+            )}
+          </p>
+          <p class="text-sm md:text-base text-gray-600 leading-snug">{item.label}</p>
+        </div>
+      );
+    })}
   </div>
 </div>
+
+<script>
+  const EASE_OUT_CUBIC = (t: number) => 1 - Math.pow(1 - t, 3);
+  const DURATION = 700;
+  const STAGGER = 80;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animateNumber(el: Element, target: number, delay: number) {
+    if (prefersReducedMotion) {
+      el.textContent = String(target);
+      return;
+    }
+    setTimeout(() => {
+      const start = performance.now();
+      function tick(now: number) {
+        const elapsed = now - start;
+        const t = Math.min(elapsed / DURATION, 1);
+        const value = Math.round(EASE_OUT_CUBIC(t) * target);
+        el.textContent = String(value);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, delay);
+  }
+
+  document.querySelectorAll('[data-numbers-block="animate"]').forEach((container) => {
+    const numberEls = container.querySelectorAll('.stat-number');
+    if (!numberEls.length) return;
+
+    const trigger = () => {
+      numberEls.forEach((el, i) => {
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        animateNumber(el, target, i * STAGGER);
+      });
+    };
+
+    // Fires immediately if the block is already in the viewport on load,
+    // and exactly once thereafter on first scroll into view.
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            trigger();
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(container);
+  });
+</script>
