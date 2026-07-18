@@ -98,12 +98,14 @@ const href = `/case-studies/${slug}`;
     </div>
 
     <!-- Right: image (3/4) -->
-    <a href={href} class="lg:w-3/4 shrink-0 block group overflow-hidden rounded-2xl">
+    <a href={href} class="lg:w-3/4 shrink-0 block group overflow-hidden rounded-2xl aspect-[16/10]">
       {thumbnail ? (
         <img
           src={thumbnail}
-          alt={title}
+          alt={`${title} — ${client} case study thumbnail`}
           class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+          loading="lazy"
+          decoding="async"
         />
       ) : (
         <div class="w-full h-full min-h-64 bg-zinc-900 border border-dashed border-zinc-700 rounded-2xl flex items-center justify-center px-8 text-center">

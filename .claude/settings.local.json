@@ -25,7 +25,9 @@
       "Bash(curl -s http://localhost:4321/case-studies/card-ritual/ -o /tmp/cr.html)",
       "Bash(curl -s http://localhost:4321/case-studies/card-ritual/ -o 'C:\\\\Users\\\\Savelle\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Projects-savellem-github-io\\\\cdb82379-8b29-48e5-8b7c-750ed2897849\\\\scratchpad/cr.html')",
       "Bash(grep *)",
-      "Bash(curl -s http://localhost:4321/)"
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(npx astro *)"
     ],
     "deny": [],
     "ask": []

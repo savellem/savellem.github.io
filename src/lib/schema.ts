@@ -20,9 +20,9 @@ export const personSchema = {
   '@id': PERSON_ID,
   name: 'Savelle McThias',
   url: SITE_URL,
-  jobTitle: 'UX/UI Designer & Digital Experience Leader',
+  jobTitle: 'Senior Product Designer & Creative Director',
   description:
-    'UX/UI designer and Digital Experience Leader with two decades of creating exceptional user experiences across enterprise SaaS, e-commerce, and AI-powered design workflows.',
+    'Senior product designer and creative director with two decades of experience designing trust and conversion moments for health and wellness products — enrollment flows, dashboards, and patient-facing experiences. Available for remote senior and lead product design roles.',
   image: `${SITE_URL}/og-image.jpg`,
   email: 'mailto:savellem@gmail.com',
   telephone: '+1-602-931-1474',
@@ -55,7 +55,7 @@ export const websiteSchema = {
   '@id': WEBSITE_ID,
   url: SITE_URL,
   name: 'Savelle McThias',
-  description: 'Portfolio and services of Savelle McThias, UX/UI Designer.',
+  description: 'Portfolio of Savelle McThias, senior product designer and creative director specializing in health and wellness enrollment and conversion design.',
   publisher: { '@id': PERSON_ID },
   inLanguage: 'en-US',
 };

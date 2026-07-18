@@ -7,6 +7,4 @@ export const EXCLUDED_SLUGS = new Set([
   'yoli-omegas-dashboard',
   'lamesa-rv-vanup-platform',
   'ifoodds-agriculture-platform',
-  'plexus-worldwide-digital-transformation',
-  'petsmart-ecommerce-redesign',
 ]);

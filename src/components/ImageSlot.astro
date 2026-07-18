@@ -18,7 +18,7 @@ const margin = className !== undefined ? className : 'my-12';
 
 {src ? (
   <div class={`${aspectClass} w-full rounded-2xl overflow-hidden ${margin}`}>
-    <img src={src} alt={label} class="w-full h-full object-cover" />
+    <img src={src} alt={label} class="w-full h-full object-cover" loading="lazy" decoding="async" />
   </div>
 ) : (
   <div class={`${aspectClass} w-full bg-zinc-900 border border-dashed border-zinc-700 rounded-2xl flex flex-col items-center justify-center ${margin} px-8 text-center gap-3`}>

@@ -1,16 +1,19 @@
-# Savelle McThias — UX/UI Designer
+# Savelle McThias
 
-> Savelle McThias is a UX/UI designer and Digital Experience Leader with two decades of
-> experience, based in Scottsdale, Arizona. Specializing in enterprise SaaS, e-commerce,
-> conversion optimization, design systems, and AI-enhanced design workflows. Available
-> for project work, monthly retainers, fractional design leadership, and remote engagements.
+> Senior product designer and creative director with two decades of experience, specializing in enrollment and conversion UX for health and wellness brands. Based in Scottsdale, AZ, available for remote roles.
 
-## Work & Background
+Savelle McThias is a senior product designer and creative director based in Scottsdale, Arizona, with two decades of experience across health and wellness, direct sales, and enterprise e-commerce platforms, including PetSmart, Plexus Worldwide, and Green Compass. Currently available for remote senior or lead product design roles, or enrollment and conversion design work.
 
-- [Case Studies](https://savellem.com/work): Selected UX/UI projects with objectives, role, scope, and outcomes.
-- [Green Compass — Digital Experience Leadership](https://savellem.com/case-studies/green-compass-digital-experience): Full-funnel digital experience leadership in the regulated CBD wellness industry.
-- [About](https://savellem.com/about): Background, professional experience, and the brands worked with (PetSmart, Plexus Worldwide, Green Compass, and others).
+## Case Studies
+
+- [Green Compass](https://savellem.com/case-studies/green-compass-digital-experience): From-scratch distributor enrollment flow for a CBD wellness company, built as Director of Digital Experience. 25% fewer customer service calls, 12% less cart abandonment, 15% more distributor enrollments, 90 days from design to launch.
+- [Card Ritual](https://savellem.com/case-studies/card-ritual): Solo-founded, designed, and built a tarot journaling web app (React Native, Next.js, Astro) in 3 months from concept to live product. Live today with paying subscribers at $5/month.
+- [Yoli](https://savellem.com/case-studies/yoli-patient-practitioner-dashboard): Patient and practitioner dashboard system for an at-home Omega-3 blood test, sole product designer on the system. Now used by roughly 30,000 patients and 5,000 medical professionals; enrollment up 12% since the new intake form launched.
+
+## About
+
+- [About](https://savellem.com/about): Two decades of product design experience spanning Savelle LLC (Founder & Principal Designer, 2021–present), Green Compass (Director of Digital Experience, 2024), iFoodDS, SyberSafe, Plexus Worldwide, and PetSmart. Skills include UX/UI design, design systems, front-end development (React, Angular), and data-driven design.
 
 ## Contact
 
-- [Contact](https://savellem.com/contact): Email savellem@gmail.com, LinkedIn linkedin.com/in/savelle. Based in Scottsdale, AZ; available remotely.
+- [Contact](https://savellem.com/contact): Email savellem@gmail.com or connect on LinkedIn (linkedin.com/in/savelle). Based in Scottsdale, AZ, available remotely.

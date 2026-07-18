@@ -19,8 +19,8 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
 </style>
 
 <BaseLayout
-  title="About — Savelle McThias | Product Designer & Creative Director"
-  description="Two decades designing for brands like PetSmart, Plexus Worldwide, and Green Compass. Savelle McThias is a product designer and creative director based in Scottsdale, Arizona — available for local projects and remote senior roles."
+  title="About — Savelle McThias | Senior Product Designer & Creative Director"
+  description="Two decades designing for brands like PetSmart, Plexus Worldwide, and Green Compass, now focused on trust and conversion moments for health and wellness products. Savelle McThias is a senior product designer and creative director based in Scottsdale, Arizona — available for remote senior and lead roles."
   schema={pageSchema}
 >
   <!-- Hero Section -->
@@ -138,6 +138,8 @@ const pageSchema = profilePageSchema(`${SITE_URL}/about`);
             src={src}
             alt={alt}
             class={`${h} w-auto object-contain brightness-0 opacity-40 shrink-0`}
+            loading="lazy"
+            decoding="async"
           />
         ))}
       </div>
