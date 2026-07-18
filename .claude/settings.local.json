@@ -27,7 +27,13 @@
       "Bash(grep *)",
       "Bash(curl -s http://localhost:4321/)",
       "Bash(awk '{print $5, $9}')",
-      "Bash(npx astro *)"
+      "Bash(npx astro *)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(npm install *)",
+      "Bash(npx playwright *)",
+      "Bash(lsof -ti:4321 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)",
+      "Bash(npm uninstall *)"
     ],
     "deny": [],
     "ask": []

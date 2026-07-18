@@ -14,12 +14,22 @@ const navItems = [
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-gray-50/95 backdrop-blur-sm">
   <nav class="container-custom py-6">
-    <div class="flex items-center justify-between md:grid md:grid-cols-3">
-      <a href="/" class="text-xl font-semibold text-gray-900 tracking-tight">
-        Savelle McThias
+    <div class="relative flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img
+          src="/images/profile-avatar.webp"
+          alt="Savelle McThias"
+          width="40"
+          height="40"
+          class="w-10 h-10 rounded-full object-cover shrink-0"
+        />
+        <span class="flex flex-col leading-tight">
+          <span class="text-xl font-semibold text-gray-900 tracking-tight">Savelle McThias</span>
+          <span class="md:hidden lg:block text-xs font-medium text-gray-500 tracking-wide whitespace-nowrap">Senior Product Designer &amp; Creative Director</span>
+        </span>
       </a>
 
-      <ul class="hidden md:flex items-center justify-center space-x-8">
+      <ul class="hidden md:flex md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 items-center space-x-8">
         {navItems.filter((item) => item.path !== '/').map((item) => (
           <li>
             <a
@@ -46,42 +56,123 @@ const navItems = [
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden p-2 text-gray-600 hover:text-gray-900"
+        class="md:hidden relative z-50 flex items-center justify-center w-11 h-11 -mr-2 text-gray-600 hover:text-gray-900"
         aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        <span class="relative block w-6 h-4">
+          <span class="hamburger-bar bar-top absolute inset-x-0 top-0 h-0.5 rounded-full bg-current"></span>
+          <span class="hamburger-bar bar-mid absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 rounded-full bg-current"></span>
+          <span class="hamburger-bar bar-bottom absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-current"></span>
+        </span>
       </button>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden mt-6 space-y-4">
-      {navItems.map((item) => (
-        <a
-          href={item.path}
-          class={`block text-sm font-medium transition-colors hover:text-gray-900 ${
-            isActive(item.path) ? 'text-gray-900' : 'text-gray-600'
-          }`}
-        >
-          {item.name}
-        </a>
-      ))}
-      <a
-        href="/contact"
-        class="block text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors"
-      >
-        Contact
-      </a>
     </div>
   </nav>
 </header>
 
+<!--
+  Backdrop and panel live outside <header> on purpose: `header` has
+  `backdrop-blur-sm`, and `backdrop-filter` on an ancestor makes descendant
+  `position: fixed` elements position relative to that ancestor instead of
+  the viewport. Nested inside header, `bottom-0` resolved against header's
+  own ~92px-tall box instead of the screen, collapsing the backdrop to
+  zero height and making it unclickable.
+-->
+
+<!-- Mobile menu backdrop -->
+<div
+  id="mobile-menu-backdrop"
+  class="md:hidden fixed inset-x-0 top-[92px] bottom-0 z-40 bg-gray-900/70 opacity-0 pointer-events-none transition-opacity duration-300"
+>
+</div>
+
+<!-- Mobile menu panel -->
+<div
+  id="mobile-menu"
+  class="md:hidden fixed inset-x-0 top-[92px] z-40 origin-top -translate-y-4 opacity-0 pointer-events-none transition-all duration-300 ease-out"
+>
+  <nav class="bg-gray-50 border-t border-gray-200 shadow-lg container-custom flex flex-col divide-y divide-gray-200 py-2">
+    {navItems.map((item) => (
+      <a
+        href={item.path}
+        class={`py-4 text-lg font-semibold transition-colors ${
+          isActive(item.path) ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
+        }`}
+      >
+        {item.name}
+      </a>
+    ))}
+    <a
+      href="/contact"
+      class="py-4 text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
+    >
+      Contact
+    </a>
+  </nav>
+</div>
+
+<style>
+  .hamburger-bar {
+    transition: transform 300ms ease, opacity 200ms ease;
+  }
+
+  #mobile-menu-button.is-open .bar-top {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  #mobile-menu-button.is-open .bar-mid {
+    opacity: 0;
+  }
+
+  #mobile-menu-button.is-open .bar-bottom {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+</style>
+
 <script>
   const button = document.getElementById('mobile-menu-button');
   const menu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
 
-  button?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+  let isOpen = false;
+
+  const openClasses = ['opacity-100', 'translate-y-0'];
+  const closedClasses = ['opacity-0', '-translate-y-4', 'pointer-events-none'];
+
+  function setOpen(open: boolean) {
+    isOpen = open;
+
+    button?.classList.toggle('is-open', open);
+    button?.setAttribute('aria-expanded', String(open));
+
+    if (open) {
+      menu?.classList.remove(...closedClasses);
+      menu?.classList.add(...openClasses);
+      backdrop?.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop?.classList.add('opacity-100');
+    } else {
+      menu?.classList.remove(...openClasses);
+      menu?.classList.add(...closedClasses);
+      backdrop?.classList.remove('opacity-100');
+      backdrop?.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    menu?.setAttribute('aria-hidden', String(!open));
+    document.documentElement.classList.toggle('overflow-hidden', open);
+  }
+
+  button?.addEventListener('click', () => setOpen(!isOpen));
+  backdrop?.addEventListener('click', () => setOpen(false));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) setOpen(false);
+  });
+
+  // Collapse back to the closed hamburger if the viewport grows past the
+  // mobile breakpoint while the menu is open (e.g. rotating a tablet).
+  const desktopQuery = window.matchMedia('(min-width: 768px)');
+  desktopQuery.addEventListener('change', (e) => {
+    if (e.matches && isOpen) setOpen(false);
   });
 </script>
