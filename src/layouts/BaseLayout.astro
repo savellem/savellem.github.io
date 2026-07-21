@@ -124,7 +124,7 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
 
       let revealObserver: IntersectionObserver | null = null;
       let parallaxItems: { img: HTMLElement; container: HTMLElement; speed: number }[] = [];
-      let glowObserver: IntersectionObserver | null = null;
+      let offscreenAnimObserver: IntersectionObserver | null = null;
 
       function initReveals() {
         revealObserver?.disconnect();
@@ -159,21 +159,28 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
         updateParallax();
       }
 
-      // Glow-orb blur-filter animations are a known WebKit main-thread cost
-      // on mobile (same class of issue as the marquee-track pause above) —
-      // stop them once the hero scrolls out of view. Scoped to mobile widths
-      // in CSS (see .glow-orb rules), so this observer is harmless on desktop.
-      function initGlowHero() {
-        glowObserver?.disconnect();
+      // Glow-orb blur filters and the logo marquee's masked, translating
+      // track are known WebKit main-thread/compositor costs on mobile. The
+      // one-shot reveal observer above only gates their *first* start — once
+      // `is-inview` is set it's never removed, so on mobile those animations
+      // otherwise keep compositing forever, fully off-screen, and paint for
+      // this region stalls for a couple seconds every time it scrolls back
+      // into view. This persistent (non-unobserving) observer instead toggles
+      // `.anim-active` continuously, so CSS (see .glow-orb / .marquee-track
+      // rules, mobile-scoped) can pause them whenever truly off-screen and
+      // resume them on re-entry. Harmless on desktop since those CSS rules
+      // are scoped to mobile widths.
+      function initOffscreenAnimPause() {
+        offscreenAnimObserver?.disconnect();
         if (reducedMotion.matches) return;
-        const heroes = document.querySelectorAll<HTMLElement>('[data-glow-hero]');
-        if (!heroes.length) return;
-        glowObserver = new IntersectionObserver((entries) => {
+        const targets = document.querySelectorAll<HTMLElement>('[data-pause-offscreen]');
+        if (!targets.length) return;
+        offscreenAnimObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
-            entry.target.classList.toggle('glow-active', entry.isIntersecting);
+            entry.target.classList.toggle('anim-active', entry.isIntersecting);
           });
         });
-        heroes.forEach((hero) => glowObserver!.observe(hero));
+        targets.forEach((el) => offscreenAnimObserver!.observe(el));
       }
 
       let parallaxTicking = false;
@@ -211,7 +218,7 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
       document.addEventListener('astro:page-load', () => {
         initReveals();
         initParallax();
-        initGlowHero();
+        initOffscreenAnimPause();
       });
     </script>
 

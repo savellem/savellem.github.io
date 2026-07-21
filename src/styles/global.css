@@ -182,13 +182,12 @@
     width: max-content;
     animation: marquee 42s linear infinite;
   }
-  /* Paused until its data-reveal ancestor is actually in view, then
-     resumed. Otherwise this runs continuously from page load — by the
-     time it scrolls into view, the browser has to composite an
-     already-long-running filtered (brightness-0 invert) layer for the
-     first time at the exact moment it also needs to run the reveal
-     fade-in, which is a common source of scroll jank/blank flashes on
-     iOS Safari/WebKit. */
+  /* Paused until its data-reveal ancestor is first in view, then resumed.
+     Otherwise this runs continuously from page load — by the time it
+     scrolls into view, the browser has to composite an already-long-running
+     filtered (brightness-0 invert) layer for the first time at the exact
+     moment it also needs to run the reveal fade-in, which is a common
+     source of scroll jank/blank flashes on iOS Safari/WebKit. */
   .js [data-reveal] .marquee-track {
     animation-play-state: paused;
   }
@@ -214,17 +213,31 @@
     from { transform: translate3d(0, 0, 0) scale(1); }
     to { transform: translate3d(6%, 10%, 0) scale(1.15); }
   }
-  /* On mobile, this continuously-running blur-filter animation is a known
-     WebKit main-thread cost (same issue the marquee-track pause above
-     works around) — it keeps re-rasterizing off-screen, starving paint for
-     content further down the page. Pause it once the hero scrolls out of
-     view; desktop leaves it running as before. */
+
+  /* The `is-inview` reveal above is one-shot (never removed once set), so
+     on mobile both the glow-orb blur filter and the marquee's masked,
+     translating track otherwise keep compositing forever once first
+     revealed — fully off-screen, competing for the same main thread/GPU
+     budget as everything else. That ongoing cost is what stalls paint for
+     a couple seconds every time these sections scroll back into view, not
+     just on first load. `data-pause-offscreen` (set via a persistent,
+     non-unobserving IntersectionObserver in BaseLayout) tracks *current*
+     visibility instead, so these can actually stop while off-screen and
+     resume on re-entry. Desktop is untouched — this block only applies
+     under the max-width query. The marquee rules need `!important` to
+     beat the higher-specificity `.is-inview` rule above. */
   @media (max-width: 767px) {
-    .js [data-glow-hero] .glow-orb {
+    .js [data-pause-offscreen] .glow-orb {
       animation-play-state: paused;
     }
-    .js [data-glow-hero].glow-active .glow-orb {
+    .js [data-pause-offscreen].anim-active .glow-orb {
       animation-play-state: running;
+    }
+    .js [data-pause-offscreen] .marquee-track {
+      animation-play-state: paused !important;
+    }
+    .js [data-pause-offscreen].anim-active .marquee-track {
+      animation-play-state: running !important;
     }
   }
 
