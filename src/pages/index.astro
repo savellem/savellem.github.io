@@ -1,66 +1,125 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import FeaturedCaseStudy from '@components/FeaturedCaseStudy.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import LogoMarquee from '@components/LogoMarquee.astro';
+import NumbersBlock from '@components/case-study/NumbersBlock.astro';
 import { getCollection } from 'astro:content';
 
-// Get the 3 homepage-featured case studies ordered by homepageOrder
+// Get the homepage-featured case studies ordered by homepageOrder
 const caseStudies = (await getCollection('case-studies'))
   .filter((study) => study.data.homepageFeatured)
   .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99))
   .slice(0, 4);
+
+// Aggregate proof pulled from the case studies themselves
+const heroStats = [
+  { stat: '20 years', label: 'designing and shipping digital products' },
+  { stat: '25%', label: 'fewer support calls after the Green Compass redesign' },
+  { stat: '~30k', label: 'patients using the Yoli dashboard system' },
+  { stat: '90 days', label: 'from design to launch on a 0-to-1 enrollment flow' },
+];
+
+const principles = [
+  {
+    title: 'Trust is a design material',
+    body: "Conversion isn't a trick, it's earned. Enrollment flows, pricing moments, and health data all hinge on whether someone believes what the screen is telling them. I design for that belief first.",
+  },
+  {
+    title: 'Evidence over opinion',
+    body: "Two decades of A/B tests, user research, and analytics taught me to argue with data, not taste. Every case study here ends in a number because that's how design earns its seat.",
+  },
+  {
+    title: 'Design that ships',
+    body: "I build what I design — React, Astro, design systems, production code. No handoff loss, no 'that's not what the mockup looked like.' The design you approve is the product you get.",
+  },
+];
 ---
 
 <BaseLayout
   title="Savelle McThias — Senior Product Designer & Creative Director, Health & Wellness"
   description="Savelle McThias designs trust and conversion moments for health and wellness products — enrollment flows, dashboards, and patient-facing experiences. Senior product designer and creative director, two decades of experience, available for remote senior and lead roles."
 >
-  <!-- Hero Intro (H1 + positioning) -->
-  <section class="relative container-custom pt-24 pb-16 overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-    <div class="max-w-2xl mx-auto text-center relative">
-      <h1 class="text-3xl md:text-4xl text-gray-900 font-medium mb-8 leading-snug">
-        There's a moment right before someone becomes a customer, a patient, a member. Their thumb hovers. They're deciding whether to trust you.
+  <!-- Hero -->
+  <section class="relative min-h-svh flex flex-col justify-center overflow-hidden">
+    <!-- Background glows -->
+    <div class="glow-orb w-[42rem] h-[42rem] bg-ember/15 -top-40 -right-40" aria-hidden="true"></div>
+    <div class="glow-orb w-[36rem] h-[36rem] bg-indigo-500/10 bottom-[-12rem] left-[-10rem]" style="animation-delay: -11s" aria-hidden="true"></div>
+
+    <div class="container-custom relative pt-36 pb-24" data-reveal-lines>
+      <div class="flex items-center gap-3 mb-10 flex-wrap" data-reveal>
+        <span class="inline-flex items-center gap-2.5 rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-fog">
+          <span class="w-1.5 h-1.5 rounded-full bg-ember pulse-dot"></span>
+          Open to senior &amp; lead roles
+        </span>
+        <span class="text-xs text-fog/70">Scottsdale, AZ — remote everywhere</span>
+      </div>
+
+      <p class="text-lg md:text-xl text-fog max-w-2xl leading-relaxed mb-10" data-reveal style="--reveal-delay: .1s">
+        There's a moment right before someone becomes a customer, a patient, a member.
+        Their thumb hovers. They're deciding whether to trust you.
+      </p>
+
+      <h1 class="font-display font-bold text-6xl md:text-8xl lg:text-[7.5rem] tracking-tight leading-[0.92] mb-12">
+        <span class="reveal-line" style="--line-delay: .15s"><span>I design</span></span>
+        <span class="reveal-line" style="--line-delay: .3s"><span><em class="font-serif italic font-normal">that</em> moment<span class="text-ember">.</span></span></span>
       </h1>
-      <p class="text-4xl md:text-5xl text-gray-900 font-serif font-medium italic mb-8 leading-snug">
-        I design that moment.
-      </p>
-      <p class="text-3xl md:text-4xl text-gray-900 font-medium mb-8 leading-snug">
-        For health and wellness products. And I build them with code.
-      </p>
-      <a
-        href="/work"
-        class="inline-flex items-center mt-4 px-8 py-4 rounded-full bg-white text-gray-900 text-base font-medium shadow-md ring-1 ring-gray-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-      >
-        What you're here for
-      </a>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-10" data-reveal style="--reveal-delay: .45s">
+        <p class="text-lg md:text-xl text-fog max-w-md leading-relaxed">
+          For health and wellness products — enrollment flows, dashboards, patient-facing experiences.
+          <span class="text-paper">And I build them with code.</span>
+        </p>
+        <div class="flex flex-wrap items-center gap-4 shrink-0">
+          <a href="/work" class="btn-primary">
+            View the work
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/about" class="btn-ghost">About me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-fog/50" aria-hidden="true">
+      <span class="text-[0.6rem] font-medium uppercase tracking-[0.3em]">Scroll</span>
+      <span class="scroll-cue-line block w-px h-10 bg-gradient-to-b from-fog/50 to-transparent"></span>
     </div>
   </section>
 
-  <!-- Featured Work Section -->
+  <!-- Brand credibility -->
+  <LogoMarquee eyebrow="Two decades, brands you know" />
+
+  <!-- The numbers -->
+  <section class="container-custom py-24 md:py-32">
+    <NumbersBlock stats={heroStats} eyebrow="Design, measured" />
+  </section>
+
+  <!-- Featured Work -->
   {caseStudies.length > 0 && (
-    <section id="featured-work" class="container-custom pt-20 pb-8">
-      <div class="mb-4 flex items-end justify-between">
+    <section id="featured-work" class="container-custom pb-10">
+      <div class="flex items-end justify-between gap-6 mb-4" data-reveal>
         <div>
-          <h2 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
-            Featured Work
+          <p class="eyebrow mb-4">Featured work</p>
+          <h2 class="font-display font-bold text-4xl md:text-6xl tracking-tight leading-none">
+            Selected <em class="font-serif italic font-normal text-fog">case studies</em>
           </h2>
-          <p class="text-gray-600 text-lg">
-            Recent projects and case studies
-          </p>
         </div>
         <a
           href="/work"
-          class="hidden md:inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors group"
+          class="hidden md:inline-flex items-center gap-2 text-sm font-medium text-fog hover:text-paper transition-colors group shrink-0 pb-2"
         >
-          View all case studies
-          <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          All work
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
       </div>
 
-      <div>
-        {caseStudies.map((study) => (
-          <FeaturedCaseStudy
+      <div class="mt-10">
+        {caseStudies.map((study, i) => (
+          <ProjectCard
             title={study.data.title}
             client={study.data.client}
             year={study.data.year}
@@ -71,52 +130,50 @@ const caseStudies = (await getCollection('case-studies'))
             media={study.data.media}
             thumbnail={study.data.thumbnail}
             slug={study.id}
+            index={i + 1}
           />
         ))}
       </div>
 
-      <div class="mt-12 text-center md:hidden">
-        <a
-          href="/work"
-          class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors group"
-        >
+      <div class="mt-4 text-center md:hidden">
+        <a href="/work" class="btn-ghost">
           View all case studies
-          <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
         </a>
       </div>
-
     </section>
   )}
 
-  <!-- CTA Section -->
-  <section class="container-custom py-32">
-    <div class="bg-gray-50 rounded-3xl p-16 md:p-24 text-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-        Let's talk.
-      </h2>
-      <p class="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
-        If you're hiring for a senior or lead product design role, or want to talk about enrollment and conversion work, reach out.
-      </p>
-      <a
-        href="/contact"
-        class="inline-flex items-center px-8 py-4 rounded-full bg-white text-gray-900 text-base font-medium shadow-md ring-1 ring-gray-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-      >
-        Get in touch
-      </a>
+  <!-- How I think -->
+  <section class="container-custom py-24 md:py-32">
+    <p class="eyebrow mb-4" data-reveal>How I think</p>
+    <h2 class="font-display font-bold text-4xl md:text-6xl tracking-tight leading-none mb-16" data-reveal>
+      Design thinking, <em class="font-serif italic font-normal text-fog">out loud</em>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10">
+      {principles.map((p, i) => (
+        <div class="bg-ink p-8 md:p-10 hover:bg-ink-soft transition-colors duration-500" data-reveal style={`--reveal-delay: ${i * 0.12}s`}>
+          <p class="text-sm font-medium text-ember tabular-nums mb-8">0{i + 1}</p>
+          <h3 class="font-display font-bold text-2xl text-paper mb-4 leading-tight">{p.title}</h3>
+          <p class="text-fog leading-relaxed">{p.body}</p>
+        </div>
+      ))}
     </div>
   </section>
-<script>
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const href = (anchor as HTMLAnchorElement).getAttribute('href');
-      const target = href ? document.querySelector(href) : null;
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-</script>
 </BaseLayout>
+
+<style>
+  .scroll-cue-line {
+    animation: scroll-cue 2s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes scroll-cue {
+    0% { transform: scaleY(0); }
+    50% { transform: scaleY(1); }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue-line {
+      animation: none;
+    }
+  }
+</style>

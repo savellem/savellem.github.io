@@ -4,10 +4,10 @@ client: "Yoli"
 project: "Patient & Practitioner Dashboard System"
 year: 2025
 description: "A patient and practitioner dashboard system for an at-home Omega-3 blood test, now used by roughly 30,000 patients and 5,000 medical professionals."
-thumbnail: "/images/case-studies/cs-y-001.png"
+thumbnail: "../../assets/case-studies/cs-y-001.png"
 featured: true
 homepageFeatured: true
-homepageOrder: 2
+homepageOrder: 1
 role: "Product Designer, sole designer on the dashboard system"
 scope: "0 to 1 Dashboard System · Multi-role UX · Health Data Visualization"
 tags: ["Product Design", "Health Data Visualization", "Multi-Role UX", "Dashboard System"]
@@ -29,8 +29,12 @@ import CopySection from '../../components/case-study/CopySection.astro'
 import CopySectionPair from '../../components/case-study/CopySectionPair.astro'
 import ReflectionSection from '../../components/case-study/ReflectionSection.astro'
 import ImagePlaceholder from '../../components/case-study/ImagePlaceholder.astro'
+import yImg1 from '../../assets/case-studies/cs-y-001.png'
+import yImg2 from '../../assets/case-studies/cs-y-002.png'
+import yImg3 from '../../assets/case-studies/cs-y-003.png'
+import yImg4 from '../../assets/case-studies/cs-y-004.png'
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-y-001.png" alt="Yoli patient and practitioner dashboards shown side by side" caption="Split or composite view showing both the patient dashboard and practitioner dashboard side by side, communicating the multi-role system at a glance." />
+<ImagePlaceholder width={1600} height={900} src={yImg1} alt="Yoli patient and practitioner dashboards shown side by side" caption="Split or composite view showing both the patient dashboard and practitioner dashboard side by side, communicating the multi-role system at a glance." />
 
 <CopySectionPair leftTitle="The Problem" rightTitle="Role and Constraints">
 <Fragment slot="left">
@@ -56,7 +60,7 @@ A new patient registers, fills out a short prefilled intake form, scans the barc
 
 </div>
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-y-002.png" alt="Yoli patient intake flow showing the prefilled registration form and test kit barcode scan step" caption="The registration and kit-scanning intake flow, showing the prefilled form and barcode scan step." />
+<ImagePlaceholder width={1600} height={900} src={yImg2} alt="Yoli patient intake flow showing the prefilled registration form and test kit barcode scan step" caption="The registration and kit-scanning intake flow, showing the prefilled form and barcode scan step." />
 
 <div class="max-w-2xl mx-auto">
 
@@ -64,7 +68,7 @@ The practitioner view surfaces everything at a glance: total patients registered
 
 </div>
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-y-003.png" alt="Yoli practitioner dashboard overview showing patient counts, test statuses, and flagged follow-up actions" caption="Overview screen showing patient counts, test statuses, and flagged actions (overdue retests, incomplete subscriptions)." />
+<ImagePlaceholder width={1600} height={900} src={yImg3} alt="Yoli practitioner dashboard overview showing patient counts, test statuses, and flagged follow-up actions" caption="Overview screen showing patient counts, test statuses, and flagged actions (overdue retests, incomplete subscriptions)." />
 
 <div class="max-w-2xl mx-auto">
 
@@ -72,7 +76,7 @@ The gradient scale with the marked desirable range became the dashboard's signat
 
 </div>
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-y-004.png" alt="Yoli's Omega-3 index gradient scale with the desirable range marked, the dashboard's signature visual" caption="The Omega-3 gradient scale with the desirable range marker, this is the signature visual of the case study, make sure it's featured clearly and large enough to read the gradient detail." />
+<ImagePlaceholder width={1600} height={900} src={yImg4} alt="Yoli's Omega-3 index gradient scale with the desirable range marked, the dashboard's signature visual" caption="The Omega-3 gradient scale with the desirable range marker, this is the signature visual of the case study, make sure it's featured clearly and large enough to read the gradient detail." />
 </CopySection>
 
 <CopySection title="Results" center>

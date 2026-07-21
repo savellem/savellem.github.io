@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 
 const caseStudies = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/case-studies' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     client: z.string(),
     project: z.string(),
@@ -12,7 +12,10 @@ const caseStudies = defineCollection({
     objectives: z.string().optional(),
     description: z.string(),
     result: z.string().optional(),
-    thumbnail: z.string().optional(),
+    /** Relative path into src/assets/ — resolved to build-time-optimized
+     *  ImageMetadata, not a public/ URL string. Paths under public/ are
+     *  never processed by Astro's image pipeline. */
+    thumbnail: image().optional(),
     featured: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     publishDate: z.coerce.date(),

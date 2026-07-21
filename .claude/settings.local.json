@@ -33,7 +33,8 @@
       "Bash(npx playwright *)",
       "Bash(lsof -ti:4321 -sTCP:LISTEN)",
       "Bash(xargs -r kill)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(git rm *)"
     ],
     "deny": [],
     "ask": []

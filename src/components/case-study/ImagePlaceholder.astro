@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   width: number;
   height: number;
@@ -10,8 +13,10 @@ interface Props {
   /** Width cap when narrow: 'sm' (default, phone mockup) or 'md' (signature/featured visual). */
   size?: 'sm' | 'md';
   class?: string;
-  /** Once set, renders the real image instead of the dashed placeholder box. */
-  src?: string;
+  /** Once set, renders the real image instead of the dashed placeholder box.
+   *  Import from src/assets/ (not a public/ string path) so it gets
+   *  optimized and re-encoded to webp at build time. */
+  src?: ImageMetadata;
   /** Alt text for the real image. Required for a real, non-empty alt attribute — falls back to `replace` or `caption` if omitted, but pass this explicitly. */
   alt?: string;
 }
@@ -24,8 +29,13 @@ const widthClass = narrow ? `${narrowWidthClass} mx-auto` : 'w-full';
 ---
 
 {src ? (
-  <div class={`${widthClass} rounded-2xl overflow-hidden ${margin}`} style={`aspect-ratio: ${width} / ${height};`}>
-    <img src={src} alt={resolvedAlt} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+  <div
+    class={`${widthClass} rounded-2xl overflow-hidden ${margin}`}
+    style={`aspect-ratio: ${width} / ${height};`}
+    data-reveal
+    data-parallax="22"
+  >
+    <Image src={src} alt={resolvedAlt} format="webp" quality={82} class="w-full h-full object-cover" loading="lazy" decoding="async" />
   </div>
 ) : (
   <div

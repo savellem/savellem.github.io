@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { personSchema, websiteSchema } from '@/lib/schema';
@@ -42,6 +43,9 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Gates all scroll-reveal hiding so no-JS visitors see full content -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -71,7 +75,7 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
     <!-- Additional SEO -->
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#0a0a0d" />
 
     <!-- Structured Data (JSON-LD) -->
     {jsonLdGraphs.map((graph) => (
@@ -94,8 +98,9 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
+    <ClientRouter />
   </head>
   <body>
     <!-- Skip Links for Accessibility -->
@@ -104,44 +109,111 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
     </a>
 
     <Header />
-    <main id="main-content" class="pt-[92px] md:pt-[88px] lg:pt-[97px]" tabindex="-1">
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <Footer />
 
-    <!-- Back to Top Button -->
-    <button
-      id="back-to-top"
-      class="back-to-top"
-      aria-label="Back to top"
-      title="Back to top"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-      </svg>
-    </button>
-
     <script>
-      // Back to top functionality
-      const backToTop = document.getElementById('back-to-top');
+      // ── Global motion engine ──
+      // One module for scroll reveals, image parallax, and utility
+      // interactions. Runs once per site visit; astro:page-load re-inits
+      // per-page element queries after every ClientRouter navigation
+      // (and fires on initial load too).
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTop?.classList.add('visible');
-        } else {
-          backToTop?.classList.remove('visible');
+      let revealObserver: IntersectionObserver | null = null;
+      let parallaxItems: { img: HTMLElement; container: HTMLElement; speed: number }[] = [];
+
+      function initReveals() {
+        revealObserver?.disconnect();
+        const els = document.querySelectorAll('[data-reveal], [data-reveal-lines]');
+        if (reducedMotion.matches) {
+          els.forEach((el) => el.classList.add('is-inview'));
+          return;
+        }
+        revealObserver = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-inview');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+        );
+        els.forEach((el) => revealObserver!.observe(el));
+      }
+
+      function initParallax() {
+        parallaxItems = [];
+        if (reducedMotion.matches) return;
+        document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((container) => {
+          const img = container.querySelector('img');
+          if (!img) return;
+          const speed = parseFloat(container.getAttribute('data-parallax') || '24');
+          parallaxItems.push({ img, container, speed });
+        });
+        updateParallax();
+      }
+
+      let parallaxTicking = false;
+      function updateParallax() {
+        const vh = window.innerHeight;
+        for (const { img, container, speed } of parallaxItems) {
+          const rect = container.getBoundingClientRect();
+          if (rect.bottom < -120 || rect.top > vh + 120) continue;
+          // -1 (below viewport) → 1 (above viewport), 0 at center
+          const progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
+          img.style.transform = `translate3d(0, ${(progress * speed).toFixed(1)}px, 0) scale(1.12)`;
+        }
+        parallaxTicking = false;
+      }
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!parallaxTicking && parallaxItems.length) {
+            parallaxTicking = true;
+            requestAnimationFrame(updateParallax);
+          }
+        },
+        { passive: true }
+      );
+
+      // Delegated "back to top" control (footer)
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('[data-scroll-top]')) {
+          window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
         }
       });
 
-      backToTop?.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+      document.addEventListener('astro:page-load', () => {
+        initReveals();
+        initParallax();
       });
     </script>
 
     <script>
+      // ── Analytics ──
+      // GA4 config fires once on initial load; ClientRouter navigations
+      // are soft, so send page_view manually for each subsequent page.
+      let firstLoad = true;
+      document.addEventListener('astro:page-load', () => {
+        if (firstLoad) {
+          firstLoad = false;
+          return;
+        }
+        const gtag = (window as any).gtag;
+        if (typeof gtag !== 'function') return;
+        gtag('event', 'page_view', {
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      });
+
       // Conversion tracking — fires GA4 events on key CTA clicks, detected by
       // destination so no per-button markup is needed.
       document.addEventListener('click', (e) => {

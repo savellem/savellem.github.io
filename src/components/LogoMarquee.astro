@@ -1,0 +1,41 @@
+---
+interface Props {
+  eyebrow?: string;
+}
+
+const { eyebrow = "Brands I've worked with" } = Astro.props;
+
+const logos = [
+  { src: '/images/logos/logo-bareminerals.svg',   alt: 'bareMinerals',    h: 'h-[20px]' },
+  { src: '/images/logos/logo-capitolrecords.svg', alt: 'Capitol Records', h: 'h-[56px]' },
+  { src: '/images/logos/logo-gm.svg',             alt: 'GM',              h: 'h-[56px]' },
+  { src: '/images/logos/logo-petsmart.svg',       alt: 'PetSmart',        h: 'h-[42px]' },
+  { src: '/images/logos/logo-richdad.svg',        alt: 'Rich Dad',        h: 'h-[20px]' },
+  { src: '/images/logos/logo-sanity.svg',         alt: 'Sanity',          h: 'h-7'      },
+  { src: '/images/logos/logo-sothebys.svg',       alt: "Sotheby's",       h: 'h-7'      },
+  { src: '/images/logos/logo-thebeachboys.svg',   alt: 'The Beach Boys',  h: 'h-[56px]' },
+  { src: '/images/logos/logo-universal.svg',      alt: 'Universal',       h: 'h-[56px]' },
+];
+
+// Track is duplicated so the -50% marquee loop is seamless.
+const track = [...logos, ...logos];
+---
+
+<section class="py-14 border-y border-white/10" data-reveal>
+  {eyebrow && (
+    <p class="eyebrow text-center mb-10">{eyebrow}</p>
+  )}
+  <div class="marquee">
+    <div class="marquee-track gap-20 items-center">
+      {track.map(({ src, alt, h }) => (
+        <img
+          src={src}
+          alt={alt}
+          class={`${h} w-auto object-contain brightness-0 invert opacity-40 shrink-0`}
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+    </div>
+  </div>
+</section>

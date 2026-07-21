@@ -2,113 +2,108 @@
 const currentPath = Astro.url.pathname;
 
 function isActive(path: string) {
-  return currentPath === path;
+  return currentPath === path || (path !== '/' && currentPath.startsWith(path));
 }
 
 const navItems = [
-  { name: 'Home', path: '/' },
   { name: 'Work', path: '/work' },
   { name: 'About', path: '/about' },
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-gray-50/95 backdrop-blur-sm">
-  <nav class="container-custom py-6">
-    <div class="relative flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-transform duration-500 ease-out"
+>
+  <nav class="container-custom pt-4 md:pt-5">
+    <div class="flex items-center justify-between gap-3">
+      <!-- Brand chip -->
+      <a
+        href="/"
+        class="flex items-center gap-3 rounded-full bg-ink/70 backdrop-blur-md border border-white/10 p-1.5 pr-5 transition-colors hover:border-white/25"
+      >
         <img
           src="/images/profile-avatar.webp"
           alt="Savelle McThias"
           width="40"
           height="40"
-          class="w-10 h-10 rounded-full object-cover shrink-0"
+          class="w-9 h-9 rounded-full object-cover shrink-0"
         />
         <span class="flex flex-col leading-tight">
-          <span class="text-xl font-semibold text-gray-900 tracking-tight">Savelle McThias</span>
-          <span class="md:hidden lg:block text-xs font-medium text-gray-500 tracking-wide whitespace-nowrap">Senior Product Designer &amp; Creative Director</span>
+          <span class="text-sm font-semibold text-paper tracking-tight">Savelle McThias</span>
+          <span class="hidden sm:block text-[0.65rem] font-medium text-fog tracking-[0.14em] uppercase whitespace-nowrap">Product Designer &amp; Creative Director</span>
         </span>
       </a>
 
-      <ul class="hidden md:flex md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 items-center space-x-8">
-        {navItems.filter((item) => item.path !== '/').map((item) => (
-          <li>
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-3">
+        <div class="flex items-center gap-1 rounded-full bg-ink/70 backdrop-blur-md border border-white/10 p-1.5">
+          {navItems.map((item) => (
             <a
               href={item.path}
-              class={`text-sm font-medium uppercase transition-colors tracking-wide hover:text-gray-900 ${
-                isActive(item.path) ? 'text-gray-900' : 'text-gray-600'
+              class={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                isActive(item.path)
+                  ? 'bg-white/10 text-paper'
+                  : 'text-fog hover:text-paper'
               }`}
             >
               {item.name}
             </a>
-          </li>
-        ))}
-      </ul>
-
-      <div class="hidden md:flex items-center justify-end">
+          ))}
+        </div>
         <a
           href="/contact"
-          class="text-sm font-medium uppercase tracking-wide text-gray-900 hover:text-gray-700 transition-colors"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-paper text-ink text-sm font-semibold transition-all duration-300 hover:bg-white hover:-translate-y-0.5"
         >
           Contact
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H9M17 7v8" />
+          </svg>
         </a>
       </div>
 
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden relative z-50 flex items-center justify-center w-11 h-11 -mr-2 text-gray-600 hover:text-gray-900"
+        class="md:hidden relative z-[70] flex items-center justify-center w-12 h-12 rounded-full bg-ink/70 backdrop-blur-md border border-white/10 text-paper"
         aria-label="Toggle menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <span class="relative block w-6 h-4">
-          <span class="hamburger-bar bar-top absolute inset-x-0 top-0 h-0.5 rounded-full bg-current"></span>
-          <span class="hamburger-bar bar-mid absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 rounded-full bg-current"></span>
-          <span class="hamburger-bar bar-bottom absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-current"></span>
+        <span class="relative block w-5 h-3.5">
+          <span class="hamburger-bar bar-top absolute inset-x-0 top-0 h-[2px] rounded-full bg-current"></span>
+          <span class="hamburger-bar bar-mid absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] rounded-full bg-current"></span>
+          <span class="hamburger-bar bar-bottom absolute inset-x-0 bottom-0 h-[2px] rounded-full bg-current"></span>
         </span>
       </button>
     </div>
   </nav>
 </header>
 
-<!--
-  Backdrop and panel live outside <header> on purpose: `header` has
-  `backdrop-blur-sm`, and `backdrop-filter` on an ancestor makes descendant
-  `position: fixed` elements position relative to that ancestor instead of
-  the viewport. Nested inside header, `bottom-0` resolved against header's
-  own ~92px-tall box instead of the screen, collapsing the backdrop to
-  zero height and making it unclickable.
--->
-
-<!-- Mobile menu backdrop -->
-<div
-  id="mobile-menu-backdrop"
-  class="md:hidden fixed inset-x-0 top-[92px] bottom-0 z-40 bg-gray-900/70 opacity-0 pointer-events-none transition-opacity duration-300"
->
-</div>
-
-<!-- Mobile menu panel -->
+<!-- Mobile menu: full-screen overlay with staggered links -->
 <div
   id="mobile-menu"
-  class="md:hidden fixed inset-x-0 top-[92px] z-40 origin-top -translate-y-4 opacity-0 pointer-events-none transition-all duration-300 ease-out"
+  class="md:hidden fixed inset-0 z-[60] bg-ink/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-400"
+  aria-hidden="true"
 >
-  <nav class="bg-gray-50 border-t border-gray-200 shadow-lg container-custom flex flex-col divide-y divide-gray-200 py-2">
-    {navItems.map((item) => (
+  <nav class="h-full container-custom flex flex-col justify-center">
+    <p class="eyebrow mb-8 menu-item">Menu</p>
+    {[{ name: 'Home', path: '/' }, ...navItems, { name: 'Contact', path: '/contact' }].map((item, i) => (
       <a
         href={item.path}
-        class={`py-4 text-lg font-semibold transition-colors ${
-          isActive(item.path) ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
-        }`}
+        class={`menu-item group flex items-baseline gap-4 py-3 font-display font-bold text-5xl tracking-tight transition-colors ${
+          isActive(item.path) && item.path !== '/' ? 'text-paper' : 'text-fog hover:text-paper'
+        } ${item.path === '/' && currentPath === '/' ? 'text-paper' : ''}`}
+        style={`transition-delay: ${80 + i * 60}ms`}
       >
+        <span class="text-sm font-sans font-medium text-fog/60 tabular-nums">0{i + 1}</span>
         {item.name}
       </a>
     ))}
-    <a
-      href="/contact"
-      class="py-4 text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
-    >
-      Contact
-    </a>
+    <div class="menu-item mt-12 pt-8 border-t border-white/10 flex flex-col gap-2" style="transition-delay: 400ms">
+      <a href="mailto:savellem@gmail.com" class="text-fog hover:text-paper transition-colors">savellem@gmail.com</a>
+      <p class="text-sm text-fog/60">Scottsdale, AZ — working remotely</p>
+    </div>
   </nav>
 </div>
 
@@ -118,7 +113,7 @@ const navItems = [
   }
 
   #mobile-menu-button.is-open .bar-top {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
   }
 
   #mobile-menu-button.is-open .bar-mid {
@@ -126,53 +121,88 @@ const navItems = [
   }
 
   #mobile-menu-button.is-open .bar-bottom {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Staggered link entrance while the overlay fades in */
+  .menu-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+  }
+  #mobile-menu.is-open .menu-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 </style>
 
 <script>
-  const button = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
-  const backdrop = document.getElementById('mobile-menu-backdrop');
-
+  // Header + mobile menu behavior. Module runs once per visit; element
+  // bindings refresh on astro:page-load since ClientRouter swaps the DOM.
+  let header: HTMLElement | null = null;
   let isOpen = false;
-
-  const openClasses = ['opacity-100', 'translate-y-0'];
-  const closedClasses = ['opacity-0', '-translate-y-4', 'pointer-events-none'];
+  let lastY = 0;
 
   function setOpen(open: boolean) {
     isOpen = open;
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
 
     button?.classList.toggle('is-open', open);
     button?.setAttribute('aria-expanded', String(open));
 
     if (open) {
-      menu?.classList.remove(...closedClasses);
-      menu?.classList.add(...openClasses);
-      backdrop?.classList.remove('opacity-0', 'pointer-events-none');
-      backdrop?.classList.add('opacity-100');
+      menu?.classList.remove('opacity-0', 'pointer-events-none');
+      menu?.classList.add('opacity-100', 'is-open');
     } else {
-      menu?.classList.remove(...openClasses);
-      menu?.classList.add(...closedClasses);
-      backdrop?.classList.remove('opacity-100');
-      backdrop?.classList.add('opacity-0', 'pointer-events-none');
+      menu?.classList.remove('opacity-100', 'is-open');
+      menu?.classList.add('opacity-0', 'pointer-events-none');
     }
 
     menu?.setAttribute('aria-hidden', String(!open));
     document.documentElement.classList.toggle('overflow-hidden', open);
   }
 
-  button?.addEventListener('click', () => setOpen(!isOpen));
-  backdrop?.addEventListener('click', () => setOpen(false));
+  // Hide on scroll down, reveal on scroll up — never while the menu is open.
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!header || isOpen) return;
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+      header.classList.toggle('-translate-y-[130%]', goingDown && y > 240);
+      lastY = y;
+    },
+    { passive: true }
+  );
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen) setOpen(false);
   });
 
-  // Collapse back to the closed hamburger if the viewport grows past the
-  // mobile breakpoint while the menu is open (e.g. rotating a tablet).
-  const desktopQuery = window.matchMedia('(min-width: 768px)');
-  desktopQuery.addEventListener('change', (e) => {
+  // Collapse if the viewport grows past the mobile breakpoint mid-open.
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
     if (e.matches && isOpen) setOpen(false);
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    header = document.getElementById('site-header');
+    lastY = window.scrollY;
+    isOpen = false;
+    document.documentElement.classList.remove('overflow-hidden');
+
+    document.getElementById('mobile-menu-button')?.addEventListener('click', () => setOpen(!isOpen));
+    // Close before navigating so the overlay doesn't linger through the transition.
+    document.querySelectorAll('#mobile-menu a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
   });
 </script>

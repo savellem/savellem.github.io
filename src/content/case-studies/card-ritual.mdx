@@ -4,10 +4,10 @@ client: "Card Ritual"
 project: "Solo Full-Stack Tarot Journaling Web App"
 year: 2026
 description: "A solo-built tarot journaling web app, three months from concept to live product, grown from nine years of personal daily practice."
-thumbnail: "/images/case-studies/cs-cr-001.png"
+thumbnail: "../../assets/case-studies/cs-cr-001.png"
 featured: true
 homepageFeatured: true
-homepageOrder: 1
+homepageOrder: 2
 role: "Founder, sole designer and engineer"
 scope: "Product Design · UX/UI · Full-Stack Development · Brand"
 tags: ["Product Design", "Full-Stack Development", "Solo Founder", "SaaS", "Web App"]
@@ -27,8 +27,12 @@ outcomes:
 import CopySection from '../../components/case-study/CopySection.astro'
 import ReflectionSection from '../../components/case-study/ReflectionSection.astro'
 import ImagePlaceholder from '../../components/case-study/ImagePlaceholder.astro'
+import crImg1 from '../../assets/case-studies/cs-cr-001.png'
+import crImg2 from '../../assets/case-studies/cs-cr-002.png'
+import crImg3 from '../../assets/case-studies/cs-cr-003.png'
+import crImg4 from '../../assets/case-studies/cs-cr-004.png'
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-001.png" alt="Card Ritual app screen showing the daily tarot card pull, the emotional entry point of the product" caption="App screenshot or composite showing the daily card pull screen, this should feel like the emotional entry point to the product." />
+<ImagePlaceholder width={1600} height={900} src={crImg1} alt="Card Ritual app screen showing the daily tarot card pull, the emotional entry point of the product" caption="App screenshot or composite showing the daily card pull screen, this should feel like the emotional entry point to the product." />
 
 <CopySection title="The Problem" center>
 <div class="max-w-2xl mx-auto">
@@ -47,7 +51,7 @@ Month one was concept and infrastructure: brainstorming the product with Claude,
 
 </div>
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-002.png" alt="Card Ritual's daily loop screen showing a pulled tarot card alongside the journal reflection prompt" caption="The core daily loop, pulling a card and writing a journal entry, ideally showing the card art and the reflection prompt together." />
+<ImagePlaceholder width={1600} height={900} src={crImg2} alt="Card Ritual's daily loop screen showing a pulled tarot card alongside the journal reflection prompt" caption="The core daily loop, pulling a card and writing a journal entry, ideally showing the card art and the reflection prompt together." />
 
 <div class="max-w-2xl mx-auto">
 
@@ -65,10 +69,10 @@ Card Ritual is live today with a small, real user base, 9 people including me, w
 
 </div>
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-003.png" alt="Card Ritual's entry history view showing past tarot journal entries over time" caption="The list or calendar view of past entries, showing how a user looks back on patterns over time." />
+<ImagePlaceholder width={1600} height={900} src={crImg3} alt="Card Ritual's entry history view showing past tarot journal entries over time" caption="The list or calendar view of past entries, showing how a user looks back on patterns over time." />
 </CopySection>
 
-<ImagePlaceholder width={1600} height={900} src="/images/case-studies/cs-cr-004.png" alt="Card Ritual marketing site and brand identity" caption="Marketing site screenshot or app icon/branding moment, shows the product as a finished, polished whole rather than just UI screens." />
+<ImagePlaceholder width={1600} height={900} src={crImg4} alt="Card Ritual marketing site and brand identity" caption="Marketing site screenshot or app icon/branding moment, shows the product as a finished, polished whole rather than just UI screens." />
 
 <ReflectionSection title="What I'd Do Differently" center>
 <div class="max-w-2xl mx-auto">
