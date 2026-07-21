@@ -27,6 +27,10 @@ const { title, client, year, yearEnd, description, role, scope, media, thumbnail
 const yearDisplay = yearEnd ? `${year}–${yearEnd}` : `${year}`;
 const href = `/case-studies/${slug}`;
 const indexLabel = String(index).padStart(2, '0');
+// Box always matches the thumbnail's real aspect ratio (not a hardcoded
+// 16/10 or 21/10) so object-cover never has to crop content off — it only
+// crops when the box ratio differs from the source image's ratio.
+const mediaAspect = thumbnail ? `${thumbnail.width} / ${thumbnail.height}` : '16 / 9';
 ---
 
 <article class="project-card group border-t border-white/10 py-14 md:py-20">
@@ -42,7 +46,13 @@ const indexLabel = String(index).padStart(2, '0');
   </div>
 
   <!-- Media -->
-  <a href={href} class="card-media block rounded-2xl md:rounded-3xl overflow-hidden bg-ink-soft relative" data-reveal="zoom" aria-label={`${title} — view case study`}>
+  <a
+    href={href}
+    class="card-media block rounded-2xl md:rounded-3xl overflow-hidden bg-ink-soft relative"
+    style={`aspect-ratio: ${mediaAspect};`}
+    data-reveal="zoom"
+    aria-label={`${title} — view case study`}
+  >
     {thumbnail ? (
       <Image
         src={thumbnail}
@@ -51,12 +61,12 @@ const indexLabel = String(index).padStart(2, '0');
         quality={82}
         widths={[640, 960, 1440]}
         sizes="(min-width: 1024px) 1200px, 100vw"
-        class="w-full aspect-[16/10] md:aspect-[21/10] object-cover"
+        class="w-full h-full object-cover"
         loading="lazy"
         decoding="async"
       />
     ) : (
-      <div class="w-full aspect-[16/10] md:aspect-[21/10] border border-dashed border-white/15 rounded-2xl flex items-center justify-center">
+      <div class="w-full h-full border border-dashed border-white/15 rounded-2xl flex items-center justify-center">
         <p class="eyebrow">Thumbnail coming soon</p>
       </div>
     )}
