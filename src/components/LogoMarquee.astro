@@ -5,16 +5,19 @@ interface Props {
 
 const { eyebrow = "Brands I've worked with" } = Astro.props;
 
+// width/height are each SVG's own viewBox — used to size the masked span
+// below to the correct aspect ratio, since a mask (unlike an <img>) has
+// no intrinsic size of its own to derive `w-auto` from.
 const logos = [
-  { src: '/images/logos/logo-bareminerals.svg',   alt: 'bareMinerals',    h: 'h-[20px]' },
-  { src: '/images/logos/logo-capitolrecords.svg', alt: 'Capitol Records', h: 'h-[56px]' },
-  { src: '/images/logos/logo-gm.svg',             alt: 'GM',              h: 'h-[56px]' },
-  { src: '/images/logos/logo-petsmart.svg',       alt: 'PetSmart',        h: 'h-[42px]' },
-  { src: '/images/logos/logo-richdad.svg',        alt: 'Rich Dad',        h: 'h-[20px]' },
-  { src: '/images/logos/logo-sanity.svg',         alt: 'Sanity',          h: 'h-7'      },
-  { src: '/images/logos/logo-sothebys.svg',       alt: "Sotheby's",       h: 'h-7'      },
-  { src: '/images/logos/logo-thebeachboys.svg',   alt: 'The Beach Boys',  h: 'h-[56px]' },
-  { src: '/images/logos/logo-universal.svg',      alt: 'Universal',       h: 'h-[56px]' },
+  { src: '/images/logos/logo-bareminerals.svg',   alt: 'bareMinerals',    h: 'h-[20px]', width: 430, height: 49  },
+  { src: '/images/logos/logo-capitolrecords.svg', alt: 'Capitol Records', h: 'h-[56px]', width: 500, height: 231 },
+  { src: '/images/logos/logo-gm.svg',             alt: 'GM',              h: 'h-[56px]', width: 209, height: 209 },
+  { src: '/images/logos/logo-petsmart.svg',       alt: 'PetSmart',        h: 'h-[42px]', width: 482, height: 122 },
+  { src: '/images/logos/logo-richdad.svg',        alt: 'Rich Dad',        h: 'h-[20px]', width: 597, height: 79  },
+  { src: '/images/logos/logo-sanity.svg',         alt: 'Sanity',          h: 'h-7',      width: 280, height: 102 },
+  { src: '/images/logos/logo-sothebys.svg',       alt: "Sotheby's",       h: 'h-7',      width: 522, height: 114 },
+  { src: '/images/logos/logo-thebeachboys.svg',   alt: 'The Beach Boys',  h: 'h-[56px]', width: 662, height: 319 },
+  { src: '/images/logos/logo-universal.svg',      alt: 'Universal',       h: 'h-[56px]', width: 460, height: 243 },
 ];
 
 // Track is duplicated so the -50% marquee loop is seamless.
@@ -26,16 +29,33 @@ const track = [...logos, ...logos];
     <p class="eyebrow text-center mb-10">{eyebrow}</p>
   )}
   <div class="marquee">
-    <div class="marquee-track gap-20 items-center">
-      {track.map(({ src, alt, h }) => (
-        <img
-          src={src}
-          alt={alt}
-          class={`${h} w-auto object-contain brightness-0 invert opacity-40 shrink-0`}
-          loading="lazy"
-          decoding="async"
+    <div class="marquee-track gap-20 items-center opacity-40">
+      {track.map(({ src, alt, h, width, height }) => (
+        <span
+          role="img"
+          aria-label={alt}
+          class={`${h} shrink-0 inline-block bg-paper logo-mask`}
+          style={`aspect-ratio: ${width} / ${height}; --logo-src: url(${src});`}
         />
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* Recolors each logo to a flat color via mask instead of
+     filter: brightness(0) invert(1) on an <img>. Masking only reads the
+     source's alpha shape (no color-pixel rasterize-then-filter pass),
+     which is both cheaper and — unlike `filter` — a technique WebKit has
+     had fast, native support for since very old iOS versions. */
+  .logo-mask {
+    -webkit-mask-image: var(--logo-src);
+    mask-image: var(--logo-src);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+</style>

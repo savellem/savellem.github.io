@@ -67,18 +67,26 @@
      ::after overlay). A box's background always paints behind its
      descendants, so this can never sit on top of content — no z-index
      needed, and it can't wash out case study images the way a
-     position:fixed z-indexed overlay did. background-attachment: fixed
-     keeps the tile pinned to the viewport instead of scrolling with the
-     page. The noise tile itself is grayscale+alpha with alpha baked in
-     to ~4.5% per pixel (see scripts/generate-noise.mjs), reproducing
-     what the old element-level `opacity: 0.045` did — a live SVG
-     feTurbulence filter here stalls Chrome's compositor (black frames). */
+     position:fixed z-indexed overlay did. The noise tile itself is
+     grayscale+alpha with alpha baked in to ~4.5% per pixel (see
+     scripts/generate-noise.mjs), reproducing what the old element-level
+     `opacity: 0.045` did — a live SVG feTurbulence filter here stalls
+     Chrome's compositor (black frames).
+
+     Deliberately NOT background-attachment: fixed. iOS Safari/WebKit
+     (which is what "Chrome" on iPhone actually runs on — Apple requires
+     it) can't hand a fixed background off to the GPU compositor the way
+     it does real position:fixed elements, so it repaints the whole
+     background on the main thread every scroll frame. That shows up as
+     a visible blank flash right as new sections scroll into view. Since
+     the tile is a small seamless repeating pattern, scrolling with the
+     page vs. staying pinned to the viewport is visually identical —
+     `fixed` bought nothing here but the iOS jank. */
   body {
     @apply bg-ink text-paper antialiased;
     position: relative;
     background-image: url('/images/noise.png');
     background-repeat: repeat;
-    background-attachment: fixed;
   }
 
   ::selection {
@@ -174,7 +182,20 @@
     width: max-content;
     animation: marquee 42s linear infinite;
   }
-  .marquee:hover .marquee-track {
+  /* Paused until its data-reveal ancestor is actually in view, then
+     resumed. Otherwise this runs continuously from page load — by the
+     time it scrolls into view, the browser has to composite an
+     already-long-running filtered (brightness-0 invert) layer for the
+     first time at the exact moment it also needs to run the reveal
+     fade-in, which is a common source of scroll jank/blank flashes on
+     iOS Safari/WebKit. */
+  .js [data-reveal] .marquee-track {
+    animation-play-state: paused;
+  }
+  .js [data-reveal].is-inview .marquee-track {
+    animation-play-state: running;
+  }
+  .js [data-reveal] .marquee:hover .marquee-track {
     animation-play-state: paused;
   }
   @keyframes marquee {
