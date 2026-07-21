@@ -56,6 +56,8 @@ function parseStat(stat: string) {
 </div>
 
 <script>
+  import { onPageReady } from '@/lib/pageReady';
+
   const EASE_OUT_CUBIC = (t: number) => 1 - Math.pow(1 - t, 3);
   const DURATION = 700;
   const STAGGER = 80;
@@ -81,8 +83,10 @@ function parseStat(stat: string) {
   }
 
   // Re-query on every navigation — ClientRouter swaps the DOM, and this
-  // module only executes once per site visit.
-  document.addEventListener('astro:page-load', () => {
+  // module only executes once per site visit. onPageReady (not a raw
+  // astro:page-load listener) so this doesn't wait on that event's
+  // window.load gate on the initial visit — see src/lib/pageReady.ts.
+  onPageReady(() => {
     document.querySelectorAll('[data-numbers-block="animate"]').forEach((container) => {
       const numberEls = container.querySelectorAll('.stat-number');
       if (!numberEls.length) return;

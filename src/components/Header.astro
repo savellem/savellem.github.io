@@ -146,7 +146,13 @@ const navItems = [
 
 <script>
   // Header + mobile menu behavior. Module runs once per visit; element
-  // bindings refresh on astro:page-load since ClientRouter swaps the DOM.
+  // bindings refresh via onPageReady since ClientRouter swaps the DOM —
+  // and unlike a raw astro:page-load listener, this doesn't wait on that
+  // event's window.load gate on the initial visit (the mobile menu button
+  // was otherwise unresponsive to taps until every page resource finished
+  // loading — see src/lib/pageReady.ts).
+  import { onPageReady } from '@/lib/pageReady';
+
   let header: HTMLElement | null = null;
   let isOpen = false;
   let lastY = 0;
@@ -193,7 +199,7 @@ const navItems = [
     if (e.matches && isOpen) setOpen(false);
   });
 
-  document.addEventListener('astro:page-load', () => {
+  onPageReady(() => {
     header = document.getElementById('site-header');
     lastY = window.scrollY;
     isOpen = false;

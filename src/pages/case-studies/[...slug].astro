@@ -173,6 +173,8 @@ const pageSchema = [
 </BaseLayout>
 
 <script>
+  import { onPageReady } from '@/lib/pageReady';
+
   // Reading progress bar — width tracks document scroll. Element only
   // exists on case study pages; re-queried each navigation.
   let bar: HTMLElement | null = null;
@@ -185,7 +187,7 @@ const pageSchema = [
   }
 
   window.addEventListener('scroll', updateProgress, { passive: true });
-  document.addEventListener('astro:page-load', () => {
+  onPageReady(() => {
     bar = document.getElementById('read-progress');
     updateProgress();
   });

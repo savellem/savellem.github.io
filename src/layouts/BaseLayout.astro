@@ -130,9 +130,12 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
     <script>
       // ── Global motion engine ──
       // One module for scroll reveals, image parallax, and utility
-      // interactions. Runs once per site visit; astro:page-load re-inits
+      // interactions. Runs once per site visit; onPageReady re-inits
       // per-page element queries after every ClientRouter navigation
-      // (and fires on initial load too).
+      // (and on initial load, without waiting on astro:page-load's
+      // window.load gate — see src/lib/pageReady.ts).
+      import { onPageReady } from '@/lib/pageReady';
+
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
       let revealObserver: IntersectionObserver | null = null;
@@ -228,7 +231,7 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
         }
       });
 
-      document.addEventListener('astro:page-load', () => {
+      onPageReady(() => {
         initReveals();
         initParallax();
         initOffscreenAnimPause();

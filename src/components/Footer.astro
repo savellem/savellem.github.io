@@ -92,6 +92,8 @@ const currentYear = new Date().getFullYear();
 </footer>
 
 <script>
+  import { onPageReady } from '@/lib/pageReady';
+
   // Live Scottsdale clock — Arizona doesn't observe DST, so a fixed
   // timeZone is always right.
   function tick() {
@@ -105,5 +107,5 @@ const currentYear = new Date().getFullYear();
     els.forEach((el) => (el.textContent = time));
   }
   setInterval(tick, 30_000);
-  document.addEventListener('astro:page-load', tick);
+  onPageReady(tick);
 </script>
