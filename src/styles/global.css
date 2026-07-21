@@ -214,6 +214,19 @@
     from { transform: translate3d(0, 0, 0) scale(1); }
     to { transform: translate3d(6%, 10%, 0) scale(1.15); }
   }
+  /* On mobile, this continuously-running blur-filter animation is a known
+     WebKit main-thread cost (same issue the marquee-track pause above
+     works around) — it keeps re-rasterizing off-screen, starving paint for
+     content further down the page. Pause it once the hero scrolls out of
+     view; desktop leaves it running as before. */
+  @media (max-width: 767px) {
+    .js [data-glow-hero] .glow-orb {
+      animation-play-state: paused;
+    }
+    .js [data-glow-hero].glow-active .glow-orb {
+      animation-play-state: running;
+    }
+  }
 
   /* Pulsing availability dot */
   .pulse-dot {

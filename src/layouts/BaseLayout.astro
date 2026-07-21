@@ -124,6 +124,7 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
 
       let revealObserver: IntersectionObserver | null = null;
       let parallaxItems: { img: HTMLElement; container: HTMLElement; speed: number }[] = [];
+      let glowObserver: IntersectionObserver | null = null;
 
       function initReveals() {
         revealObserver?.disconnect();
@@ -156,6 +157,23 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
           parallaxItems.push({ img, container, speed });
         });
         updateParallax();
+      }
+
+      // Glow-orb blur-filter animations are a known WebKit main-thread cost
+      // on mobile (same class of issue as the marquee-track pause above) —
+      // stop them once the hero scrolls out of view. Scoped to mobile widths
+      // in CSS (see .glow-orb rules), so this observer is harmless on desktop.
+      function initGlowHero() {
+        glowObserver?.disconnect();
+        if (reducedMotion.matches) return;
+        const heroes = document.querySelectorAll<HTMLElement>('[data-glow-hero]');
+        if (!heroes.length) return;
+        glowObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            entry.target.classList.toggle('glow-active', entry.isIntersecting);
+          });
+        });
+        heroes.forEach((hero) => glowObserver!.observe(hero));
       }
 
       let parallaxTicking = false;
@@ -193,6 +211,7 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
       document.addEventListener('astro:page-load', () => {
         initReveals();
         initParallax();
+        initGlowHero();
       });
     </script>
 

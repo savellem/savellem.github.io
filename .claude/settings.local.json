@@ -34,7 +34,8 @@
       "Bash(lsof -ti:4321 -sTCP:LISTEN)",
       "Bash(xargs -r kill)",
       "Bash(npm uninstall *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(powershell -Command \"Get-ChildItem -Path 'D:\\\\Projects\\\\savellem.github.io\\\\public\\\\images\\\\logos' | Select-Object Name, Length\")"
     ],
     "deny": [],
     "ask": []
