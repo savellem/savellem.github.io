@@ -40,12 +40,15 @@ const pillKeywords = allDetails
   .filter(Boolean);
 
 const caseUrl = `${SITE_URL}/case-studies/${study.id}`;
+// study.data.thumbnail is build-time ImageMetadata (see content.config.ts),
+// not a URL string — meta tags and JSON-LD need the resolved asset path.
+const thumbnailSrc = study.data.thumbnail?.src;
 const pageSchema = [
   creativeWorkSchema({
     name: study.data.title,
     description: study.data.description,
     url: caseUrl,
-    image: study.data.thumbnail,
+    image: thumbnailSrc,
     datePublished: study.data.publishDate.toISOString().slice(0, 10),
     keywords: study.data.tags,
     about: study.data.project,
@@ -61,110 +64,106 @@ const pageSchema = [
 <BaseLayout
   title={`${study.data.title} - ${study.data.client}`}
   description={study.data.description}
-  image={study.data.thumbnail}
+  image={thumbnailSrc}
   schema={pageSchema}
 >
-  <Breadcrumbs items={[
-    { label: 'Case Studies', href: '/work' },
-    { label: study.data.client, href: `/case-studies/${study.id}` },
-  ]} />
+  <!-- Reading progress -->
+  <div id="read-progress" class="fixed top-0 left-0 h-[3px] bg-ember z-[80] w-0" aria-hidden="true"></div>
 
-  <!-- Header -->
-  <section class="container-custom pt-10 pb-16 bg-gradient-to-b from-gray-50 to-white">
-    <a
-      href="/work"
-      class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
-    >
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-      Work
-    </a>
+  <!-- Dark hero -->
+  <section class="relative overflow-hidden pt-28 md:pt-32 pb-16 md:pb-20">
+    <div class="glow-orb w-[36rem] h-[36rem] bg-ember/10 -top-48 right-[-10rem]" aria-hidden="true"></div>
 
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight mb-10">
-      {study.data.title}
-    </h1>
+    <Breadcrumbs items={[
+      { label: 'Case Studies', href: '/work' },
+      { label: study.data.client, href: `/case-studies/${study.id}` },
+    ]} />
 
-    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 mb-12">
-      <!-- Left: subheadline -->
-      <div class="lg:w-1/2">
-        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-6">
-          {study.data.description}
-        </p>
+    <div class="container-custom relative pt-6" data-reveal-lines>
+      <h1 class="font-display font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[0.98] mb-12 max-w-5xl">
+        <span class="reveal-line"><span>{study.data.title}</span></span>
+      </h1>
 
-        {pillKeywords.length > 0 && (
-          <div class="border-t border-gray-200 pt-4">
-            <p class="text-sm md:text-base font-semibold text-gray-900">
-              {pillKeywords.map((keyword, i) => (
-                <>
-                  {i > 0 && <span class="text-gray-400 mx-2">&bull;</span>}
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 mb-4">
+        <!-- Left: subheadline + pills -->
+        <div class="lg:w-1/2" data-reveal style="--reveal-delay: .15s">
+          <p class="text-lg md:text-xl text-fog leading-relaxed mb-6">
+            {study.data.description}
+          </p>
+
+          {pillKeywords.length > 0 && (
+            <div class="flex flex-wrap gap-2 border-t border-white/10 pt-5">
+              {pillKeywords.map((keyword) => (
+                <span class="inline-flex items-center rounded-full border border-white/15 px-3.5 py-1.5 text-xs font-medium text-paper/80">
                   {keyword}
-                </>
+                </span>
               ))}
-            </p>
+            </div>
+          )}
+        </div>
+
+        <!-- Right: Role / Team / Timeline -->
+        {heroDetails.length > 0 && (
+          <div class="lg:w-1/2 flex" data-reveal style="--reveal-delay: .25s">
+            <div class="w-full divide-y divide-white/10 border-t border-white/10 self-start">
+              {heroDetails.map((item) => (
+                <div class="flex items-start justify-between py-3.5 gap-6">
+                  <span class="text-fog/60 shrink-0 text-sm">{item.label}</span>
+                  <span class="text-paper/90 text-right text-sm">{item.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
-
-      <!-- Right: Role / Team / Timeline -->
-      {heroDetails.length > 0 && (
-        <div class="lg:w-1/2 flex">
-          <div class="w-full divide-y divide-gray-200 border-t border-gray-200">
-            {heroDetails.map((item) => (
-              <div class="flex items-start justify-between py-3">
-                <span class="text-gray-500 shrink-0 mr-4">{item.label}</span>
-                <span class="text-gray-900 text-right">{item.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   </section>
 
   <!-- Numbers -->
   {study.data.outcomes && study.data.outcomes.length > 0 && (
-    <section class="container-custom mb-16">
+    <section class="container-custom mb-16 md:mb-20">
       <NumbersBlock stats={study.data.outcomes} />
     </section>
   )}
 
-  <!-- Main Content -->
-  <section class="container-custom mb-16">
-    <div class="prose-custom">
-      <Content />
+  <!-- Reading sheet: light long-form so the design thinking stays readable -->
+  <section class="relative z-10 bg-white text-gray-900 rounded-t-[2.5rem] md:rounded-t-[3.5rem]">
+    <div class="container-custom py-16 md:py-24">
+      <div class="prose-custom">
+        <Content />
+      </div>
     </div>
   </section>
 
   <!-- Prev / Next Navigation -->
   {prevStudy && nextStudy && (
-    <section class="container-custom py-16">
-      <div class="grid grid-cols-2 gap-6 border-t border-gray-200 pt-8">
+    <section class="border-t border-white/10">
+      <div class="grid grid-cols-1 sm:grid-cols-2">
         <a
           href={`/case-studies/${prevStudy.id}`}
-          class="group"
+          class="group container-custom sm:!pr-8 py-14 md:py-20 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-ink-soft transition-colors duration-500"
         >
-          <p class="inline-flex items-center text-sm text-gray-500 group-hover:text-gray-900 transition-colors mb-2">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          <p class="inline-flex items-center gap-2 text-sm text-fog group-hover:text-paper transition-colors mb-4">
+            <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
             Previous
           </p>
-          <p class="text-lg md:text-xl font-display font-bold text-gray-900 leading-snug">
+          <p class="font-display font-bold text-3xl md:text-4xl text-paper leading-tight">
             {prevStudy.data.client}
           </p>
         </a>
         <a
           href={`/case-studies/${nextStudy.id}`}
-          class="group text-right"
+          class="group container-custom sm:!pl-8 py-14 md:py-20 text-right hover:bg-ink-soft transition-colors duration-500"
         >
-          <p class="inline-flex items-center justify-end text-sm text-gray-500 group-hover:text-gray-900 transition-colors mb-2">
+          <p class="inline-flex items-center justify-end gap-2 text-sm text-fog group-hover:text-paper transition-colors mb-4">
             Next
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </p>
-          <p class="text-lg md:text-xl font-display font-bold text-gray-900 leading-snug">
+          <p class="font-display font-bold text-3xl md:text-4xl text-paper leading-tight">
             {nextStudy.data.client}
           </p>
         </a>
@@ -172,3 +171,22 @@ const pageSchema = [
     </section>
   )}
 </BaseLayout>
+
+<script>
+  // Reading progress bar — width tracks document scroll. Element only
+  // exists on case study pages; re-queried each navigation.
+  let bar: HTMLElement | null = null;
+
+  function updateProgress() {
+    if (!bar) return;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    bar.style.width = `${(progress * 100).toFixed(2)}%`;
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  document.addEventListener('astro:page-load', () => {
+    bar = document.getElementById('read-progress');
+    updateProgress();
+  });
+</script>

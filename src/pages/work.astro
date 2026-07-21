@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import FeaturedCaseStudy from '@components/FeaturedCaseStudy.astro';
+import ProjectCard from '@components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 
@@ -13,26 +13,29 @@ const caseStudies = (await getCollection('case-studies'))
   title="Portfolio & Case Studies — Savelle McThias"
   description="Case studies and portfolio work spanning product design, e-commerce, enterprise SaaS, branding, and front-end development. Two decades of real results for real businesses."
 >
-  <!-- Hero Section -->
-  <section class="container-custom py-20 bg-gradient-to-b from-gray-50 to-white">
-    <div class="max-w-3xl">
-      <h1 class="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-6">
-        My Work
+  <!-- Hero -->
+  <section class="relative overflow-hidden pt-36 md:pt-44 pb-16 md:pb-24">
+    <div class="glow-orb w-[34rem] h-[34rem] bg-ember/10 -top-40 right-[-8rem]" aria-hidden="true"></div>
+
+    <div class="container-custom relative" data-reveal-lines>
+      <p class="eyebrow mb-6" data-reveal>Case studies</p>
+      <h1 class="font-display font-bold text-6xl md:text-8xl tracking-tight leading-[0.92] mb-10">
+        <span class="reveal-line" style="--line-delay: .1s"><span>The</span></span>
+        <span class="reveal-line" style="--line-delay: .25s"><span><em class="font-serif italic font-normal text-fog">work</em><span class="text-ember">.</span></span></span>
       </h1>
-      <p class="text-xl text-gray-600 leading-relaxed">
-        A collection of case studies showcasing my approach to solving complex design
-        challenges. Each project represents a unique opportunity to create meaningful
-        user experiences.
+      <p class="text-lg md:text-xl text-fog leading-relaxed max-w-2xl" data-reveal style="--reveal-delay: .4s">
+        Each project here is a real problem, a real constraint, and a measured result —
+        the design thinking is the point, not just the screens.
       </p>
     </div>
   </section>
 
   <!-- Case Studies List -->
-  <section class="container-custom pb-20">
+  <section class="container-custom pb-24">
     {caseStudies.length > 0 ? (
       <div>
-        {caseStudies.map((study) => (
-          <FeaturedCaseStudy
+        {caseStudies.map((study, i) => (
+          <ProjectCard
             title={study.data.title}
             client={study.data.client}
             year={study.data.year}
@@ -43,12 +46,13 @@ const caseStudies = (await getCollection('case-studies'))
             media={study.data.media}
             thumbnail={study.data.thumbnail}
             slug={study.id}
+            index={i + 1}
           />
         ))}
       </div>
     ) : (
       <div class="text-center py-20">
-        <p class="text-xl text-gray-600">No case studies available yet. Check back soon!</p>
+        <p class="text-xl text-fog">No case studies available yet. Check back soon!</p>
       </div>
     )}
   </section>

@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface MediaLink {
+  label: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  client: string;
+  year: number;
+  yearEnd?: number;
+  description: string;
+  role?: string;
+  scope?: string;
+  media?: MediaLink[];
+  thumbnail?: ImageMetadata;
+  slug: string;
+  /** 1-based position in the list, rendered as an index number. */
+  index: number;
+}
+
+const { title, client, year, yearEnd, description, role, scope, media, thumbnail, slug, index } = Astro.props;
+
+const yearDisplay = yearEnd ? `${year}–${yearEnd}` : `${year}`;
+const href = `/case-studies/${slug}`;
+const indexLabel = String(index).padStart(2, '0');
+// Box always matches the thumbnail's real aspect ratio (not a hardcoded
+// 16/10 or 21/10) so object-cover never has to crop content off — it only
+// crops when the box ratio differs from the source image's ratio.
+const mediaAspect = thumbnail ? `${thumbnail.width} / ${thumbnail.height}` : '16 / 9';
+---
+
+<article class="project-card group border-t border-white/10 py-14 md:py-20">
+  <!-- Meta row -->
+  <div class="flex items-baseline justify-between gap-6 mb-8" data-reveal>
+    <div class="flex items-baseline gap-5">
+      <span class="text-sm font-medium text-fog/50 tabular-nums">{indexLabel}</span>
+      <h3 class="font-display font-bold text-2xl md:text-4xl tracking-tight text-paper transition-colors duration-300 group-hover:text-white">
+        {client}
+      </h3>
+    </div>
+    <span class="text-sm text-fog tabular-nums shrink-0">{yearDisplay}</span>
+  </div>
+
+  <!-- Media -->
+  <a
+    href={href}
+    class="card-media block rounded-2xl md:rounded-3xl overflow-hidden bg-ink-soft relative"
+    style={`aspect-ratio: ${mediaAspect};`}
+    data-reveal="zoom"
+    aria-label={`${title} — view case study`}
+  >
+    {thumbnail ? (
+      <Image
+        src={thumbnail}
+        alt={`${title} — ${client} case study`}
+        format="webp"
+        quality={82}
+        widths={[640, 960, 1440]}
+        sizes="(min-width: 1024px) 1200px, 100vw"
+        class="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="w-full h-full border border-dashed border-white/15 rounded-2xl flex items-center justify-center">
+        <p class="eyebrow">Thumbnail coming soon</p>
+      </div>
+    )}
+    <!-- Hover affordance -->
+    <span class="absolute bottom-5 right-5 inline-flex items-center gap-2 rounded-full bg-ink/80 backdrop-blur-md border border-white/15 px-5 py-2.5 text-sm font-medium text-paper opacity-0 translate-y-2 transition-all duration-400 group-hover:opacity-100 group-hover:translate-y-0 max-md:opacity-100 max-md:translate-y-0">
+      View case study
+      <svg class="w-3.5 h-3.5 text-ember" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H9M17 7v8" />
+      </svg>
+    </span>
+  </a>
+
+  <!-- Detail row -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 mt-8" data-reveal style="--reveal-delay: .1s">
+    <p class="text-lg text-fog leading-relaxed">{description}</p>
+    <div class="flex flex-col gap-0 divide-y divide-white/10 text-sm">
+      {role && (
+        <div class="flex items-start justify-between gap-6 py-2.5">
+          <span class="text-fog/60 shrink-0">Role</span>
+          <span class="text-paper/90 text-right">{role}</span>
+        </div>
+      )}
+      {scope && (
+        <div class="flex items-start justify-between gap-6 py-2.5">
+          <span class="text-fog/60 shrink-0">Scope</span>
+          <span class="text-paper/90 text-right">{scope}</span>
+        </div>
+      )}
+      {media && media.length > 0 && (
+        <div class="flex items-start justify-between gap-6 py-2.5">
+          <span class="text-fog/60 shrink-0">Media</span>
+          <div class="flex flex-wrap gap-x-4 gap-y-1 justify-end">
+            {media.map((item) => (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-paper/90 hover:text-ember transition-colors inline-flex items-center gap-1"
+              >
+                {item.label}
+                <svg class="w-2.5 h-2.5" viewBox="0 0 12 12" fill="none">
+                  <path d="M3.5 8.5L8.5 3.5M8.5 3.5H5M8.5 3.5V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  /* Media reveal (scale-down entrance) + hover zoom, kept in one place so
+     the two transforms never fight. Reduced-motion turns both off. */
+  .card-media img {
+    transition: transform 1.2s var(--ease-out-expo);
+  }
+  :global(.js) .card-media[data-reveal='zoom']:not(.is-inview) img {
+    transform: scale(1.14);
+  }
+  .project-card:hover .card-media.is-inview img {
+    transform: scale(1.035);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-media img {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>
