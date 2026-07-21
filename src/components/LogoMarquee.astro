@@ -7,15 +7,43 @@ interface Props {
 
 const { eyebrow = "Brands I've worked with" } = Astro.props;
 
-// Track is duplicated so the -50% marquee loop is seamless.
+// Desktop track is duplicated so the -50% marquee loop is seamless.
 const track = [...logos, ...logos];
+
+// Mobile crossfade: two logos visible at a time (consecutive pairs). Every
+// item shares the same @keyframes timeline (one "on" window that fades in,
+// holds, fades out); items in the same pair get the same animation-delay,
+// staggered per pair so the pairs cycle through the full set exactly once
+// per `totalSeconds`. Percentages are derived from the logo count so the
+// timeline stays correct if logos are added or removed.
+// With an odd count, a lone unpaired logo in the last slot reads as a
+// visible glitch (everywhere else is a pair) — repeating one logo instead
+// is unnoticeable, so pad up to even by re-showing the first logo.
+const perGroup = 2;
+const mobileLogos = logos.length % perGroup === 0 ? logos : [...logos, logos[0]];
+const groupCount = Math.ceil(mobileLogos.length / perGroup);
+const slotSeconds = 3;
+const totalSeconds = groupCount * slotSeconds;
+const slotPct = 100 / groupCount;
+const fadeInPct = (slotPct * 0.2).toFixed(3);
+const holdEndPct = (slotPct * 0.8).toFixed(3);
+const fadeOutPct = slotPct.toFixed(3);
+const logoFadeKeyframes = `@keyframes logo-fade-cycle {
+  0% { opacity: 0; }
+  ${fadeInPct}% { opacity: 0.4; }
+  ${holdEndPct}% { opacity: 0.4; }
+  ${fadeOutPct}% { opacity: 0; }
+  100% { opacity: 0; }
+}`;
 ---
 
 <section class="py-14 border-y border-white/10" data-reveal data-pause-offscreen>
   {eyebrow && (
     <p class="eyebrow text-center mb-10">{eyebrow}</p>
   )}
-  <div class="marquee">
+
+  <!-- Desktop/tablet: infinite horizontal scroller -->
+  <div class="marquee hidden md:block">
     <div class="marquee-track gap-20 items-center opacity-40">
       {track.map(({ src, alt, h, width, height }) => (
         <span
@@ -27,14 +55,44 @@ const track = [...logos, ...logos];
       ))}
     </div>
   </div>
+
+  <!-- Mobile: crossfade through logos two at a time instead of a moving
+       scroller. The scroller's continuously-translating masked layer is
+       expensive for WebKit to composite (independent of the source SVGs'
+       size — the mask has to be re-rasterized every frame it moves), which
+       was stalling scroll/paint for a couple seconds on phones. A static,
+       opacity-only crossfade needs no per-frame mask re-rasterization. -->
+  <div class="logo-fade md:hidden" style={`--logo-fade-duration: ${totalSeconds}s;`}>
+    {mobileLogos.map(({ src, alt, h, width, height }, i) => (
+      <span
+        role="img"
+        aria-label={alt}
+        class={`${h} bg-paper logo-mask logo-fade-item`}
+        style={`aspect-ratio: ${width} / ${height}; --logo-src: url(${src}); animation-delay: ${(Math.floor(i / perGroup) * slotSeconds).toFixed(2)}s;`}
+      />
+    ))}
+  </div>
 </section>
 
-<style>
+<style is:inline set:html={logoFadeKeyframes}></style>
+
+<style is:global>
+  /* is:global is required here, not just stylistic: these rules key off
+     `.js` on <html>, which is outside this component's own rendered tree.
+     Astro's default scoped `<style>` appends a component-local
+     data-astro-cid-* attribute to every simple selector in a rule,
+     including `.js` — but <html> never carries that attribute, so a scoped
+     `.js ...` selector can never match anything. Without `is:global` here,
+     the crossfade below silently never animates; only the static fallback
+     (all logos listed, unanimated) ever runs. */
+
   /* Recolors each logo to a flat color via mask instead of
      filter: brightness(0) invert(1) on an <img>. Masking only reads the
      source's alpha shape (no color-pixel rasterize-then-filter pass),
      which is both cheaper and — unlike `filter` — a technique WebKit has
-     had fast, native support for since very old iOS versions. */
+     had fast, native support for since very old iOS versions. This is fine
+     for the mobile crossfade below since nothing translates there — see
+     the comment on .logo-fade for why the desktop scroller is different. */
   .logo-mask {
     -webkit-mask-image: var(--logo-src);
     mask-image: var(--logo-src);
@@ -44,5 +102,66 @@ const track = [...logos, ...logos];
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+  }
+
+  /* Base (no-JS and reduced-motion fallback): a plain wrapped static row,
+     all logos visible at once — matches the site's "no hiding without JS"
+     rule. The absolute two-column crossfade below is a JS-gated
+     progressive enhancement on top of this. */
+  .logo-fade {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem 2.5rem;
+  }
+  .logo-fade-item {
+    opacity: 0.4;
+  }
+
+  .js .logo-fade {
+    position: relative;
+    height: 3.5rem;
+    flex-wrap: nowrap;
+  }
+  .js .logo-fade-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-block: auto;
+    opacity: 0;
+    animation-name: logo-fade-cycle;
+    animation-duration: var(--logo-fade-duration);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+  }
+  /* Left/right column per pair — matches the animation-delay grouping
+     above (items 0&1 share a delay, 2&3 share the next, and so on). */
+  .js .logo-fade-item:nth-child(odd) {
+    left: 25%;
+    transform: translateX(-50%);
+  }
+  .js .logo-fade-item:nth-child(even) {
+    left: 75%;
+    transform: translateX(-50%);
+  }
+  .js [data-reveal].is-inview .logo-fade-item {
+    animation-play-state: running;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js .logo-fade {
+      position: static;
+      height: auto;
+      flex-wrap: wrap;
+    }
+    .js .logo-fade-item {
+      position: static;
+      left: auto;
+      transform: none;
+      opacity: 0.4 !important;
+      animation: none !important;
+    }
   }
 </style>

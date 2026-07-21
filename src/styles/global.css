@@ -215,29 +215,22 @@
   }
 
   /* The `is-inview` reveal above is one-shot (never removed once set), so
-     on mobile both the glow-orb blur filter and the marquee's masked,
-     translating track otherwise keep compositing forever once first
-     revealed — fully off-screen, competing for the same main thread/GPU
-     budget as everything else. That ongoing cost is what stalls paint for
-     a couple seconds every time these sections scroll back into view, not
-     just on first load. `data-pause-offscreen` (set via a persistent,
-     non-unobserving IntersectionObserver in BaseLayout) tracks *current*
-     visibility instead, so these can actually stop while off-screen and
-     resume on re-entry. Desktop is untouched — this block only applies
-     under the max-width query. The marquee rules need `!important` to
-     beat the higher-specificity `.is-inview` rule above. */
+     on mobile the glow-orb blur filter otherwise keeps compositing forever
+     once first revealed — fully off-screen, competing for the same main
+     thread/GPU budget as everything else. `data-pause-offscreen` (set via
+     a persistent, non-unobserving IntersectionObserver in BaseLayout)
+     tracks *current* visibility instead, so it can actually stop while
+     off-screen and resume on re-entry. Desktop is untouched — this block
+     only applies under the max-width query.
+     (The marquee track itself doesn't need this: LogoMarquee swaps to a
+     `md:hidden` crossfade below this width, so the translating scroller is
+     `display: none` on mobile entirely — no compositing cost to pause.) */
   @media (max-width: 767px) {
     .js [data-pause-offscreen] .glow-orb {
       animation-play-state: paused;
     }
     .js [data-pause-offscreen].anim-active .glow-orb {
       animation-play-state: running;
-    }
-    .js [data-pause-offscreen] .marquee-track {
-      animation-play-state: paused !important;
-    }
-    .js [data-pause-offscreen].anim-active .marquee-track {
-      animation-play-state: running !important;
     }
   }
 
