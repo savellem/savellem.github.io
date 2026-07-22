@@ -3,7 +3,6 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { personSchema, websiteSchema } from '@/lib/schema';
-import { logos } from '@/data/logos';
 import '@/styles/global.css';
 
 interface Props {
@@ -12,10 +11,6 @@ interface Props {
   image?: string;
   /** Page-specific JSON-LD graph(s); Person + WebSite are always included. */
   schema?: object | object[];
-  /** Preloads LogoMarquee's SVG mask sources at low priority, for pages
-   * that render it, so they're already fetched/decoded by the time the
-   * user scrolls there instead of stalling paint at that moment. */
-  preloadLogos?: boolean;
 }
 
 const {
@@ -23,7 +18,6 @@ const {
   description = 'Savelle McThias is a senior product designer and creative director specializing in trust and conversion moments for health and wellness products. Two decades of experience, available for remote senior and lead product design roles.',
   image = '/og-image.jpg',
   schema,
-  preloadLogos = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -100,13 +94,6 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
         </script>
       </Fragment>
     )}
-
-    <!-- LogoMarquee mask sources — low-priority preload so they're already
-         fetched/decoded before the user scrolls to that section (see the
-         `preloadLogos` prop doc above). -->
-    {preloadLogos && logos.map((logo) => (
-      <link rel="preload" as="image" href={logo.src} fetchpriority="low" />
-    ))}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

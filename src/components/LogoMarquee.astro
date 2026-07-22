@@ -19,12 +19,13 @@ const track = [...logos, ...logos];
   <!-- Desktop/tablet: infinite horizontal scroller -->
   <div class="marquee hidden md:block">
     <div class="marquee-track gap-20 items-center opacity-40">
-      {track.map(({ src, alt, h, width, height }) => (
+      {track.map(({ alt, h, width, height, markup }) => (
         <span
           role="img"
           aria-label={alt}
-          class={`${h} shrink-0 inline-block bg-paper logo-mask`}
-          style={`aspect-ratio: ${width} / ${height}; --logo-src: url(${src});`}
+          class={`${h} shrink-0 text-paper logo-svg`}
+          style={`aspect-ratio: ${width} / ${height};`}
+          set:html={markup}
         />
       ))}
     </div>
@@ -36,31 +37,20 @@ const track = [...logos, ...logos];
        across several different fixes — a plain static list has no ongoing
        compositing cost to cause that in the first place. -->
   <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 md:hidden">
-    {logos.map(({ src, alt, h, width, height }) => (
+    {logos.map(({ alt, h, width, height, markup }) => (
       <span
         role="img"
         aria-label={alt}
-        class={`${h} bg-paper logo-mask opacity-40`}
-        style={`aspect-ratio: ${width} / ${height}; --logo-src: url(${src});`}
+        class={`${h} text-paper logo-svg opacity-40`}
+        style={`aspect-ratio: ${width} / ${height};`}
+        set:html={markup}
       />
     ))}
   </div>
 </section>
 
 <style>
-  /* Recolors each logo to a flat color via mask instead of
-     filter: brightness(0) invert(1) on an <img>. Masking only reads the
-     source's alpha shape (no color-pixel rasterize-then-filter pass),
-     which is both cheaper and — unlike `filter` — a technique WebKit has
-     had fast, native support for since very old iOS versions. */
-  .logo-mask {
-    -webkit-mask-image: var(--logo-src);
-    mask-image: var(--logo-src);
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+  .logo-svg {
+    display: inline-block;
   }
 </style>

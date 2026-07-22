@@ -1,24 +1,50 @@
+import bareMinerals from '@/assets/logos/logo-bareminerals.svg?raw';
+import capitolRecords from '@/assets/logos/logo-capitolrecords.svg?raw';
+import gm from '@/assets/logos/logo-gm.svg?raw';
+import petsmart from '@/assets/logos/logo-petsmart.svg?raw';
+import richDad from '@/assets/logos/logo-richdad.svg?raw';
+import sanity from '@/assets/logos/logo-sanity.svg?raw';
+import sothebys from '@/assets/logos/logo-sothebys.svg?raw';
+import theBeachBoys from '@/assets/logos/logo-thebeachboys.svg?raw';
+import universal from '@/assets/logos/logo-universal.svg?raw';
+
 export interface Logo {
-  src: string;
   alt: string;
   h: string;
   width: number;
   height: number;
+  /** Raw <svg> markup, recolored to currentColor, for inline rendering. */
+  markup: string;
 }
 
-// width/height are each SVG's own viewBox — used to size the masked span
-// in LogoMarquee to the correct aspect ratio, since a mask (unlike an
-// <img>) has no intrinsic size of its own to derive `w-auto` from.
-// Also used by BaseLayout to preload these as low-priority `mask-image`
-// sources ahead of scroll (see the `preloadLogos` prop).
+// Recolors every fill in a logo to currentColor so it can be inlined
+// directly (color driven by the wrapping element's `color`) instead of
+// applied via CSS mask-image. WebKit mobile has no async decode path for
+// mask-image with an external SVG source — the mask has to be fetched and
+// rasterized synchronously on the main thread the first time it's
+// painted, which was stalling scroll/paint for multiple seconds. A plain
+// inline SVG with fill="currentColor" is just normal vector paint, no
+// masking involved. Matches masking's behavior of flattening every shape
+// to one color regardless of the source's own fill values (e.g. PetSmart's
+// SVG has a #000 accent path alongside its #fff shapes).
+// Also swaps the SVG's own fixed width/height for 100% so it fills
+// whatever box the wrapping element (h-[Npx] + aspect-ratio) sizes it to.
+function recolor(svg: string): string {
+  return svg
+    .replace(/fill="#(fff|000)"/g, 'fill="currentColor"')
+    .replace(/width="\d+" height="\d+"/, 'width="100%" height="100%"');
+}
+
+// width/height are each SVG's own viewBox — used to size the wrapping span
+// in LogoMarquee to the correct aspect ratio.
 export const logos: Logo[] = [
-  { src: '/images/logos/logo-bareminerals.svg',   alt: 'bareMinerals',    h: 'h-[20px]', width: 430, height: 49  },
-  { src: '/images/logos/logo-capitolrecords.svg', alt: 'Capitol Records', h: 'h-[56px]', width: 500, height: 231 },
-  { src: '/images/logos/logo-gm.svg',             alt: 'GM',              h: 'h-[56px]', width: 209, height: 209 },
-  { src: '/images/logos/logo-petsmart.svg',       alt: 'PetSmart',        h: 'h-[42px]', width: 482, height: 122 },
-  { src: '/images/logos/logo-richdad.svg',        alt: 'Rich Dad',        h: 'h-[20px]', width: 597, height: 79  },
-  { src: '/images/logos/logo-sanity.svg',         alt: 'Sanity',          h: 'h-7',      width: 280, height: 102 },
-  { src: '/images/logos/logo-sothebys.svg',       alt: "Sotheby's",       h: 'h-7',      width: 522, height: 114 },
-  { src: '/images/logos/logo-thebeachboys.svg',   alt: 'The Beach Boys',  h: 'h-[56px]', width: 662, height: 319 },
-  { src: '/images/logos/logo-universal.svg',      alt: 'Universal',       h: 'h-[56px]', width: 460, height: 243 },
+  { alt: 'bareMinerals',    h: 'h-[20px]', width: 430, height: 49,  markup: recolor(bareMinerals) },
+  { alt: 'Capitol Records', h: 'h-[56px]', width: 500, height: 231, markup: recolor(capitolRecords) },
+  { alt: 'GM',              h: 'h-[56px]', width: 209, height: 209, markup: recolor(gm) },
+  { alt: 'PetSmart',        h: 'h-[42px]', width: 482, height: 122, markup: recolor(petsmart) },
+  { alt: 'Rich Dad',        h: 'h-[20px]', width: 597, height: 79,  markup: recolor(richDad) },
+  { alt: 'Sanity',          h: 'h-7',      width: 280, height: 102, markup: recolor(sanity) },
+  { alt: "Sotheby's",       h: 'h-7',      width: 522, height: 114, markup: recolor(sothebys) },
+  { alt: 'The Beach Boys',  h: 'h-[56px]', width: 662, height: 319, markup: recolor(theBeachBoys) },
+  { alt: 'Universal',       h: 'h-[56px]', width: 460, height: 243, markup: recolor(universal) },
 ];
