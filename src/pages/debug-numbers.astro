@@ -1,13 +1,14 @@
 ---
-// TEMPORARY diagnostic page — round 2. Round 1 (just NumbersBlock, no
-// images/logos/glow-orb) scrolled clean, ruling out NumbersBlock and the
-// base motion system entirely. This round adds back real lazy-loaded
-// images positioned right after NumbersBlock — the one thing consistently
-// present there on both the homepage (ProjectCard) and case study pages
-// (MDX body images) — to test whether lazy-image decode near that scroll
-// position is the actual trigger. Delete this page once done.
+// TEMPORARY diagnostic page — round 3. Round 1 (just NumbersBlock) and
+// round 2 (+ real lazy-loaded images after it) both scrolled clean,
+// ruling out NumbersBlock, the base motion system, and lazy images. This
+// round adds LogoMarquee right before NumbersBlock (matching the
+// homepage's actual Hero → LogoMarquee → NumbersBlock order) since it has
+// the longest, most-modified history in this investigation and hasn't
+// been tested in isolation yet. Delete this page once done.
 import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import LogoMarquee from '@components/LogoMarquee.astro';
 import NumbersBlock from '@components/case-study/NumbersBlock.astro';
 import img1 from '@/assets/case-studies/cs-cr-001.png';
 import img2 from '@/assets/case-studies/cs-gs-003.png';
@@ -23,10 +24,12 @@ const stats = [
 const images = [img1, img2, img3, img4];
 ---
 
-<BaseLayout title="Debug: Numbers freeze isolation test, round 2">
+<BaseLayout title="Debug: Numbers freeze isolation test, round 3">
   <div class="min-h-svh flex items-center justify-center text-center px-6">
-    <p class="text-2xl text-fog">Scroll down to reach the numbers section.</p>
+    <p class="text-2xl text-fog">Scroll down to reach the logo row, then the numbers section.</p>
   </div>
+
+  <LogoMarquee eyebrow="Isolation test — logos" />
 
   <section class="container-custom py-24">
     <NumbersBlock stats={stats} eyebrow="Isolation test" />
@@ -39,6 +42,6 @@ const images = [img1, img2, img3, img4];
   </section>
 
   <div class="min-h-svh flex items-center justify-center text-center px-6">
-    <p class="text-2xl text-fog">Past everything. If you scrolled through without a freeze, images aren't it either.</p>
+    <p class="text-2xl text-fog">Past everything. If you scrolled through without a freeze, LogoMarquee isn't it either.</p>
   </div>
 </BaseLayout>
