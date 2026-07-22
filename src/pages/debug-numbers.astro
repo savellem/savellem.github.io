@@ -1,0 +1,28 @@
+---
+// TEMPORARY diagnostic page — isolates NumbersBlock from everything else
+// on the real pages (images, logos, glow-orbs, reading sheet) to test
+// whether the mobile scroll freeze happens here too. Delete once done.
+import BaseLayout from '@layouts/BaseLayout.astro';
+import NumbersBlock from '@components/case-study/NumbersBlock.astro';
+
+const stats = [
+  { stat: '25%', label: 'reduction in customer service calls' },
+  { stat: '12%', label: 'decrease in cart abandonment' },
+  { stat: '15%', label: 'increase in distributor enrollments' },
+  { stat: '90 days', label: 'from design to launch' },
+];
+---
+
+<BaseLayout title="Debug: Numbers freeze isolation test">
+  <div class="min-h-svh flex items-center justify-center text-center px-6">
+    <p class="text-2xl text-fog">Scroll down to reach the numbers section.</p>
+  </div>
+
+  <section class="container-custom py-24">
+    <NumbersBlock stats={stats} eyebrow="Isolation test" />
+  </section>
+
+  <div class="min-h-svh flex items-center justify-center text-center px-6">
+    <p class="text-2xl text-fog">Past the numbers section. If you scrolled through without a freeze, this page is clean.</p>
+  </div>
+</BaseLayout>

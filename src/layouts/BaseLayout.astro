@@ -32,10 +32,7 @@ const jsonLdGraphs = [personSchema, websiteSchema, ...pageSchema];
 // Only inject analytics in production builds so local dev and previews don't
 // pollute the property.
 const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-Q08TQD2DG9';
-// TEMP: GA4 disabled to test whether its script is behind the mobile
-// scroll freeze near count-up sections. Restore `import.meta.env.PROD &&
-// Boolean(GA_ID)` once that's confirmed either way.
-const enableAnalytics = false;
+const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
 ---
 
 <!doctype html>
