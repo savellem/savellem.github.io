@@ -7,7 +7,7 @@ interface Stat {
 interface Props {
   stats: Stat[];
   eyebrow?: string;
-  /** Counts each stat up from 0 when the block scrolls into view. */
+  /** Counts each stat up from 0 when the block scrolls into view (desktop only — see below). */
   animate?: boolean;
 }
 
@@ -42,19 +42,22 @@ function parseStat(stat: string) {
           <p class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-paper leading-none mb-3">
             {parsed ? (
               <>
-                {/* min-width reserves space for the final digit count up front
-                    (e.g. "20" needs 2ch even while showing "0"). Without it,
-                    each 1→2-digit transition during the count-up resizes the
-                    box and forces a reflow — at this font size, with up to 4
-                    of these animating at once via requestAnimationFrame, that
-                    reflow-per-frame is expensive enough to visibly jank on
-                    mobile. Reserving the width up front makes every frame a
-                    pure repaint (glyph swap only, no layout). */}
-                {parsed.prefix}<span
-                  class="stat-number tabular-nums inline-block"
-                  style={`min-width: ${String(parsed.value).length}ch;`}
-                  data-target={parsed.value}
-                >0</span>{parsed.suffix}
+                {/* Mobile: the plain final string, server-rendered — no
+                    JS involved at all, not even the IntersectionObserver
+                    below runs there (see the script's early return). No
+                    "0" placeholder to swap in later, nothing to freeze.
+                    Desktop: the JS-driven count-up, hidden on mobile via
+                    `hidden md:inline`. min-width reserves space for the
+                    final digit count up front so each frame is a pure
+                    repaint rather than a reflow-causing resize. */}
+                <span class="md:hidden">{item.stat}</span>
+                <span class="hidden md:inline">
+                  {parsed.prefix}<span
+                    class="stat-number tabular-nums inline-block"
+                    style={`min-width: ${String(parsed.value).length}ch;`}
+                    data-target={parsed.value}
+                  >0</span>{parsed.suffix}
+                </span>
               </>
             ) : (
               item.stat
@@ -74,16 +77,12 @@ function parseStat(stat: string) {
   const DURATION = 700;
   const STAGGER = 80;
 
-  // Mobile skips the count-up entirely (numbers just render at their final
-  // value) — desktop keeps it. Same OR'd media query as the rest of the
-  // motion system.
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px)').matches;
+  // Mobile renders the final value directly (see the template) — there's
+  // nothing for this script to do there, so it skips setup entirely rather
+  // than running an IntersectionObserver against elements nobody sees.
+  const skipOnThisViewport = window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px)').matches;
 
   function animateNumber(el: Element, target: number, delay: number) {
-    if (prefersReducedMotion) {
-      el.textContent = String(target);
-      return;
-    }
     setTimeout(() => {
       const start = performance.now();
       function tick(now: number) {
@@ -102,6 +101,8 @@ function parseStat(stat: string) {
   // astro:page-load listener) so this doesn't wait on that event's
   // window.load gate on the initial visit — see src/lib/pageReady.ts.
   onPageReady(() => {
+    if (skipOnThisViewport) return;
+
     document.querySelectorAll('[data-numbers-block="animate"]').forEach((container) => {
       const numberEls = container.querySelectorAll('.stat-number');
       if (!numberEls.length) return;
