@@ -214,6 +214,21 @@
     to { transform: translate3d(6%, 10%, 0) scale(1.15); }
   }
 
+  /* This — not the animation, not any component — was the confirmed cause
+     of the multi-second mobile scroll freeze, isolated via a dedicated
+     test page that only reproduced it once glow-orb was added back in.
+     Stopping the animation on mobile (see the reduced-motion block above)
+     wasn't enough because filter: blur() at a large radius is expensive
+     for WebKit to rasterize even on a fully static element — a
+     well-documented iOS Safari/Chrome (same WebKit engine) performance
+     cliff, independent of whether anything is moving. Hiding it outright
+     on mobile removes the cost entirely; desktop is untouched. */
+  @media (max-width: 767px) {
+    .glow-orb {
+      display: none;
+    }
+  }
+
   /* Pulsing availability dot */
   .pulse-dot {
     position: relative;
