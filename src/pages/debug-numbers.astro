@@ -1,11 +1,10 @@
 ---
-// TEMPORARY diagnostic page — round 3. Round 1 (just NumbersBlock) and
-// round 2 (+ real lazy-loaded images after it) both scrolled clean,
-// ruling out NumbersBlock, the base motion system, and lazy images. This
-// round adds LogoMarquee right before NumbersBlock (matching the
-// homepage's actual Hero → LogoMarquee → NumbersBlock order) since it has
-// the longest, most-modified history in this investigation and hasn't
-// been tested in isolation yet. Delete this page once done.
+// TEMPORARY diagnostic page — round 4. Rounds 1-3 (NumbersBlock alone,
+// + real lazy images, + LogoMarquee) all scrolled clean, ruling out
+// NumbersBlock, the base motion system, lazy images, and LogoMarquee.
+// This round adds the hero's glow-orb (the blurred background element) —
+// the last piece of real-page content not yet tested in isolation.
+// Delete this page once done.
 import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LogoMarquee from '@components/LogoMarquee.astro';
@@ -24,9 +23,11 @@ const stats = [
 const images = [img1, img2, img3, img4];
 ---
 
-<BaseLayout title="Debug: Numbers freeze isolation test, round 3">
-  <div class="min-h-svh flex items-center justify-center text-center px-6">
-    <p class="text-2xl text-fog">Scroll down to reach the logo row, then the numbers section.</p>
+<BaseLayout title="Debug: Numbers freeze isolation test, round 4">
+  <div class="relative min-h-svh flex items-center justify-center text-center px-6 overflow-hidden">
+    <div class="glow-orb w-[42rem] h-[42rem] bg-ember/15 -top-40 -right-40" aria-hidden="true"></div>
+    <div class="glow-orb w-[36rem] h-[36rem] bg-indigo-500/10 bottom-[-12rem] left-[-10rem]" style="animation-delay: -11s" aria-hidden="true"></div>
+    <p class="relative text-2xl text-fog">Scroll down to reach the logo row, then the numbers section.</p>
   </div>
 
   <LogoMarquee eyebrow="Isolation test — logos" />
@@ -42,6 +43,6 @@ const images = [img1, img2, img3, img4];
   </section>
 
   <div class="min-h-svh flex items-center justify-center text-center px-6">
-    <p class="text-2xl text-fog">Past everything. If you scrolled through without a freeze, LogoMarquee isn't it either.</p>
+    <p class="text-2xl text-fog">Past everything. If you scrolled through without a freeze, glow-orb isn't it either — we're out of real-page ingredients to test.</p>
   </div>
 </BaseLayout>
