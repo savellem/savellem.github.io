@@ -74,7 +74,10 @@ function parseStat(stat: string) {
   const DURATION = 700;
   const STAGGER = 80;
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Mobile skips the count-up entirely (numbers just render at their final
+  // value) — desktop keeps it. Same OR'd media query as the rest of the
+  // motion system.
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px)').matches;
 
   function animateNumber(el: Element, target: number, delay: number) {
     if (prefersReducedMotion) {

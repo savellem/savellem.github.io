@@ -132,7 +132,7 @@ const mediaAspect = thumbnail ? `${thumbnail.width} / ${thumbnail.height}` : '16
     transform: scale(1.035);
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: reduce), (max-width: 767px) {
     .card-media img {
       transition: none;
       transform: none !important;

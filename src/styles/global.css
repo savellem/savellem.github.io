@@ -214,26 +214,6 @@
     to { transform: translate3d(6%, 10%, 0) scale(1.15); }
   }
 
-  /* The `is-inview` reveal above is one-shot (never removed once set), so
-     on mobile the glow-orb blur filter otherwise keeps compositing forever
-     once first revealed — fully off-screen, competing for the same main
-     thread/GPU budget as everything else. `data-pause-offscreen` (set via
-     a persistent, non-unobserving IntersectionObserver in BaseLayout)
-     tracks *current* visibility instead, so it can actually stop while
-     off-screen and resume on re-entry. Desktop is untouched — this block
-     only applies under the max-width query.
-     (The marquee track itself doesn't need this: LogoMarquee swaps to a
-     `md:hidden` crossfade below this width, so the translating scroller is
-     `display: none` on mobile entirely — no compositing cost to pause.) */
-  @media (max-width: 767px) {
-    .js [data-pause-offscreen] .glow-orb {
-      animation-play-state: paused;
-    }
-    .js [data-pause-offscreen].anim-active .glow-orb {
-      animation-play-state: running;
-    }
-  }
-
   /* Pulsing availability dot */
   .pulse-dot {
     position: relative;
@@ -344,8 +324,12 @@
   }
 }
 
-/* ── Reduced motion: show everything, stop everything ── */
-@media (prefers-reduced-motion: reduce) {
+/* ── Reduced motion: show everything, stop everything ──
+   Also applies under the mobile breakpoint — mobile keeps none of the
+   site's animation (reveals, marquee, parallax, glow-orb, count-up
+   numbers), desktop keeps all of it. Comma-separated media queries are
+   OR'd, same as in the JS matchMedia calls this mirrors. */
+@media (prefers-reduced-motion: reduce), (max-width: 767px) {
   .js [data-reveal],
   .js [data-reveal-lines] .reveal-line > span {
     opacity: 1;

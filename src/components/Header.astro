@@ -135,7 +135,7 @@ const navItems = [
     transform: translateY(0);
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: reduce), (max-width: 767px) {
     .menu-item {
       opacity: 1;
       transform: none;

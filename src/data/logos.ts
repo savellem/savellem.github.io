@@ -29,8 +29,17 @@ export interface Logo {
 // SVG has a #000 accent path alongside its #fff shapes).
 // Also swaps the SVG's own fixed width/height for 100% so it fills
 // whatever box the wrapping element (h-[Npx] + aspect-ratio) sizes it to.
+// Strips <defs>/clip-path entirely: several of these SVGs define a
+// same-named clipPath id="a" (just a rect matching their own viewBox, an
+// export artifact). Inlining multiple of these logos on one page means
+// every clip-path="url(#a)" resolves to whichever id="a" appears *first*
+// in the document, clipping unrelated logos to the wrong box — which is
+// exactly what was chopping up GM, Rich Dad, Sanity, and Universal. The
+// SVG's own viewBox already bounds the content, so the clip was redundant.
 function recolor(svg: string): string {
   return svg
+    .replace(/<defs>[\s\S]*?<\/defs>/g, '')
+    .replace(/\s*clip-path="url\(#[^)]+\)"/g, '')
     .replace(/fill="#(fff|000)"/g, 'fill="currentColor"')
     .replace(/width="\d+" height="\d+"/, 'width="100%" height="100%"');
 }

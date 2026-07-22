@@ -123,11 +123,15 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
       // window.load gate — see src/lib/pageReady.ts).
       import { onPageReady } from '@/lib/pageReady';
 
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      // Mobile gets none of this site's animation (reveals, parallax,
+      // marquee/glow-orb pausing) — desktop keeps all of it. Piggybacking
+      // on the reducedMotion check (rather than a separate mobile branch)
+      // means every `if (reducedMotion.matches) return`/early-exit below
+      // already does the right thing for both cases for free.
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px)');
 
       let revealObserver: IntersectionObserver | null = null;
       let parallaxItems: { img: HTMLElement; container: HTMLElement; speed: number }[] = [];
-      let offscreenAnimObserver: IntersectionObserver | null = null;
 
       function initReveals() {
         revealObserver?.disconnect();
@@ -160,30 +164,6 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
           parallaxItems.push({ img, container, speed });
         });
         updateParallax();
-      }
-
-      // Glow-orb blur filters and the logo marquee's masked, translating
-      // track are known WebKit main-thread/compositor costs on mobile. The
-      // one-shot reveal observer above only gates their *first* start — once
-      // `is-inview` is set it's never removed, so on mobile those animations
-      // otherwise keep compositing forever, fully off-screen, and paint for
-      // this region stalls for a couple seconds every time it scrolls back
-      // into view. This persistent (non-unobserving) observer instead toggles
-      // `.anim-active` continuously, so CSS (see .glow-orb / .marquee-track
-      // rules, mobile-scoped) can pause them whenever truly off-screen and
-      // resume them on re-entry. Harmless on desktop since those CSS rules
-      // are scoped to mobile widths.
-      function initOffscreenAnimPause() {
-        offscreenAnimObserver?.disconnect();
-        if (reducedMotion.matches) return;
-        const targets = document.querySelectorAll<HTMLElement>('[data-pause-offscreen]');
-        if (!targets.length) return;
-        offscreenAnimObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            entry.target.classList.toggle('anim-active', entry.isIntersecting);
-          });
-        });
-        targets.forEach((el) => offscreenAnimObserver!.observe(el));
       }
 
       let parallaxTicking = false;
@@ -221,7 +201,6 @@ const enableAnalytics = import.meta.env.PROD && Boolean(GA_ID);
       onPageReady(() => {
         initReveals();
         initParallax();
-        initOffscreenAnimPause();
       });
     </script>
 
