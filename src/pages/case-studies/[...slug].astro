@@ -186,7 +186,26 @@ const pageSchema = [
     bar.style.width = `${(progress * 100).toFixed(2)}%`;
   }
 
-  window.addEventListener('scroll', updateProgress, { passive: true });
+  // rAF-throttled, not a raw per-scroll-event listener: iOS fires 'scroll'
+  // at high frequency during momentum scrolling, and each one was forcing
+  // a synchronous style write (and the layout recalc that comes with it).
+  // Case study pages are the only place this exists, and it was compounding
+  // with everything else the page does while scrolling (reveal observers,
+  // image decode) into real, felt jank/stalls specifically there.
+  let progressTicking = false;
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!progressTicking) {
+        progressTicking = true;
+        requestAnimationFrame(() => {
+          updateProgress();
+          progressTicking = false;
+        });
+      }
+    },
+    { passive: true }
+  );
   onPageReady(() => {
     bar = document.getElementById('read-progress');
     updateProgress();
