@@ -42,7 +42,19 @@ function parseStat(stat: string) {
           <p class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-paper leading-none mb-3">
             {parsed ? (
               <>
-                {parsed.prefix}<span class="stat-number tabular-nums" data-target={parsed.value}>0</span>{parsed.suffix}
+                {/* min-width reserves space for the final digit count up front
+                    (e.g. "20" needs 2ch even while showing "0"). Without it,
+                    each 1→2-digit transition during the count-up resizes the
+                    box and forces a reflow — at this font size, with up to 4
+                    of these animating at once via requestAnimationFrame, that
+                    reflow-per-frame is expensive enough to visibly jank on
+                    mobile. Reserving the width up front makes every frame a
+                    pure repaint (glyph swap only, no layout). */}
+                {parsed.prefix}<span
+                  class="stat-number tabular-nums inline-block"
+                  style={`min-width: ${String(parsed.value).length}ch;`}
+                  data-target={parsed.value}
+                >0</span>{parsed.suffix}
               </>
             ) : (
               item.stat
