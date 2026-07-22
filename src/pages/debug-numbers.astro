@@ -1,9 +1,18 @@
 ---
-// TEMPORARY diagnostic page — isolates NumbersBlock from everything else
-// on the real pages (images, logos, glow-orbs, reading sheet) to test
-// whether the mobile scroll freeze happens here too. Delete once done.
+// TEMPORARY diagnostic page — round 2. Round 1 (just NumbersBlock, no
+// images/logos/glow-orb) scrolled clean, ruling out NumbersBlock and the
+// base motion system entirely. This round adds back real lazy-loaded
+// images positioned right after NumbersBlock — the one thing consistently
+// present there on both the homepage (ProjectCard) and case study pages
+// (MDX body images) — to test whether lazy-image decode near that scroll
+// position is the actual trigger. Delete this page once done.
+import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import NumbersBlock from '@components/case-study/NumbersBlock.astro';
+import img1 from '@/assets/case-studies/cs-cr-001.png';
+import img2 from '@/assets/case-studies/cs-gs-003.png';
+import img3 from '@/assets/case-studies/cs-y-002.png';
+import img4 from '@/assets/case-studies/cs-gs-004.png';
 
 const stats = [
   { stat: '25%', label: 'reduction in customer service calls' },
@@ -11,9 +20,10 @@ const stats = [
   { stat: '15%', label: 'increase in distributor enrollments' },
   { stat: '90 days', label: 'from design to launch' },
 ];
+const images = [img1, img2, img3, img4];
 ---
 
-<BaseLayout title="Debug: Numbers freeze isolation test">
+<BaseLayout title="Debug: Numbers freeze isolation test, round 2">
   <div class="min-h-svh flex items-center justify-center text-center px-6">
     <p class="text-2xl text-fog">Scroll down to reach the numbers section.</p>
   </div>
@@ -22,7 +32,13 @@ const stats = [
     <NumbersBlock stats={stats} eyebrow="Isolation test" />
   </section>
 
+  <section class="container-custom pb-24 space-y-8">
+    {images.map((img) => (
+      <Image src={img} alt="" format="webp" quality={82} widths={[640, 960, 1440]} sizes="100vw" class="w-full rounded-2xl" loading="lazy" decoding="async" />
+    ))}
+  </section>
+
   <div class="min-h-svh flex items-center justify-center text-center px-6">
-    <p class="text-2xl text-fog">Past the numbers section. If you scrolled through without a freeze, this page is clean.</p>
+    <p class="text-2xl text-fog">Past everything. If you scrolled through without a freeze, images aren't it either.</p>
   </div>
 </BaseLayout>
