@@ -22,7 +22,7 @@ export const personSchema = {
   url: SITE_URL,
   jobTitle: 'Senior Product Designer & Creative Director',
   description:
-    'Senior product designer and creative director with two decades of experience designing trust and conversion moments for health and wellness products — enrollment flows, dashboards, and patient-facing experiences. Available for remote senior and lead product design roles.',
+    'Senior product designer and creative director with two decades of experience designing enrollment flows, dashboards, and the high-stakes moments where trust turns into a decision. Available for remote senior and lead product design roles.',
   image: `${SITE_URL}/og-image.jpg`,
   email: 'mailto:savellem@gmail.com',
   telephone: '+1-602-931-1474',
@@ -55,7 +55,7 @@ export const websiteSchema = {
   '@id': WEBSITE_ID,
   url: SITE_URL,
   name: 'Savelle McThias',
-  description: 'Portfolio of Savelle McThias, senior product designer and creative director specializing in health and wellness enrollment and conversion design.',
+  description: 'Portfolio of Savelle McThias, senior product designer and creative director specializing in enrollment, dashboard, and conversion design for high-stakes user moments.',
   publisher: { '@id': PERSON_ID },
   inLanguage: 'en-US',
 };

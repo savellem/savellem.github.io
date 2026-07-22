@@ -50,6 +50,12 @@ No dev server should be left running across turns — kill any background `astro
 
 **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to GitHub Pages on every push to `master`. Static output (`output: 'static'` in `astro.config.mjs`), site URL is `https://savellem.com` (custom domain via `public/CNAME`).
 
+## Positioning
+
+The site's value proposition is intentionally vertical-agnostic: **enrollment flows, dashboards, and the high-stakes moments where trust turns into a decision** — framed around high-stakes user moments and trust/conversion psychology, not a named industry. (This replaced narrower "health and wellness" positioning language that previously ran through the hero, meta descriptions, `src/lib/schema.ts` JSON-LD, and `public/llms.txt`, as of 2026-07-21.) When editing hero copy, meta descriptions/keywords, structured data, or `llms.txt`, keep this vertical-agnostic framing — don't reintroduce "health and wellness," "patient-facing," or similar named-vertical language as the site's core specialization claim. The hero's opening line ("There's a moment right before someone becomes a customer, a patient, a member...") is exempt — it's an illustrative list of relationship types, not a vertical claim, and stays as-is.
+
+**Case study content is off-limits for positioning edits.** MDX files in `src/content/case-studies/` (Green Compass, Yoli, Card Ritual) are accurate descriptions of specific past projects and legitimately use industry-specific language ("patient," "wellness," etc.) where the underlying work actually was in that space — never edit case study titles/blurbs/descriptions for sitewide positioning consistency. The same applies to factual, non-positioning mentions elsewhere (e.g. the About page's "CBD wellness company" description of the actual Green Compass employer) — those describe real work history, not a specialization claim, and stay as-is.
+
 ## Content notes
 
 - `docs/` contains planning/audit documents (SEO audit summary, case study rebuild prompts, lead-capture setup) — useful for background but may describe pages or plans (e.g. `/services`, `/ux-audit`, `/ux-health-check`) that don't currently exist in `src/pages/`. Verify against actual routes before assuming a doc reflects current state.
