@@ -194,6 +194,19 @@
     to { transform: translate3d(6%, 10%, 0) scale(1.15); }
   }
 
+  /* filter: blur() at a large radius is expensive for WebKit to rasterize
+     even on a fully static, non-animated element — a well-documented iOS
+     Safari/Chrome (same underlying engine) performance cliff, independent
+     of whether anything is moving. Confirmed via isolation testing as the
+     cause of a multi-second mobile scroll freeze near content below the
+     hero. Hiding it outright on mobile removes the cost entirely; desktop
+     is untouched. */
+  @media (max-width: 767px) {
+    .glow-orb {
+      display: none;
+    }
+  }
+
   /* Pulsing availability dot */
   .pulse-dot {
     position: relative;
