@@ -9,6 +9,8 @@ Savelle McThias is a senior product designer and creative director based in Scot
 - [Green Compass](https://savellem.com/case-studies/green-compass-digital-experience): From-scratch distributor enrollment flow for a CBD wellness company, built as Director of Digital Experience. 25% fewer customer service calls, 12% less cart abandonment, 15% more distributor enrollments, 90 days from design to launch.
 - [Card Ritual](https://savellem.com/case-studies/card-ritual): Solo-founded, designed, and built a tarot journaling web app (React Native, Next.js, Astro) in 3 months from concept to live product. Live today with paying subscribers at $5/month.
 - [Yoli](https://savellem.com/case-studies/yoli-patient-practitioner-dashboard): Patient and practitioner dashboard system for an at-home Omega-3 blood test, sole product designer on the system. Now used by roughly 30,000 patients and 5,000 medical professionals; enrollment up 12% since the new intake form launched.
+- [iFoodDS](https://savellem.com/case-studies/ifoodds-compliance-app-rebuild): Tablet-first rebuild of a food-safety compliance app used across the agriculture supply chain, restructuring 3k+ forms into role-based navigation. Adoption up 70% from a 30% starting base; ~60% less time spent finding forms and documents.
+- [PetSmart](https://savellem.com/case-studies/petsmart-navigation-redesign): Sitewide navigation and homepage redesign for petsmart.com's 1M+ page e-commerce catalog, reordering navigation around the pet instead of the product category. 10% increase in navigation usage, 20% increase in purchases of in-house brands.
 
 ## About
 

@@ -4,12 +4,13 @@ import ProjectCard from '@components/ProjectCard.astro';
 import LogoMarquee from '@components/LogoMarquee.astro';
 import NumbersBlock from '@components/case-study/NumbersBlock.astro';
 import { getCollection } from 'astro:content';
+import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 
-// Get the homepage-featured case studies ordered by homepageOrder
+// All non-excluded case studies, ordered by homepageOrder — the homepage
+// shows the full list rather than a featured subset.
 const caseStudies = (await getCollection('case-studies'))
-  .filter((study) => study.data.homepageFeatured)
-  .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99))
-  .slice(0, 4);
+  .filter((study) => !EXCLUDED_SLUGS.has(study.id))
+  .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99));
 
 // Aggregate proof pulled from the case studies themselves
 const heroStats = [
@@ -96,25 +97,14 @@ const principles = [
     <NumbersBlock stats={heroStats} eyebrow="Design, measured" />
   </section>
 
-  <!-- Featured Work -->
+  <!-- Case Studies -->
   {caseStudies.length > 0 && (
-    <section id="featured-work" class="container-custom pb-10">
-      <div class="flex items-end justify-between gap-6 mb-4" data-reveal>
-        <div>
-          <p class="eyebrow mb-4">Featured work</p>
-          <h2 class="font-display font-bold text-4xl md:text-6xl tracking-tight leading-none">
-            Selected <em class="font-serif italic font-normal text-fog">case studies</em>
-          </h2>
-        </div>
-        <a
-          href="/work"
-          class="hidden md:inline-flex items-center gap-2 text-sm font-medium text-fog hover:text-paper transition-colors group shrink-0 pb-2"
-        >
-          All work
-          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
+    <section id="featured-work" class="container-custom pb-10 scroll-mt-28">
+      <div class="mb-4" data-reveal>
+        <p class="eyebrow mb-4">Case studies</p>
+        <h2 class="font-display font-bold text-4xl md:text-6xl tracking-tight leading-none">
+          The <em class="font-serif italic font-normal text-fog">work</em>
+        </h2>
       </div>
 
       <div class="mt-10">
@@ -133,12 +123,6 @@ const principles = [
             index={i + 1}
           />
         ))}
-      </div>
-
-      <div class="mt-4 text-center md:hidden">
-        <a href="/work" class="btn-ghost">
-          View all case studies
-        </a>
       </div>
     </section>
   )}
