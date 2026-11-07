@@ -9,7 +9,7 @@ interface Props {
   eyebrow?: string;
 }
 
-const { stats, eyebrow = 'The Numbers' } = Astro.props;
+const { stats, eyebrow } = Astro.props;
 
 // Literal class strings (not template-interpolated) so Tailwind's scanner picks them up.
 const gridClass = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3';
@@ -19,7 +19,7 @@ const gridClass = stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid
   class="rounded-3xl bg-white/[0.03] border border-white/10 px-8 py-10 md:px-14 md:py-14"
   data-reveal
 >
-  <p class="eyebrow mb-10">{eyebrow}</p>
+  {eyebrow && <p class="eyebrow mb-10">{eyebrow}</p>}
   <div class={`grid grid-cols-1 ${gridClass} divide-y sm:divide-y-0 sm:divide-x divide-white/10`}>
     {stats.map((item) => (
       <div class="py-6 first:pt-0 last:pb-0 sm:py-0 sm:px-8 sm:first:pl-0">

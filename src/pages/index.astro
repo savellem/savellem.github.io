@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import LogoMarquee from '@components/LogoMarquee.astro';
-import NumbersBlock from '@components/case-study/NumbersBlock.astro';
 import { getCollection } from 'astro:content';
 import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 
@@ -11,14 +10,6 @@ import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 const caseStudies = (await getCollection('case-studies'))
   .filter((study) => !EXCLUDED_SLUGS.has(study.id))
   .sort((a, b) => (a.data.homepageOrder ?? 99) - (b.data.homepageOrder ?? 99));
-
-// Aggregate proof pulled from the case studies themselves
-const heroStats = [
-  { stat: '18 years', label: 'designing and shipping digital products' },
-  { stat: '25%', label: 'fewer support calls after the Green Compass redesign' },
-  { stat: '~30k', label: 'users on the Yoli dashboard system' },
-  { stat: '90 days', label: 'from design to launch on a 0-to-1 enrollment flow' },
-];
 
 const principles = [
   {
@@ -53,7 +44,7 @@ const principles = [
           <span class="w-1.5 h-1.5 rounded-full bg-ember pulse-dot"></span>
           Open to senior &amp; lead roles
         </span>
-        <span class="text-xs text-fog/70">Scottsdale, AZ — remote everywhere</span>
+        <span class="text-xs text-fog/70">Scottsdale, AZ. Remote or Phoenix area</span>
       </div>
 
       <p class="text-lg md:text-xl text-fog max-w-2xl leading-relaxed mb-8" data-reveal style="--reveal-delay: .1s">
@@ -88,16 +79,10 @@ const principles = [
   <LogoMarquee eyebrow="" compact />
   </div>
 
-  <!-- The numbers -->
-  <section class="container-custom py-24 md:py-32">
-    <NumbersBlock stats={heroStats} eyebrow="Design, measured" />
-  </section>
-
   <!-- Case Studies -->
   {caseStudies.length > 0 && (
-    <section id="featured-work" class="container-custom pb-10 scroll-mt-28">
+    <section id="featured-work" class="container-custom pt-20 md:pt-28 pb-10 scroll-mt-28">
       <div class="mb-4" data-reveal>
-        <p class="eyebrow mb-4">Case studies</p>
         <h2 class="font-display font-bold text-4xl md:text-6xl tracking-tight leading-none">
           The <em class="font-serif italic font-normal text-fog">work</em>
         </h2>
@@ -131,7 +116,6 @@ const principles = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10">
       {principles.map((p, i) => (
         <div class="bg-ink p-8 md:p-10 hover:bg-ink-soft transition-colors duration-500" data-reveal style={`--reveal-delay: ${i * 0.12}s`}>
-          <p class="text-sm font-medium text-ember tabular-nums mb-8">0{i + 1}</p>
           <h3 class="font-display font-bold text-2xl text-paper mb-4 leading-tight">{p.title}</h3>
           <p class="text-fog leading-relaxed">{p.body}</p>
         </div>
