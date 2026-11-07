@@ -8,7 +8,7 @@ import { EXCLUDED_SLUGS } from '@/lib/caseStudies';
 
 export async function getStaticPaths() {
   const caseStudies = await getCollection('case-studies');
-  // Prev/Next cycles through the same visible, ordered set shown on /work,
+  // Prev/Next cycles through the same visible, ordered set shown on the homepage,
   // wrapping around at both ends. Legacy/excluded pages get no nav.
   const visible = caseStudies
     .filter((s) => !EXCLUDED_SLUGS.has(s.id))
@@ -55,7 +55,7 @@ const pageSchema = [
   }),
   breadcrumbListSchema([
     { name: 'Home', url: SITE_URL },
-    { name: 'Case Studies', url: `${SITE_URL}/work` },
+    { name: 'Case Studies', url: `${SITE_URL}/#featured-work` },
     { name: study.data.client, url: caseUrl },
   ]),
 ];
@@ -75,7 +75,7 @@ const pageSchema = [
     <div class="glow-orb w-[36rem] h-[36rem] bg-ember/10 -top-48 right-[-10rem]" aria-hidden="true"></div>
 
     <Breadcrumbs items={[
-      { label: 'Case Studies', href: '/work' },
+      { label: 'Case Studies', href: '/#featured-work' },
       { label: study.data.client, href: `/case-studies/${study.id}` },
     ]} />
 

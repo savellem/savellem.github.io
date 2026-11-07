@@ -1,9 +1,10 @@
 ---
 interface Props {
   eyebrow?: string;
+  compact?: boolean;
 }
 
-const { eyebrow = "Brands I've worked with" } = Astro.props;
+const { eyebrow = "Brands I've worked with", compact = false } = Astro.props;
 
 const logos = [
   { src: '/images/logos/logo-bareminerals.svg',   alt: 'bareMinerals',    h: 'h-[20px]' },
@@ -21,7 +22,7 @@ const logos = [
 const track = [...logos, ...logos];
 ---
 
-<section class="py-14 border-y border-white/10" data-reveal>
+<section class={`${compact ? 'py-6' : 'py-14'} border-y border-white/10`} data-reveal>
   {eyebrow && (
     <p class="eyebrow text-center mb-10">{eyebrow}</p>
   )}

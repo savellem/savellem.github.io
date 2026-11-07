@@ -9,4 +9,6 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   site: 'https://savellem.com',
   output: 'static',
+  // The standalone /work page was removed; old links land on the homepage work section.
+  redirects: { '/work': '/#featured-work' },
 });

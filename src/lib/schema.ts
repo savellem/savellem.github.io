@@ -5,7 +5,7 @@
  * Pages pass additional, page-specific schema (Service, FAQPage, ProfilePage)
  * via the BaseLayout `schema` prop.
  *
- * NOTE: `sameAs` intentionally lists only verified profiles (LinkedIn). Add
+ * NOTE: `sameAs` intentionally lists only verified profiles (LinkedIn, Substack). Add
  * Behance / Dribbble / X here only once each profile is confirmed live and
  * on-brand — a stale profile in the entity graph hurts more than it helps.
  */
@@ -20,9 +20,9 @@ export const personSchema = {
   '@id': PERSON_ID,
   name: 'Savelle McThias',
   url: SITE_URL,
-  jobTitle: 'Senior Product Designer & Creative Director',
+  jobTitle: 'Senior Product & Web Designer',
   description:
-    'Senior product designer and creative director with two decades of experience designing enrollment flows, dashboards, and the high-stakes moments where trust turns into a decision. Available for remote senior and lead product design roles.',
+    'Senior product and web designer with 18 years of experience designing enrollment flows, dashboards, and the high-stakes moments where trust turns into a decision. Available for remote senior and lead product design roles.',
   image: `${SITE_URL}/og-image.jpg`,
   email: 'mailto:savellem@gmail.com',
   telephone: '+1-602-931-1474',
@@ -46,7 +46,7 @@ export const personSchema = {
     'UX Research',
     'AI-powered design workflows',
   ],
-  sameAs: ['https://www.linkedin.com/in/savelle'],
+  sameAs: ['https://www.linkedin.com/in/savelle', 'https://savelledesign.substack.com/'],
 };
 
 export const websiteSchema = {
@@ -55,7 +55,7 @@ export const websiteSchema = {
   '@id': WEBSITE_ID,
   url: SITE_URL,
   name: 'Savelle McThias',
-  description: 'Portfolio of Savelle McThias, senior product designer and creative director specializing in enrollment, dashboard, and conversion design for high-stakes user moments.',
+  description: 'Portfolio of Savelle McThias, senior product and web designer specializing in enrollment, dashboard, and conversion design for high-stakes user moments.',
   publisher: { '@id': PERSON_ID },
   inLanguage: 'en-US',
 };
