@@ -18,15 +18,12 @@ interface Props {
   media?: MediaLink[];
   thumbnail?: ImageMetadata;
   slug: string;
-  /** 1-based position in the list, rendered as an index number. */
-  index: number;
 }
 
-const { title, client, year, yearEnd, description, role, scope, media, thumbnail, slug, index } = Astro.props;
+const { title, client, year, yearEnd, description, role, scope, media, thumbnail, slug } = Astro.props;
 
 const yearDisplay = yearEnd ? `${year}–${yearEnd}` : `${year}`;
 const href = `/case-studies/${slug}`;
-const indexLabel = String(index).padStart(2, '0');
 // Box always matches the thumbnail's real aspect ratio (not a hardcoded
 // 16/10 or 21/10) so object-cover never has to crop content off — it only
 // crops when the box ratio differs from the source image's ratio.
@@ -36,12 +33,9 @@ const mediaAspect = thumbnail ? `${thumbnail.width} / ${thumbnail.height}` : '16
 <article class="project-card group border-t border-white/10 py-14 md:py-20">
   <!-- Meta row -->
   <div class="flex items-baseline justify-between gap-6 mb-8" data-reveal>
-    <div class="flex items-baseline gap-5">
-      <span class="text-sm font-medium text-fog/50 tabular-nums">{indexLabel}</span>
-      <h3 class="font-display font-bold text-2xl md:text-4xl tracking-tight text-paper transition-colors duration-300 group-hover:text-white">
-        {client}
-      </h3>
-    </div>
+    <h3 class="font-display font-bold text-2xl md:text-4xl tracking-tight text-paper transition-colors duration-300 group-hover:text-white">
+      {client}
+    </h3>
     <span class="text-sm text-fog tabular-nums shrink-0">{yearDisplay}</span>
   </div>
 

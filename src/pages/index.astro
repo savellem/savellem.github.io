@@ -89,7 +89,7 @@ const principles = [
       </div>
 
       <div class="mt-10">
-        {caseStudies.map((study, i) => (
+        {caseStudies.map((study) => (
           <ProjectCard
             title={study.data.title}
             client={study.data.client}
@@ -101,7 +101,6 @@ const principles = [
             media={study.data.media}
             thumbnail={study.data.thumbnail}
             slug={study.id}
-            index={i + 1}
           />
         ))}
       </div>

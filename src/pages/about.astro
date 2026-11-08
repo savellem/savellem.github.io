@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LogoMarquee from '@components/LogoMarquee.astro';
+import { Image } from 'astro:assets';
+import desertImg from '../assets/about/savelle-desert.jpg';
+import dogImg from '../assets/about/savelle-dog.jpg';
+import diegoImg from '../assets/about/savelle-diego.jpg';
 import { profilePageSchema, SITE_URL } from '@/lib/schema';
 
 const pageSchema = profilePageSchema(`${SITE_URL}/about`);
@@ -89,7 +93,8 @@ const skills = [
       <line x1="0" y1="598" x2="1400" y2="598" stroke="rgba(244,242,237,0.05)" stroke-width="1" />
     </svg>
 
-    <div class="container-custom relative" data-reveal-lines>
+    <div class="container-custom relative grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] gap-14 lg:gap-16 items-start" data-reveal-lines>
+      <div>
       <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] mb-14">
         <span class="reveal-line" style="--line-delay: .05s"><span><em class="font-serif italic font-normal text-ember">Designer.</em></span></span>
         <span class="reveal-line" style="--line-delay: .2s"><span>Builder.</span></span>
@@ -106,6 +111,26 @@ const skills = [
         <p class="text-lg text-fog leading-relaxed">
           I'm based in Scottsdale with my bull terrier Diego, who makes life considerably stranger. I've spent the last decade practicing tarot as a decision-making framework, structured enough that I built an app around it. I also run a YouTube channel built on gaming and music, and somewhere in the long-term plan is either retiring to make music full time or opening a karaoke bar. Whichever comes first.
         </p>
+      </div>
+      </div>
+
+      <!-- Photo collage -->
+      <div class="collage relative w-full max-w-md mx-auto lg:max-w-none aspect-[1/1.4] lg:mt-6">
+        <div class="collage-item absolute left-[18%] top-[10%] w-[64%] z-10" data-reveal="zoom" style="--reveal-delay: .6s">
+          <div class="collage-inner" style="--tilt: 0deg; --lift: -10px">
+            <Image src={desertImg} alt="Savelle in the Arizona desert" widths={[480, 640]} sizes="(min-width: 1024px) 24rem, 60vw" format="webp" quality={82} class="w-full aspect-[4/5] object-cover rounded-3xl" />
+          </div>
+        </div>
+        <div class="collage-item absolute right-0 top-0 w-[38%] z-20" data-reveal="zoom" style="--reveal-delay: .8s">
+          <div class="collage-inner" style="--tilt: 4deg; --lift: -8px">
+            <Image src={dogImg} alt="Diego the bull terrier" widths={[320, 480, 640]} sizes="(min-width: 1024px) 15rem, 38vw" format="webp" quality={82} class="w-full aspect-square object-cover rounded-2xl border-4 border-ink" />
+          </div>
+        </div>
+        <div class="collage-item absolute left-0 bottom-[4%] w-[42%] z-20" data-reveal="zoom" style="--reveal-delay: 1s">
+          <div class="collage-inner" style="--tilt: -4deg; --lift: -8px">
+            <Image src={diegoImg} alt="Savelle's bull terrier Diego" widths={[320, 480, 640]} sizes="(min-width: 1024px) 16rem, 42vw" format="webp" quality={82} class="w-full aspect-square object-cover rounded-2xl border-4 border-ink" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -289,3 +314,24 @@ const skills = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .collage-inner {
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+    border-radius: 1.5rem;
+  }
+  .collage-item:hover {
+    z-index: 30;
+  }
+  .collage-item:hover .collage-inner {
+    transform: translateY(var(--lift, -8px)) rotate(0deg) scale(1.06);
+    box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.8);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .collage-inner {
+      transition: none;
+    }
+  }
+</style>
